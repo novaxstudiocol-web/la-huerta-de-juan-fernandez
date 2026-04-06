@@ -1,45 +1,1286 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Huerta De Juan Fernández</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #ffffff; color: #333; }
-        header { background-color: #d9a300; padding: 20px; text-align: center; }
-        h1 { color: #005e3c; }
-        .product { margin: 20px; padding: 10px; border: 1px solid #ccc; display: inline-block; }
-        .whatsapp { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 10px; border-radius: 5px; text-decoration: none; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="La Huerta De Juan Fernández – Flores frescas, follaje y bouquets en Madrid. Plaza Tirso de Molina, Kiosco #5." />
+  <title>La Huerta De Juan Fernández</title>
+  <style>
+    /* =========================================
+       VARIABLES & RESET
+    ========================================= */
+    :root {
+      --oro:        #D4AF37;
+      --oro-light:  #e8cc6a;
+      --verde:      #1b3a1f;
+      --blanco:     #ffffff;
+      --beige:      #f5f0e6;
+      --gris:       #f1f1f1;
+      --gris-text:  #555;
+      --negro:      #111111;
+      --whatsapp:   #25d366;
+      --radius:     10px;
+      --sombra:     0 4px 20px rgba(0,0,0,.12);
+      --trans:      .25s ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--blanco);
+      color: var(--negro);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    /* =========================================
+       OVERLAY
+    ========================================= */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.5);
+      z-index: 150;
+    }
+    .overlay.active { display: block; }
+
+    /* =========================================
+       HEADER
+    ========================================= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--verde);
+      box-shadow: var(--sombra);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Hamburger */
+    .btn-menu {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+    }
+    .btn-menu span {
+      display: block;
+      height: 2px;
+      background: var(--oro);
+      border-radius: 2px;
+      transition: var(--trans);
+    }
+
+    /* Logo */
+    .logo {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .logo-text {
+      font-size: clamp(14px, 3.5vw, 22px);
+      font-weight: 800;
+      color: var(--oro);
+      letter-spacing: .04em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+    .logo-sub {
+      font-size: clamp(9px, 2vw, 13px);
+      font-weight: 400;
+      color: var(--oro-light);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    /* Search bar */
+    .search-wrap {
+      flex-shrink: 0;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    #searchInput {
+      width: clamp(120px, 22vw, 220px);
+      padding: 7px 36px 7px 12px;
+      border: 1.5px solid var(--oro);
+      border-radius: 20px;
+      background: rgba(255,255,255,.08);
+      color: var(--blanco);
+      font-size: 13px;
+      outline: none;
+      transition: var(--trans);
+    }
+    #searchInput::placeholder { color: rgba(255,255,255,.5); }
+    #searchInput:focus { background: rgba(255,255,255,.15); }
+    .search-icon {
+      position: absolute;
+      right: 10px;
+      color: var(--oro);
+      pointer-events: none;
+      font-size: 14px;
+    }
+
+    /* Header actions */
+    .header-actions {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-whatsapp-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--whatsapp);
+      color: var(--blanco);
+      padding: 7px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      transition: var(--trans);
+      white-space: nowrap;
+    }
+    .btn-whatsapp-header:hover { opacity: .85; }
+    .btn-whatsapp-header .wa-label { display: none; }
+    @media (min-width: 640px) {
+      .btn-whatsapp-header .wa-label { display: inline; }
+    }
+    .btn-cart {
+      position: relative;
+      color: var(--oro);
+      font-size: 22px;
+      line-height: 1;
+      padding: 4px;
+    }
+    .cart-badge {
+      position: absolute;
+      top: -2px;
+      right: -4px;
+      background: var(--oro);
+      color: var(--verde);
+      font-size: 10px;
+      font-weight: 700;
+      min-width: 16px;
+      height: 16px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 3px;
+    }
+
+    /* =========================================
+       SIDE MENU
+    ========================================= */
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -320px;
+      width: 300px;
+      height: 100%;
+      background: var(--verde);
+      z-index: 300;
+      transition: left var(--trans);
+      overflow-y: auto;
+      padding: 24px 20px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .side-menu.open { left: 0; }
+    .side-menu-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .side-menu-logo {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--oro);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      line-height: 1.3;
+    }
+    .btn-close-menu {
+      font-size: 24px;
+      color: var(--oro);
+      line-height: 1;
+    }
+    .side-divider {
+      height: 1px;
+      background: rgba(212,175,55,.25);
+    }
+    .side-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--oro);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin-bottom: 10px;
+    }
+    .side-menu nav ul li a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 0;
+      color: rgba(255,255,255,.85);
+      font-size: 14px;
+      transition: var(--trans);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .side-menu nav ul li a:hover { color: var(--oro); }
+    .side-menu nav ul li a .nav-icon { font-size: 16px; }
+    .side-info p {
+      font-size: 13px;
+      color: rgba(255,255,255,.75);
+      line-height: 1.6;
+      margin-bottom: 8px;
+      display: flex;
+      gap: 8px;
+    }
+    .side-info p .icon { color: var(--oro); flex-shrink: 0; }
+    .btn-wa-side {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--whatsapp);
+      color: var(--blanco);
+      padding: 11px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      transition: var(--trans);
+    }
+    .btn-wa-side:hover { opacity: .85; }
+
+    /* =========================================
+       AVAILABILITY BANNER
+    ========================================= */
+    .availability-banner {
+      background: var(--verde);
+      color: var(--oro-light);
+      text-align: center;
+      padding: 10px 16px;
+      font-size: clamp(11px, 2.5vw, 13px);
+      font-weight: 600;
+      letter-spacing: .05em;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .availability-banner a {
+      background: var(--whatsapp);
+      color: var(--blanco);
+      padding: 5px 14px;
+      border-radius: 16px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: var(--trans);
+    }
+    .availability-banner a:hover { opacity: .85; }
+
+    /* =========================================
+       HERO
+    ========================================= */
+    .hero {
+      background: linear-gradient(135deg, var(--verde) 0%, #2e5c34 100%);
+      padding: clamp(40px, 8vw, 80px) 16px;
+      text-align: center;
+    }
+    .hero-tagline {
+      font-size: clamp(11px, 2.5vw, 13px);
+      color: var(--oro);
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      margin-bottom: 10px;
+    }
+    .hero-title {
+      font-size: clamp(26px, 5.5vw, 52px);
+      font-weight: 800;
+      color: var(--blanco);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero-title span { color: var(--oro); }
+    .hero-desc {
+      font-size: clamp(14px, 2.5vw, 17px);
+      color: rgba(255,255,255,.8);
+      max-width: 540px;
+      margin: 0 auto 28px;
+      line-height: 1.6;
+    }
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--oro);
+      color: var(--verde);
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-size: 15px;
+      transition: var(--trans);
+      box-shadow: 0 4px 15px rgba(212,175,55,.4);
+    }
+    .hero-btn:hover { background: var(--oro-light); transform: translateY(-2px); }
+
+    /* =========================================
+       MAIN CONTENT
+    ========================================= */
+    main { max-width: 1200px; margin: 0 auto; padding: 0 16px 60px; }
+
+    /* Section title */
+    .section-header {
+      text-align: center;
+      padding: clamp(32px, 6vw, 56px) 0 24px;
+    }
+    .section-tag {
+      display: inline-block;
+      background: var(--beige);
+      color: var(--verde);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(20px, 4vw, 32px);
+      font-weight: 800;
+      color: var(--verde);
+      margin-bottom: 8px;
+    }
+    .section-title span { color: var(--oro); }
+    .section-line {
+      width: 48px;
+      height: 3px;
+      background: var(--oro);
+      margin: 0 auto;
+      border-radius: 2px;
+    }
+
+    /* Category tabs */
+    .category-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+    .tab-btn {
+      padding: 8px 20px;
+      border-radius: 20px;
+      border: 2px solid var(--gris);
+      background: var(--blanco);
+      color: var(--gris-text);
+      font-size: 13px;
+      font-weight: 600;
+      transition: var(--trans);
+    }
+    .tab-btn:hover, .tab-btn.active {
+      border-color: var(--oro);
+      background: var(--oro);
+      color: var(--verde);
+    }
+
+    /* Product grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 18px;
+    }
+    @media (max-width: 480px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    }
+
+    /* Product card */
+    .product-card {
+      background: var(--blanco);
+      border: 1.5px solid #ebebeb;
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--trans);
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card:hover {
+      border-color: var(--oro);
+      box-shadow: 0 6px 24px rgba(212,175,55,.18);
+      transform: translateY(-3px);
+    }
+    .product-card.unavailable { opacity: .6; }
+
+    .product-img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      background: var(--beige);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(36px, 10vw, 56px);
+      flex-shrink: 0;
+    }
+
+    .product-body {
+      padding: 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .product-category {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--oro);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+    .product-name {
+      font-size: clamp(13px, 2.5vw, 15px);
+      font-weight: 700;
+      color: var(--negro);
+      line-height: 1.3;
+    }
+    .product-desc {
+      font-size: 11px;
+      color: var(--gris-text);
+      line-height: 1.4;
+    }
+
+    .product-footer {
+      padding: 10px 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .product-price {
+      font-size: clamp(15px, 3vw, 18px);
+      font-weight: 800;
+      color: var(--verde);
+    }
+    .product-price .from {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--gris-text);
+    }
+    .badge-unavailable {
+      background: #fde8e8;
+      color: #c0392b;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 8px;
+      text-transform: uppercase;
+    }
+    .btn-add {
+      background: var(--verde);
+      color: var(--blanco);
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      transition: var(--trans);
+      white-space: nowrap;
+    }
+    .btn-add:hover { background: var(--oro); color: var(--verde); }
+    .btn-add:disabled { opacity: .45; cursor: not-allowed; }
+
+    /* No results */
+    .no-results {
+      text-align: center;
+      padding: 48px 16px;
+      color: var(--gris-text);
+      font-size: 16px;
+      grid-column: 1 / -1;
+      display: none;
+    }
+    .no-results.show { display: block; }
+
+    /* =========================================
+       CART PANEL
+    ========================================= */
+    .cart-panel {
+      position: fixed;
+      top: 0;
+      right: -380px;
+      width: min(360px, 100vw);
+      height: 100%;
+      background: var(--blanco);
+      z-index: 300;
+      box-shadow: -4px 0 24px rgba(0,0,0,.18);
+      transition: right var(--trans);
+      display: flex;
+      flex-direction: column;
+    }
+    .cart-panel.open { right: 0; }
+
+    .cart-header {
+      padding: 18px 20px;
+      background: var(--verde);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cart-header h2 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--oro);
+    }
+    .btn-close-cart {
+      font-size: 22px;
+      color: var(--oro);
+      line-height: 1;
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+    }
+    .cart-empty {
+      text-align: center;
+      padding: 48px 16px;
+      color: var(--gris-text);
+    }
+    .cart-empty .empty-icon { font-size: 48px; margin-bottom: 12px; }
+
+    .cart-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gris);
+    }
+    .cart-item-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--beige);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .cart-item-info { flex: 1; min-width: 0; }
+    .cart-item-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--negro);
+      margin-bottom: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cart-item-price {
+      font-size: 12px;
+      color: var(--gris-text);
+    }
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .qty-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gris-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: var(--gris-text);
+      transition: var(--trans);
+    }
+    .qty-btn:hover { border-color: var(--oro); color: var(--oro); }
+    .qty-val { font-size: 14px; font-weight: 700; min-width: 20px; text-align: center; }
+    .btn-remove-item {
+      margin-left: auto;
+      color: #c0392b;
+      font-size: 16px;
+      opacity: .6;
+      transition: var(--trans);
+    }
+    .btn-remove-item:hover { opacity: 1; }
+
+    .cart-footer {
+      padding: 16px 20px;
+      border-top: 2px solid var(--gris);
+      background: var(--beige);
+    }
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .cart-total-label { font-size: 15px; font-weight: 600; color: var(--gris-text); }
+    .cart-total-amount { font-size: 22px; font-weight: 800; color: var(--verde); }
+    .btn-checkout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: var(--whatsapp);
+      color: var(--blanco);
+      padding: 14px;
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-weight: 700;
+      transition: var(--trans);
+    }
+    .btn-checkout:hover { opacity: .88; }
+    .btn-clear-cart {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--gris-text);
+      text-decoration: underline;
+    }
+
+    /* =========================================
+       FLOATING WHATSAPP BUTTON
+    ========================================= */
+    .fab-wa {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100;
+      background: var(--whatsapp);
+      color: var(--blanco);
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      box-shadow: 0 4px 16px rgba(37,211,102,.5);
+      transition: var(--trans);
+    }
+    .fab-wa:hover { transform: scale(1.1); }
+
+    /* =========================================
+       FOOTER
+    ========================================= */
+    footer {
+      background: var(--verde);
+      color: rgba(255,255,255,.8);
+      padding: clamp(32px, 6vw, 56px) 16px 24px;
+    }
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .footer-col-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--oro);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 14px;
+    }
+    .footer-col p, .footer-col li {
+      font-size: 13px;
+      line-height: 1.8;
+    }
+    .footer-col a { color: rgba(255,255,255,.75); transition: var(--trans); }
+    .footer-col a:hover { color: var(--oro); }
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .footer-contact-item .icon { color: var(--oro); flex-shrink: 0; margin-top: 2px; }
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,.15);
+      padding-top: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,255,255,.5);
+    }
+
+    /* =========================================
+       UTILITIES
+    ========================================= */
+    .hidden { display: none !important; }
+    .text-gold { color: var(--oro); }
+
+    /* Search highlight */
+    .highlight { background: rgba(212,175,55,.35); border-radius: 2px; }
+
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 90px;
+      right: 24px;
+      background: var(--verde);
+      color: var(--blanco);
+      padding: 10px 18px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 500;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .3s, transform .3s;
+      pointer-events: none;
+      max-width: 260px;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+  </style>
 </head>
 <body>
 
+<!-- OVERLAY -->
+<div class="overlay" id="overlay"></div>
+
+<!-- SIDE MENU -->
+<aside class="side-menu" id="sideMenu" aria-label="Menú lateral">
+  <div class="side-menu-header">
+    <div class="side-menu-logo">🌸 La Huerta<br>De Juan Fernández</div>
+    <button class="btn-close-menu" id="btnCloseMenu" aria-label="Cerrar menú">✕</button>
+  </div>
+  <div class="side-divider"></div>
+  <nav>
+    <p class="side-section-title">Catálogo</p>
+    <ul>
+      <li><a href="#" data-filter="all"><span class="nav-icon">🏪</span> Todos los productos</a></li>
+      <li><a href="#" data-filter="follaje"><span class="nav-icon">🌿</span> Follaje</a></li>
+      <li><a href="#" data-filter="flores"><span class="nav-icon">🌸</span> Flores</a></li>
+      <li><a href="#" data-filter="bouquet"><span class="nav-icon">💐</span> Bouquets</a></li>
+    </ul>
+  </nav>
+  <div class="side-divider"></div>
+  <nav>
+    <p class="side-section-title">Ocasiones</p>
+    <ul>
+      <li><a href="#"><span class="nav-icon">💍</span> Aniversario</a></li>
+      <li><a href="#"><span class="nav-icon">🎂</span> Cumpleaños</a></li>
+      <li><a href="#"><span class="nav-icon">👶</span> Nacimientos</a></li>
+      <li><a href="#"><span class="nav-icon">💒</span> Bodas</a></li>
+      <li><a href="#"><span class="nav-icon">🙏</span> Condolencias</a></li>
+      <li><a href="#"><span class="nav-icon">🎁</span> Regalos</a></li>
+    </ul>
+  </nav>
+  <div class="side-divider"></div>
+  <div class="side-info">
+    <p class="side-section-title">Información</p>
+    <p><span class="icon">📍</span> Plaza Tirso de Molina, Kiosco #5, CP 28012 Madrid</p>
+    <p><span class="icon">📞</span> +34 602 687 285</p>
+    <p><span class="icon">✉️</span> castro59freddy@gmail.com</p>
+    <p><span class="icon">🕐</span> Lun–Sáb: 9:00 – 20:00<br>Dom: 10:00 – 15:00</p>
+  </div>
+  <a href="https://wa.me/34602687285?text=Hola!%20Me%20gustar%C3%ADa%20consultar%20la%20disponibilidad%20de%20flores." target="_blank" rel="noopener" class="btn-wa-side">
+    <span>📱</span> Consultar por WhatsApp
+  </a>
+</aside>
+
+<!-- HEADER -->
 <header>
-    <img src="logo.png" alt="La Huerta De Juan Fernández Logo">
-    <h1>Welcome to La Huerta De Juan Fernández</h1>
+  <div class="header-inner">
+    <button class="btn-menu" id="btnMenu" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="logo">
+      <div>
+        <div class="logo-text">La Huerta De Juan Fernández</div>
+        <div class="logo-sub">Flores &amp; Follaje · Madrid</div>
+      </div>
+    </div>
+    <div class="search-wrap">
+      <input type="text" id="searchInput" placeholder="Buscar flores…" autocomplete="off" aria-label="Buscar productos" />
+      <span class="search-icon">🔍</span>
+    </div>
+    <div class="header-actions">
+      <a href="https://wa.me/34602687285" target="_blank" rel="noopener" class="btn-whatsapp-header" aria-label="WhatsApp">
+        <span>📱</span><span class="wa-label">WhatsApp</span>
+      </a>
+      <button class="btn-cart" id="btnCart" aria-label="Ver carrito">
+        🛒
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+    </div>
+  </div>
 </header>
 
-<main>
-    <section id="catalog">
-        <h2>Product Catalog</h2>
-        <div class="product">Follaje</div>
-        <div class="product">Flores</div>
-        <div class="product">Bouquets</div>
-    </section>
-    <section id="search">
-        <input type="text" placeholder="Search products..." id="searchBox">
-        <button onclick="searchProducts()">Search</button>
-    </section>
+<!-- AVAILABILITY BANNER -->
+<div class="availability-banner">
+  <span>⚠️ TU PEDIDO SUJETO A DISPOSICIÓN DE FLORES SEGÚN TEMPORADA</span>
+  <a href="https://wa.me/34602687285?text=Hola!%20Quiero%20consultar%20la%20disponibilidad%20de%20flores." target="_blank" rel="noopener">📱 Consultar disponibilidad</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-tagline">🌸 Flores Frescas · Madrid</p>
+  <h1 class="hero-title">Tu floristería de<br><span>confianza</span></h1>
+  <p class="hero-desc">Follaje, flores y bouquets para toda ocasión. Calidad y frescura directa al kiosco. Plaza Tirso de Molina, Madrid.</p>
+  <a href="#catalogo" class="hero-btn">🌺 Ver catálogo completo</a>
+</section>
+
+<!-- CATALOG -->
+<main id="catalogo">
+  <div class="section-header">
+    <span class="section-tag">🌿 Catálogo</span>
+    <h2 class="section-title">Nuestros <span>Productos</span></h2>
+    <div class="section-line"></div>
+  </div>
+
+  <!-- Category Tabs -->
+  <div class="category-tabs" id="categoryTabs">
+    <button class="tab-btn active" data-filter="all">🏪 Todos</button>
+    <button class="tab-btn" data-filter="follaje">🌿 Follaje</button>
+    <button class="tab-btn" data-filter="flores">🌸 Flores</button>
+    <button class="tab-btn" data-filter="bouquet">💐 Bouquets</button>
+  </div>
+
+  <!-- Products -->
+  <div class="product-grid" id="productGrid">
+    <!-- rendered by JS -->
+  </div>
+  <p class="no-results" id="noResults">😔 No se encontraron productos para "<span id="noResultsQuery"></span>"</p>
 </main>
 
-<a class="whatsapp" href="https://wa.me/34602687285">Chat with us on WhatsApp</a>
+<!-- CART PANEL -->
+<aside class="cart-panel" id="cartPanel" aria-label="Carrito de compras">
+  <div class="cart-header">
+    <h2>🛒 Mi Carrito</h2>
+    <button class="btn-close-cart" id="btnCloseCart" aria-label="Cerrar carrito">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">
+      <div class="empty-icon">🌸</div>
+      <p>Tu carrito está vacío.<br>¡Añade flores hermosas!</p>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-amount" id="cartTotal">0,00 €</span>
+    </div>
+    <button class="btn-checkout" id="btnCheckout">
+      <span>📱</span> Pedir por WhatsApp
+    </button>
+    <button class="btn-clear-cart" id="btnClearCart">Vaciar carrito</button>
+  </div>
+</aside>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <p class="footer-col-title">🌸 La Huerta De Juan Fernández</p>
+      <p style="font-size:13px;line-height:1.7;margin-bottom:12px;">Tu kiosco de flores frescas en el corazón de Madrid. Calidad, frescura y variedad para toda ocasión.</p>
+      <a href="https://wa.me/34602687285" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:var(--whatsapp);color:#fff;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;">
+        📱 WhatsApp
+      </a>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">📞 Contacto</p>
+      <div class="footer-contact-item">
+        <span class="icon">📍</span>
+        <span>Plaza Tirso de Molina, Kiosco #5<br>CP 28012, Madrid</span>
+      </div>
+      <div class="footer-contact-item">
+        <span class="icon">📱</span>
+        <a href="https://wa.me/34602687285">+34 602 687 285</a>
+      </div>
+      <div class="footer-contact-item">
+        <span class="icon">✉️</span>
+        <a href="mailto:castro59freddy@gmail.com">castro59freddy@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">🕐 Horarios</p>
+      <ul>
+        <li>Lunes – Viernes: 9:00 – 20:00</li>
+        <li>Sábado: 9:00 – 20:00</li>
+        <li>Domingo: 10:00 – 15:00</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">🌺 Ocasiones</p>
+      <ul>
+        <li>💍 Aniversarios</li>
+        <li>🎂 Cumpleaños</li>
+        <li>👶 Nacimientos</li>
+        <li>💒 Bodas</li>
+        <li>🙏 Condolencias</li>
+        <li>🎁 Regalos especiales</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 La Huerta De Juan Fernández · Plaza Tirso de Molina, Kiosco #5 · Madrid</p>
+    <p style="margin-top:4px;">⚠️ Pedidos sujetos a disposición de flores según temporada.</p>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/34602687285" target="_blank" rel="noopener" class="fab-wa" aria-label="WhatsApp">📱</a>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
 <script>
-    function searchProducts() {
-        const query = document.getElementById('searchBox').value.toLowerCase();
-        alert(`Search functionality is not implemented yet. You searched for: ${query}`);
-    }
-</script>
+/* =========================================
+   PRODUCT DATA
+========================================= */
+const PRODUCTS = [
+  // FOLLAJE
+  { id: 1,  category: 'follaje', name: 'Tuya',            desc: 'Follaje decorativo de calidad',         price: 5,   unit: 'unidad',       icon: '🌿', available: true },
+  { id: 2,  category: 'follaje', name: 'Paniculata',      desc: 'Follaje fino y elegante',               price: 6,   unit: 'unidad',       icon: '🌿', available: true },
+  { id: 3,  category: 'follaje', name: 'Eucalipto Pequeño', desc: 'Follaje aromático, tamaño pequeño',   price: 5,   unit: 'unidad',       icon: '🌱', available: true },
+  { id: 4,  category: 'follaje', name: 'Eucalipto Grande',  desc: 'Follaje aromático, tamaño grande',    price: 10,  unit: 'unidad',       icon: '🌱', available: true },
+  { id: 5,  category: 'follaje', name: 'Ruscus',          desc: '10 varas de ruscus natural',            price: 7,   unit: '10 varas',     icon: '🍃', available: true },
 
+  // FLORES
+  { id: 6,  category: 'flores', name: 'Lilium Oriental',      desc: 'Con aroma intenso, 1 vara',         price: 4,   unit: '1 vara',       icon: '🌸', available: true },
+  { id: 7,  category: 'flores', name: 'Lilium Nacional',      desc: '1 vara de lilium nacional',         price: 3,   unit: '1 vara',       icon: '🌸', available: true },
+  { id: 8,  category: 'flores', name: 'Girasol',              desc: '1 flor de girasol radiante',        price: 3,   unit: '1 flor',       icon: '🌻', available: true },
+  { id: 9,  category: 'flores', name: 'Girasol (x5)',         desc: 'Pack 5 unidades de girasol',        price: 12,  unit: '5 unidades',   icon: '🌻', available: true },
+  { id: 10, category: 'flores', name: 'Anastasia Spider',     desc: 'Crisantemo spider elegante',        price: 3,   unit: 'unidad',       icon: '🌼', available: true },
+  { id: 11, category: 'flores', name: 'Anastasia Tubular',    desc: 'Crisantemo tubular premium',        price: 3,   unit: 'unidad',       icon: '🌼', available: true },
+  { id: 12, category: 'flores', name: 'Gerbera',              desc: 'Gerbera colorida y fresca',         price: 2,   unit: 'unidad',       icon: '🌺', available: true },
+  { id: 13, category: 'flores', name: 'Rosa',                 desc: 'Rosa clásica de calidad premium',   price: 3,   unit: 'unidad',       icon: '🌹', available: true },
+  { id: 14, category: 'flores', name: 'Gladiolo',             desc: 'Gladiolo majestuoso y vistoso',     price: 2,   unit: 'unidad',       icon: '🌷', available: true },
+  { id: 15, category: 'flores', name: 'Clavel',               desc: '1 clavel fresco y perfumado',       price: 1,   unit: '1 unidad',     icon: '🌺', available: true },
+  { id: 16, category: 'flores', name: 'Claveles (x10)',       desc: 'Pack 10 unidades de clavel',        price: 6,   unit: '10 unidades',  icon: '🌺', available: true },
+  { id: 17, category: 'flores', name: 'Claveles (x12)',       desc: 'Pack 12 unidades de clavel',        price: 12,  unit: '12 unidades',  icon: '🌺', available: true },
+  { id: 18, category: 'flores', name: 'Margaritas',           desc: '5 varas de margaritas blancas',     price: 12,  unit: '5 varas',      icon: '🌼', available: true },
+  { id: 19, category: 'flores', name: 'Siempreviva',          desc: 'Flor seca de larga duración',       price: 6,   unit: 'unidad',       icon: '🌾', available: true },
+  { id: 20, category: 'flores', name: 'Tulipanes',            desc: '10 varas de tulipanes frescos',     price: 15,  unit: '10 varas',     icon: '🌷', available: true },
+  { id: 21, category: 'flores', name: 'Mimosa Pequeña',       desc: 'Mimosa amarilla, tamaño pequeño',   price: 6,   unit: 'unidad',       icon: '🌼', available: true },
+  { id: 22, category: 'flores', name: 'Mimosa Grande',        desc: 'Mimosa amarilla, tamaño grande',    price: 12,  unit: 'unidad',       icon: '🌼', available: true },
+  { id: 23, category: 'flores', name: 'Brassica',             desc: 'Col ornamental decorativa',         price: 3,   unit: 'unidad',       icon: '🌿', available: true },
+  { id: 24, category: 'flores', name: 'Ranúnculos',           desc: 'Flores de ranúnculo coloridas',     price: 10,  unit: 'unidad',       icon: '🌸', available: true },
+  { id: 25, category: 'flores', name: 'Fresias',              desc: 'Fresias aromáticas y delicadas',    price: 10,  unit: 'unidad',       icon: '🌸', available: true },
+  { id: 26, category: 'flores', name: 'Astromelia Pequeña',   desc: 'Astromelia, tamaño pequeño',        price: 6,   unit: 'unidad',       icon: '🌸', available: true },
+  { id: 27, category: 'flores', name: 'Astromelia Grande',    desc: 'Astromelia, tamaño grande',         price: 12,  unit: 'unidad',       icon: '🌸', available: true },
+  { id: 28, category: 'flores', name: 'Craspedia',            desc: 'Flor bola amarilla decorativa',     price: 0,   unit: '',             icon: '🌼', available: false },
+  { id: 29, category: 'flores', name: 'Ave del Paraíso',      desc: 'Flor exótica tropical',             price: 0,   unit: '',             icon: '🦜', available: false },
+
+  // BOUQUETS
+  { id: 30, category: 'bouquet', name: 'Bouquet Pequeño',   desc: 'Bouquet variado para toda ocasión',   price: 6,   unit: 'unidad',   icon: '💐', available: true },
+  { id: 31, category: 'bouquet', name: 'Bouquet Mediano',   desc: 'Bouquet variado surtido elegante',    price: 12,  unit: 'unidad',   icon: '💐', available: true },
+  { id: 32, category: 'bouquet', name: 'Bouquet Grande',    desc: 'Bouquet variado de lujo',             price: 14,  unit: 'unidad',   icon: '💐', available: true },
+  { id: 33, category: 'bouquet', name: 'Bouquet de Rosas',  desc: '6 rosas perfectas con follaje',       price: 15,  unit: '6 rosas',  icon: '🌹', available: true },
+];
+
+/* =========================================
+   CART STATE
+========================================= */
+let cart = JSON.parse(localStorage.getItem('cart_lhjf') || '[]');
+
+function saveCart() {
+  localStorage.setItem('cart_lhjf', JSON.stringify(cart));
+}
+
+function getCartCount() {
+  return cart.reduce((acc, item) => acc + item.qty, 0);
+}
+
+function getCartTotal() {
+  return cart.reduce((acc, item) => acc + item.price * item.qty, 0);
+}
+
+function updateCartBadge() {
+  const count = getCartCount();
+  const badge = document.getElementById('cartBadge');
+  badge.textContent = count;
+  badge.style.display = count > 0 ? 'flex' : 'none';
+}
+
+/* =========================================
+   RENDER PRODUCTS
+========================================= */
+let currentFilter = 'all';
+let currentSearch = '';
+
+function renderProducts() {
+  const grid = document.getElementById('productGrid');
+  const noResults = document.getElementById('noResults');
+  const query = currentSearch.trim().toLowerCase();
+
+  const filtered = PRODUCTS.filter(p => {
+    const matchCat = currentFilter === 'all' || p.category === currentFilter;
+    const matchQ = !query ||
+      p.name.toLowerCase().includes(query) ||
+      p.desc.toLowerCase().includes(query) ||
+      p.category.toLowerCase().includes(query);
+    return matchCat && matchQ;
+  });
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '';
+    noResults.classList.add('show');
+    document.getElementById('noResultsQuery').textContent = query;
+    return;
+  }
+
+  noResults.classList.remove('show');
+
+  grid.innerHTML = filtered.map(p => {
+    const priceHTML = p.available
+      ? `<span class="product-price">${p.price.toFixed(2).replace('.', ',')} €<br><span class="from">${p.unit}</span></span>`
+      : `<span class="badge-unavailable">No disponible</span>`;
+    const btnHTML = p.available
+      ? `<button class="btn-add" data-id="${p.id}">+ Añadir</button>`
+      : `<button class="btn-add" disabled>No disponible</button>`;
+
+    const highlightName = query
+      ? p.name.replace(new RegExp(`(${escapeRegex(query)})`, 'gi'), '<mark class="highlight">$1</mark>')
+      : p.name;
+
+    return `
+      <div class="product-card${p.available ? '' : ' unavailable'}" data-id="${p.id}">
+        <div class="product-img">${p.icon}</div>
+        <div class="product-body">
+          <span class="product-category">${capitalize(p.category)}</span>
+          <p class="product-name">${highlightName}</p>
+          <p class="product-desc">${p.desc}</p>
+        </div>
+        <div class="product-footer">
+          ${priceHTML}
+          ${btnHTML}
+        </div>
+      </div>`;
+  }).join('');
+
+  // Bind add-to-cart buttons
+  grid.querySelectorAll('.btn-add:not([disabled])').forEach(btn => {
+    btn.addEventListener('click', () => addToCart(Number(btn.dataset.id)));
+  });
+}
+
+/* =========================================
+   CART FUNCTIONS
+========================================= */
+function addToCart(id) {
+  const product = PRODUCTS.find(p => p.id === id);
+  if (!product || !product.available) return;
+  const existing = cart.find(item => item.id === id);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ id: product.id, name: product.name, price: product.price, icon: product.icon, unit: product.unit, qty: 1 });
+  }
+  saveCart();
+  updateCartBadge();
+  renderCart();
+  showToast(`✅ ${product.name} añadido al carrito`);
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(item => item.id !== id);
+  saveCart();
+  updateCartBadge();
+  renderCart();
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) {
+    removeFromCart(id);
+    return;
+  }
+  saveCart();
+  updateCartBadge();
+  renderCart();
+}
+
+function clearCart() {
+  cart = [];
+  saveCart();
+  updateCartBadge();
+  renderCart();
+}
+
+function renderCart() {
+  const container = document.getElementById('cartItems');
+  const footer = document.getElementById('cartFooter');
+
+  if (cart.length === 0) {
+    container.innerHTML = `<div class="cart-empty"><div class="empty-icon">🌸</div><p>Tu carrito está vacío.<br>¡Añade flores hermosas!</p></div>`;
+    footer.style.display = 'none';
+    return;
+  }
+
+  footer.style.display = 'block';
+  document.getElementById('cartTotal').textContent = getCartTotal().toFixed(2).replace('.', ',') + ' €';
+
+  container.innerHTML = cart.map(item => `
+    <div class="cart-item" data-id="${item.id}">
+      <div class="cart-item-icon">${item.icon}</div>
+      <div class="cart-item-info">
+        <p class="cart-item-name">${item.name}</p>
+        <p class="cart-item-price">${item.price.toFixed(2).replace('.', ',')} € / ${item.unit || 'unidad'}</p>
+        <div class="cart-item-controls">
+          <button class="qty-btn" data-action="dec" data-id="${item.id}">−</button>
+          <span class="qty-val">${item.qty}</span>
+          <button class="qty-btn" data-action="inc" data-id="${item.id}">+</button>
+          <button class="btn-remove-item" data-id="${item.id}" title="Eliminar">✕</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  container.querySelectorAll('.qty-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = Number(btn.dataset.id);
+      changeQty(id, btn.dataset.action === 'inc' ? 1 : -1);
+    });
+  });
+  container.querySelectorAll('.btn-remove-item').forEach(btn => {
+    btn.addEventListener('click', () => removeFromCart(Number(btn.dataset.id)));
+  });
+}
+
+function buildWhatsAppMessage() {
+  let msg = '🌸 *Pedido - La Huerta De Juan Fernández*\n\n';
+  cart.forEach(item => {
+    msg += `• ${item.name} x${item.qty} = ${(item.price * item.qty).toFixed(2)}€\n`;
+  });
+  msg += `\n💰 *Total: ${getCartTotal().toFixed(2)}€*\n\n`;
+  msg += '⚠️ Pedido sujeto a disponibilidad según temporada.\n';
+  msg += '📍 Plaza Tirso de Molina, Kiosco #5, Madrid';
+  return encodeURIComponent(msg);
+}
+
+/* =========================================
+   UI HELPERS
+========================================= */
+function openCart() {
+  document.getElementById('cartPanel').classList.add('open');
+  document.getElementById('overlay').classList.add('active');
+}
+function closeCart() {
+  document.getElementById('cartPanel').classList.remove('open');
+  document.getElementById('overlay').classList.remove('active');
+}
+function openMenu() {
+  document.getElementById('sideMenu').classList.add('open');
+  document.getElementById('overlay').classList.add('active');
+}
+function closeMenu() {
+  document.getElementById('sideMenu').classList.remove('open');
+  document.getElementById('overlay').classList.remove('active');
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+function capitalize(s) {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+function escapeRegex(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/* =========================================
+   EVENT LISTENERS
+========================================= */
+document.addEventListener('DOMContentLoaded', () => {
+  // Initial render
+  renderProducts();
+  renderCart();
+  updateCartBadge();
+
+  // Hamburger
+  document.getElementById('btnMenu').addEventListener('click', openMenu);
+  document.getElementById('btnCloseMenu').addEventListener('click', closeMenu);
+
+  // Cart
+  document.getElementById('btnCart').addEventListener('click', openCart);
+  document.getElementById('btnCloseCart').addEventListener('click', closeCart);
+
+  // Overlay closes everything
+  document.getElementById('overlay').addEventListener('click', () => {
+    closeCart();
+    closeMenu();
+  });
+
+  // Clear cart
+  document.getElementById('btnClearCart').addEventListener('click', clearCart);
+
+  // Checkout via WhatsApp
+  document.getElementById('btnCheckout').addEventListener('click', () => {
+    if (cart.length === 0) return;
+    window.open('https://wa.me/34602687285?text=' + buildWhatsAppMessage(), '_blank', 'noopener');
+  });
+
+  // Category tabs
+  document.getElementById('categoryTabs').addEventListener('click', e => {
+    const btn = e.target.closest('.tab-btn');
+    if (!btn) return;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    renderProducts();
+  });
+
+  // Side menu filter links
+  document.querySelectorAll('.side-menu nav [data-filter]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      currentFilter = link.dataset.filter;
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.filter === currentFilter);
+      });
+      closeMenu();
+      document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
+      renderProducts();
+    });
+  });
+
+  // Search – real time
+  document.getElementById('searchInput').addEventListener('input', e => {
+    currentSearch = e.target.value;
+    renderProducts();
+  });
+});
+</script>
 </body>
 </html>
