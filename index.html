@@ -1165,7 +1165,7 @@
     }
 
     const priceLabel = unavailable ? 'No disponible'
-      : (product.variants ? product.variants[0].label.split('–')[1]?.trim() : fmt(product.price));
+      : (product.variants ? (product.variants[0].label.split('–')[1] || '').trim() || fmt(product.variants[0].price) : fmt(product.price));
 
     card.innerHTML = `
       <div class="product-thumb">
@@ -1188,7 +1188,7 @@
       if (selectEl) {
         selectEl.addEventListener('change', () => {
           const idx = parseInt(selectEl.value, 10);
-          priceEl.textContent = product.variants[idx].label.split('–')[1]?.trim() || fmt(product.variants[idx].price);
+          priceEl.textContent = (product.variants[idx].label.split('–')[1] || '').trim() || fmt(product.variants[idx].price);
         });
       }
 
@@ -1344,10 +1344,6 @@
   function closeOverlay() {
     if (!document.getElementById('cartPanel').classList.contains('open') &&
         !document.getElementById('sideMenu').classList.contains('open')) {
-      document.getElementById('overlay').classList.remove('active');
-      document.body.style.overflow = '';
-    } else if (!document.getElementById('cartPanel').classList.contains('open') &&
-               !document.getElementById('sideMenu').classList.contains('open')) {
       document.getElementById('overlay').classList.remove('active');
       document.body.style.overflow = '';
     }
