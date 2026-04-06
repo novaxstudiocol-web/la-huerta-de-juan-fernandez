@@ -1,45 +1,1406 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Huerta De Juan Fernández</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #ffffff; color: #333; }
-        header { background-color: #d9a300; padding: 20px; text-align: center; }
-        h1 { color: #005e3c; }
-        .product { margin: 20px; padding: 10px; border: 1px solid #ccc; display: inline-block; }
-        .whatsapp { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 10px; border-radius: 5px; text-decoration: none; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="La Huerta De Juan Fernández – Floristería en Plaza Tirso de Molina, Madrid. Flores frescas, follaje, bouquets y más. Abierto Lunes a Domingo 10:00–21:00." />
+  <title>La Huerta De Juan Fernández | Floristería Madrid</title>
+
+  <style>
+    /* ===== VARIABLES ===== */
+    :root {
+      --gold:    #D4AF37;
+      --gold-dk: #b8941f;
+      --green:   #1b3a1f;
+      --green-lt:#2a5c30;
+      --white:   #ffffff;
+      --beige:   #f5f0e6;
+      --black:   #000000;
+      --gray:    #f1f1f1;
+      --gray-md: #888888;
+      --shadow:  0 4px 20px rgba(0,0,0,.12);
+      --radius:  12px;
+      --transition: .25s ease;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--white);
+      color: var(--black);
+      min-height: 100vh;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { cursor: pointer; font-family: inherit; border: none; }
+
+    /* ===== OVERLAY ===== */
+    #overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.45);
+      z-index: 800;
+    }
+    #overlay.active { display: block; }
+
+    /* ===== SIDE MENU ===== */
+    #sideMenu {
+      position: fixed;
+      top: 0; left: -320px;
+      width: 300px; height: 100%;
+      background: var(--green);
+      z-index: 900;
+      transition: left var(--transition);
+      overflow-y: auto;
+      padding-bottom: 40px;
+    }
+    #sideMenu.open { left: 0; }
+    .side-header {
+      background: var(--green-lt);
+      padding: 20px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .side-logo-text {
+      color: var(--gold);
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    #closeMenu {
+      background: transparent;
+      color: var(--gold);
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+    .side-nav { padding: 12px 0; }
+    .side-nav-title {
+      color: var(--gold);
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 14px 20px 6px;
+    }
+    .side-nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,.88);
+      padding: 10px 20px;
+      font-size: .95rem;
+      transition: background var(--transition), color var(--transition);
+    }
+    .side-nav a:hover, .side-nav a:focus {
+      background: rgba(255,255,255,.1);
+      color: var(--gold);
+    }
+    .side-divider {
+      height: 1px;
+      background: rgba(255,255,255,.12);
+      margin: 8px 20px;
+    }
+    .side-info-block {
+      padding: 14px 20px;
+      color: rgba(255,255,255,.7);
+      font-size: .82rem;
+      line-height: 1.7;
+    }
+    .side-info-block strong { color: var(--gold); display: block; margin-bottom: 4px; }
+
+    /* ===== HEADER ===== */
+    #mainHeader {
+      position: sticky;
+      top: 0;
+      z-index: 700;
+      background: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,.1);
+    }
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      gap: 12px;
+    }
+    #hamburger {
+      background: transparent;
+      font-size: 1.5rem;
+      color: var(--green);
+      padding: 4px;
+      flex-shrink: 0;
+    }
+
+    /* ===== LOGO ===== */
+    .logo-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      user-select: none;
+    }
+    .logo-arc-container {
+      position: relative;
+      width: 220px;
+      height: 36px;
+      overflow: visible;
+    }
+    .logo-arc-container svg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+    .logo-main-text {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 1px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .logo-sub {
+      font-size: .62rem;
+      color: var(--gold);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .logo-lines {
+      width: 100%;
+      max-width: 280px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 3px;
+    }
+    .logo-line {
+      flex: 1;
+      height: 1px;
+      background: var(--gold);
+    }
+    .logo-diamond { color: var(--gold); font-size: .5rem; }
+
+    .logo-leaves {
+      position: absolute;
+      top: -8px;
+      right: -24px;
+      font-size: 1.1rem;
+      line-height: 1;
+      transform: rotate(15deg);
+      color: var(--gold);
+      pointer-events: none;
+    }
+    /* Relative wrapper to position leaves */
+    .logo-center {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ===== HEADER ACTIONS ===== */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .btn-wa-header {
+      background: #25d366;
+      color: var(--white);
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: .78rem;
+      font-weight: 600;
+      display: none;
+      align-items: center;
+      gap: 5px;
+    }
+    @media (min-width: 600px) { .btn-wa-header { display: flex; } }
+    .cart-btn {
+      position: relative;
+      background: var(--gold);
+      color: var(--white);
+      border-radius: 50%;
+      width: 40px; height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: background var(--transition);
+    }
+    .cart-btn:hover { background: var(--gold-dk); }
+    .cart-count {
+      position: absolute;
+      top: -4px; right: -4px;
+      background: var(--green);
+      color: var(--white);
+      font-size: .6rem;
+      font-weight: 700;
+      width: 17px; height: 17px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cart-count.hidden { display: none; }
+
+    /* ===== SEARCH BAR ===== */
+    .search-bar {
+      padding: 8px 20px 12px;
+      display: flex;
+      gap: 8px;
+    }
+    .search-bar input {
+      flex: 1;
+      padding: 9px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 30px;
+      font-size: .9rem;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+    .search-bar input:focus { border-color: var(--gold); }
+    .search-bar button {
+      background: var(--gold);
+      color: var(--white);
+      border-radius: 30px;
+      padding: 9px 18px;
+      font-size: .9rem;
+      font-weight: 600;
+      transition: background var(--transition);
+    }
+    .search-bar button:hover { background: var(--gold-dk); }
+
+    /* ===== BANNER ===== */
+    #banner {
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-lt) 60%, #3a7040 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    #banner::before {
+      content: '🌸';
+      position: absolute;
+      font-size: 8rem;
+      opacity: .06;
+      top: -10px; left: -20px;
+    }
+    #banner::after {
+      content: '🌿';
+      position: absolute;
+      font-size: 8rem;
+      opacity: .06;
+      bottom: -20px; right: -10px;
+    }
+    .banner-subtitle {
+      color: var(--gold);
+      font-size: .85rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .banner-title {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .banner-title span { color: var(--gold); }
+    .banner-desc {
+      font-size: 1rem;
+      opacity: .85;
+      max-width: 500px;
+      margin: 0 auto 28px;
+      line-height: 1.6;
+    }
+    .btn-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: var(--black);
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-size: 1rem;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .btn-banner:hover { background: var(--gold-dk); transform: translateY(-2px); }
+
+    /* ===== AVAILABILITY NOTICE ===== */
+    #availNotice {
+      background: var(--beige);
+      border-left: 4px solid var(--gold);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .notice-text {
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--green);
+      flex: 1;
+    }
+    .notice-text span { color: var(--gold-dk); }
+    .btn-notice {
+      background: #25d366;
+      color: var(--white);
+      border-radius: 20px;
+      padding: 7px 14px;
+      font-size: .8rem;
+      font-weight: 600;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background var(--transition);
+    }
+    .btn-notice:hover { background: #1ebe5d; }
+
+    /* ===== CATALOG SECTION ===== */
+    #catalog { padding: 40px 16px; max-width: 1200px; margin: 0 auto; }
+    .catalog-title {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .catalog-title h2 {
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      color: var(--green);
+      font-weight: 800;
+    }
+    .catalog-title p {
+      color: var(--gray-md);
+      margin-top: 6px;
+      font-size: .95rem;
+    }
+    .catalog-title .gold-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      margin: 10px 0;
+    }
+    .catalog-title .gold-line span { flex: 1; max-width: 80px; height: 2px; background: var(--gold); }
+
+    /* Category block */
+    .category-section { margin-bottom: 56px; }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .category-icon {
+      width: 48px; height: 48px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .category-header h3 {
+      font-size: 1.35rem;
+      color: var(--green);
+      font-weight: 800;
+    }
+    .category-header p { color: var(--gray-md); font-size: .85rem; }
+
+    /* Product grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+    }
+    @media (min-width: 480px) {
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+    }
+    @media (min-width: 768px) {
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+    }
+
+    /* Product card */
+    .product-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .product-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,.16); }
+    .product-card.unavailable { opacity: .55; pointer-events: none; }
+
+    .product-thumb {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--beige);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .badge-unavail {
+      position: absolute;
+      top: 8px; right: 8px;
+      background: #e53935;
+      color: var(--white);
+      font-size: .62rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .product-body { padding: 12px; flex: 1; display: flex; flex-direction: column; }
+    .product-name {
+      font-weight: 700;
+      font-size: .92rem;
+      color: var(--green);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    /* Variant selector */
+    .variant-select {
+      width: 100%;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      padding: 5px 8px;
+      font-size: .8rem;
+      margin-bottom: 8px;
+      outline: none;
+      background: var(--white);
+      transition: border-color var(--transition);
+    }
+    .variant-select:focus { border-color: var(--gold); }
+
+    .product-price {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--gold-dk);
+      margin-top: auto;
+      margin-bottom: 10px;
+    }
+
+    .btn-add {
+      width: 100%;
+      background: var(--green);
+      color: var(--white);
+      border-radius: 8px;
+      padding: 9px;
+      font-size: .85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .btn-add:hover { background: var(--green-lt); transform: scale(1.02); }
+    .btn-add:active { transform: scale(.98); }
+
+    /* No results */
+    #noResults {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray-md);
+    }
+    #noResults .nr-icon { font-size: 3rem; margin-bottom: 12px; }
+    #noResults h3 { font-size: 1.3rem; color: var(--green); margin-bottom: 6px; }
+
+    /* ===== CART PANEL ===== */
+    #cartPanel {
+      position: fixed;
+      top: 0; right: -380px;
+      width: 360px; max-width: 96vw;
+      height: 100%;
+      background: var(--white);
+      box-shadow: -4px 0 30px rgba(0,0,0,.18);
+      z-index: 900;
+      display: flex;
+      flex-direction: column;
+      transition: right var(--transition);
+    }
+    #cartPanel.open { right: 0; }
+    .cart-header {
+      background: var(--green);
+      color: var(--white);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .cart-header h2 { font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
+    #closeCart {
+      background: transparent;
+      color: var(--white);
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+    .cart-body { flex: 1; overflow-y: auto; padding: 16px; }
+    .cart-empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray-md);
+    }
+    .cart-empty .ce-icon { font-size: 3rem; margin-bottom: 12px; }
+    .cart-empty p { font-size: .95rem; }
+
+    /* Cart item */
+    .cart-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gray);
+      animation: slideIn .2s ease;
+    }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+    .ci-thumb {
+      width: 52px; height: 52px;
+      background: var(--beige);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+    .ci-info { flex: 1; }
+    .ci-name { font-weight: 700; font-size: .88rem; color: var(--green); line-height: 1.3; }
+    .ci-variant { font-size: .75rem; color: var(--gray-md); margin-top: 2px; }
+    .ci-price { font-size: .85rem; color: var(--gold-dk); font-weight: 700; margin-top: 4px; }
+    .ci-qty {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .ci-qty button {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--gray);
+      font-size: .9rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition);
+    }
+    .ci-qty button:hover { background: var(--gold); color: var(--white); }
+    .ci-qty span { font-size: .88rem; font-weight: 600; min-width: 18px; text-align: center; }
+    .ci-remove {
+      background: transparent;
+      color: #e53935;
+      font-size: 1.1rem;
+      align-self: flex-start;
+      margin-top: 2px;
+    }
+    .ci-remove:hover { color: #b71c1c; }
+
+    .cart-footer {
+      padding: 16px;
+      border-top: 2px solid var(--gray);
+      flex-shrink: 0;
+    }
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 14px;
+    }
+    .cart-total-row span:last-child { color: var(--gold-dk); }
+    .btn-checkout {
+      width: 100%;
+      background: #25d366;
+      color: var(--white);
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background var(--transition);
+    }
+    .btn-checkout:hover { background: #1ebe5d; }
+    .btn-clear-cart {
+      width: 100%;
+      background: transparent;
+      color: #e53935;
+      border: 1.5px solid #e53935;
+      border-radius: 8px;
+      padding: 9px;
+      font-size: .85rem;
+      font-weight: 600;
+      margin-top: 8px;
+      transition: background var(--transition), color var(--transition);
+    }
+    .btn-clear-cart:hover { background: #e53935; color: var(--white); }
+
+    /* ===== FLOATING WA BUTTON ===== */
+    #floatWA {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      background: #25d366;
+      color: var(--white);
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: 0 4px 16px rgba(37,211,102,.45);
+      z-index: 600;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    #floatWA:hover { transform: scale(1.1); box-shadow: 0 6px 24px rgba(37,211,102,.6); }
+
+    /* ===== TOAST ===== */
+    #toast {
+      position: fixed;
+      bottom: 90px; right: 20px;
+      background: var(--green);
+      color: var(--white);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: .88rem;
+      font-weight: 600;
+      z-index: 1000;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .3s, transform .3s;
+      pointer-events: none;
+    }
+    #toast.show { opacity: 1; transform: translateY(0); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--green);
+      color: rgba(255,255,255,.85);
+      padding: 50px 20px 28px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+      max-width: 1100px;
+      margin: 0 auto 40px;
+    }
+    @media (min-width: 600px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr 1fr 1fr; } }
+    .footer-block h4 {
+      color: var(--gold);
+      font-size: .85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .footer-block p, .footer-block li {
+      font-size: .88rem;
+      line-height: 1.8;
+    }
+    .footer-block a { transition: color var(--transition); }
+    .footer-block a:hover { color: var(--gold); }
+    .footer-logo {
+      text-align: center;
+    }
+    .footer-logo .fl-text {
+      font-family: 'Georgia', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .footer-logo .fl-sub {
+      font-size: .7rem;
+      color: rgba(255,255,255,.5);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .social-links {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .social-links a {
+      width: 34px; height: 34px;
+      background: rgba(255,255,255,.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: background var(--transition);
+    }
+    .social-links a:hover { background: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.12);
+      padding-top: 20px;
+      text-align: center;
+      font-size: .8rem;
+      color: rgba(255,255,255,.4);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .footer-bottom a { color: rgba(255,255,255,.4); }
+    .footer-bottom a:hover { color: var(--gold); }
+
+    /* ===== SCHEDULE BADGE ===== */
+    .schedule-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gold);
+      color: var(--black);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: .75rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    /* ===== BACK TO TOP ===== */
+    #backTop {
+      position: fixed;
+      bottom: 90px; left: 20px;
+      background: var(--gold);
+      color: var(--white);
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      z-index: 600;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition);
+    }
+    #backTop.visible { opacity: 1; pointer-events: auto; }
+    #backTop:hover { background: var(--gold-dk); }
+
+    /* Utility */
+    .hidden-search { display: none !important; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+  </style>
 </head>
 <body>
 
-<header>
-    <img src="logo.png" alt="La Huerta De Juan Fernández Logo">
-    <h1>Welcome to La Huerta De Juan Fernández</h1>
+<!-- ===== OVERLAY ===== -->
+<div id="overlay" role="presentation" aria-hidden="true"></div>
+
+<!-- ===== SIDE MENU ===== -->
+<nav id="sideMenu" role="navigation" aria-label="Menú principal">
+  <div class="side-header">
+    <div class="side-logo-text">🌿 La Huerta<br>De Juan Fernández</div>
+    <button id="closeMenu" aria-label="Cerrar menú">✕</button>
+  </div>
+  <div class="side-nav">
+    <div class="side-nav-title">Categorías</div>
+    <a href="#follaje" class="menu-link">🌿 Follaje</a>
+    <a href="#flores" class="menu-link">🌸 Flores</a>
+    <a href="#bouquets" class="menu-link">💐 Bouquets Variados</a>
+    <div class="side-divider"></div>
+    <div class="side-nav-title">Ocasiones</div>
+    <a href="#catalog">💍 Aniversario</a>
+    <a href="#catalog">🎂 Cumpleaños</a>
+    <a href="#catalog">🏠 Decoración hogar</a>
+    <a href="#catalog">🥀 Condolencias</a>
+    <a href="#catalog">💒 Bodas</a>
+    <div class="side-divider"></div>
+    <div class="side-nav-title">Información</div>
+    <a href="https://wa.me/34602687285" target="_blank" rel="noopener">📦 Hacer un pedido</a>
+    <a href="https://wa.me/34602687285" target="_blank" rel="noopener">❓ Consultar disponibilidad</a>
+    <a href="mailto:castro59freddy@gmail.com">✉️ Contacto</a>
+    <div class="side-divider"></div>
+    <div class="side-info-block">
+      <strong>📍 Ubicación</strong>
+      Plaza Tirso de Molina, Kiosco #5<br>CP 28012 – Madrid
+    </div>
+    <div class="side-info-block">
+      <strong>🕐 Horario</strong>
+      Lunes a Domingo<br>10:00 AM – 9:00 PM
+    </div>
+    <div class="side-info-block">
+      <strong>📞 Teléfono / WhatsApp</strong>
+      +34 602 687 285
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HEADER ===== -->
+<header id="mainHeader">
+  <div class="header-top">
+    <button id="hamburger" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+    <!-- LOGO -->
+    <div class="logo-wrapper" role="banner">
+      <div class="logo-center">
+        <!-- Arc "La Huerta" using SVG text on path -->
+        <div class="logo-arc-container" aria-hidden="true">
+          <svg viewBox="0 0 220 40" xmlns="http://www.w3.org/2000/svg" width="220" height="40">
+            <defs>
+              <path id="arcPath" d="M 10,38 A 100,70 0 0,1 210,38" />
+            </defs>
+            <text font-family="Georgia, serif" font-size="15" fill="#D4AF37" font-weight="bold" letter-spacing="3">
+              <textPath href="#arcPath" startOffset="50%" text-anchor="middle">✦ LA HUERTA ✦</textPath>
+            </text>
+          </svg>
+        </div>
+        <div class="logo-main-text">De Juan Fernández</div>
+        <div class="logo-lines">
+          <span class="logo-line"></span>
+          <span class="logo-diamond">◆</span>
+          <span class="logo-line"></span>
+        </div>
+        <div class="logo-sub">Plaza Tirso de Molina</div>
+        <div class="logo-leaves" aria-hidden="true">🌿🍃</div>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <a href="https://wa.me/34602687285" class="btn-wa-header" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+        💬 WhatsApp
+      </a>
+      <button class="cart-btn" id="openCart" aria-label="Abrir carrito de compras">
+        🛒
+        <span class="cart-count hidden" id="cartCount" aria-live="polite">0</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-bar" role="search">
+    <label for="searchInput" class="sr-only">Buscar productos</label>
+    <input type="search" id="searchInput" placeholder="🔍 Buscar flores, follaje, bouquets…" autocomplete="off" />
+    <button id="clearSearch" aria-label="Limpiar búsqueda">✕</button>
+  </div>
 </header>
 
-<main>
-    <section id="catalog">
-        <h2>Product Catalog</h2>
-        <div class="product">Follaje</div>
-        <div class="product">Flores</div>
-        <div class="product">Bouquets</div>
-    </section>
-    <section id="search">
-        <input type="text" placeholder="Search products..." id="searchBox">
-        <button onclick="searchProducts()">Search</button>
-    </section>
+<!-- ===== BANNER ===== -->
+<section id="banner" aria-label="Bienvenida">
+  <p class="banner-subtitle">🌿 Flores frescas cada día</p>
+  <h1 class="banner-title">BIENVENIDOS A<br><span>LA HUERTA</span></h1>
+  <p class="banner-desc">Flores y follajes naturales en el corazón de Madrid. Calidad, variedad y frescura para cada ocasión especial.</p>
+  <a href="#catalog" class="btn-banner">🛍️ Ver Catálogo</a>
+</section>
+
+<!-- ===== AVAILABILITY NOTICE ===== -->
+<aside id="availNotice" aria-label="Aviso de disponibilidad">
+  <p class="notice-text">⚠️ <span>TU PEDIDO SUJETO A DISPOSICIÓN DE FLORES SEGÚN TEMPORADA</span> – Consulta disponibilidad antes de pedir.</p>
+  <a href="https://wa.me/34602687285?text=Hola!%20Quiero%20consultar%20la%20disponibilidad%20de%20flores." class="btn-notice" target="_blank" rel="noopener">💬 Consultar</a>
+</aside>
+
+<!-- ===== CATALOG ===== -->
+<main id="catalog" aria-label="Catálogo de productos">
+  <div style="padding: 0 16px; max-width: 1200px; margin: 0 auto;">
+    <div class="catalog-title">
+      <div class="gold-line"><span></span>🌸<span></span></div>
+      <h2>Nuestro Catálogo</h2>
+      <p>Selecciona tus flores favoritas y agrégalas al carrito</p>
+    </div>
+  </div>
+
+  <!-- FOLLAJE -->
+  <section id="follaje" aria-labelledby="hFollaje" style="padding: 0 16px 0; max-width: 1200px; margin: 0 auto;">
+    <div class="category-section">
+      <div class="category-header">
+        <div class="category-icon">🌿</div>
+        <div>
+          <h3 id="hFollaje">Follaje</h3>
+          <p>Verdes y texturas para tus arreglos</p>
+        </div>
+      </div>
+      <div class="products-grid" id="gridFollaje"></div>
+    </div>
+  </section>
+
+  <!-- FLORES -->
+  <section id="flores" aria-labelledby="hFlores" style="padding: 0 16px 0; max-width: 1200px; margin: 0 auto;">
+    <div class="category-section">
+      <div class="category-header">
+        <div class="category-icon">🌸</div>
+        <div>
+          <h3 id="hFlores">Flores</h3>
+          <p>La mejor selección de flores frescas</p>
+        </div>
+      </div>
+      <div class="products-grid" id="gridFlores"></div>
+    </div>
+  </section>
+
+  <!-- BOUQUETS -->
+  <section id="bouquets" aria-labelledby="hBouquets" style="padding: 0 16px 0; max-width: 1200px; margin: 0 auto;">
+    <div class="category-section">
+      <div class="category-header">
+        <div class="category-icon">💐</div>
+        <div>
+          <h3 id="hBouquets">Bouquets Variados</h3>
+          <p>Ramos preparados para cada ocasión</p>
+        </div>
+      </div>
+      <div class="products-grid" id="gridBouquets"></div>
+    </div>
+  </section>
+
+  <!-- NO RESULTS -->
+  <div id="noResults" aria-live="polite">
+    <div class="nr-icon">🔍</div>
+    <h3>Sin resultados</h3>
+    <p>No encontramos productos que coincidan con tu búsqueda.</p>
+  </div>
 </main>
 
-<a class="whatsapp" href="https://wa.me/34602687285">Chat with us on WhatsApp</a>
+<!-- ===== CART PANEL ===== -->
+<aside id="cartPanel" role="dialog" aria-modal="true" aria-label="Carrito de compras">
+  <div class="cart-header">
+    <h2>🛒 Mi Carrito</h2>
+    <button id="closeCart" aria-label="Cerrar carrito">✕</button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty">
+      <div class="ce-icon">🛒</div>
+      <p>Tu carrito está vacío</p>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-total-row">
+      <span>Total</span>
+      <span id="cartTotal">0,00 €</span>
+    </div>
+    <button class="btn-checkout" id="btnCheckout">
+      💬 Pedir por WhatsApp
+    </button>
+    <button class="btn-clear-cart" id="btnClear">🗑️ Vaciar carrito</button>
+  </div>
+</aside>
 
+<!-- ===== FLOATING WA ===== -->
+<a id="floatWA" href="https://wa.me/34602687285" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">💬</a>
+
+<!-- ===== BACK TO TOP ===== -->
+<button id="backTop" aria-label="Volver arriba">▲</button>
+
+<!-- ===== TOAST ===== -->
+<div id="toast" role="status" aria-live="assertive"></div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-block footer-logo">
+      <div class="fl-text">🌿 La Huerta<br>De Juan Fernández</div>
+      <div class="fl-sub">Floristería Madrid</div>
+      <div class="social-links" aria-label="Redes sociales">
+        <a href="https://wa.me/34602687285" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+        <a href="mailto:castro59freddy@gmail.com" aria-label="Email">✉️</a>
+        <a href="#" aria-label="Instagram">📷</a>
+        <a href="#" aria-label="Facebook">👍</a>
+      </div>
+    </div>
+
+    <div class="footer-block">
+      <h4>Horario</h4>
+      <div class="schedule-badge">🟢 Abierto hoy</div>
+      <p><strong style="color:var(--gold);">Lunes a Domingo</strong></p>
+      <p>10:00 AM – 9:00 PM</p>
+      <p style="margin-top:8px; font-size:.8rem; opacity:.7;">Festivos consultar disponibilidad</p>
+    </div>
+
+    <div class="footer-block">
+      <h4>Contacto</h4>
+      <ul>
+        <li>📞 <a href="tel:+34602687285">+34 602 687 285</a></li>
+        <li>💬 <a href="https://wa.me/34602687285" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li>✉️ <a href="mailto:castro59freddy@gmail.com">castro59freddy@gmail.com</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-block">
+      <h4>Ubicación</h4>
+      <p>📍 Plaza Tirso de Molina</p>
+      <p>Kiosco #5 – CP 28012</p>
+      <p>Madrid, España</p>
+      <a href="https://maps.google.com/?q=Plaza+Tirso+de+Molina+Madrid" target="_blank" rel="noopener" style="display:inline-block; margin-top:8px; color:var(--gold); font-size:.82rem;">Ver en mapa →</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© <span id="footerYear"></span> La Huerta De Juan Fernández · Plaza Tirso de Molina, Madrid ·
+      <a href="mailto:castro59freddy@gmail.com">Aviso legal</a>
+    </p>
+  </div>
+</footer>
+
+<!-- ===== SCRIPTS ===== -->
 <script>
-    function searchProducts() {
-        const query = document.getElementById('searchBox').value.toLowerCase();
-        alert(`Search functionality is not implemented yet. You searched for: ${query}`);
-    }
-</script>
+(function () {
+  'use strict';
 
+  /* ─── PRODUCT DATA ─── */
+  const PRODUCTS = {
+    follaje: [
+      { id: 'tuya',       name: 'Tuya',       emoji: '🌿', price: 5,  variants: null },
+      { id: 'paniculata', name: 'Paniculata',  emoji: '🌾', price: 6,  variants: null },
+      { id: 'eucalipto',  name: 'Eucalipto',   emoji: '🍃', price: 5,
+        variants: [{ label: 'Pequeño – 5€', price: 5 }, { label: 'Grande – 10€', price: 10 }] },
+      { id: 'ruscus',     name: 'Ruscus (10 varas)', emoji: '🌿', price: 7, variants: null },
+    ],
+    flores: [
+      { id: 'lilium-o',   name: 'Lilium Oriental con Aroma',  emoji: '🌺', price: 4,
+        variants: [{ label: '1 vara – 4€', price: 4 }] },
+      { id: 'lilium-n',   name: 'Lilium Nacional',             emoji: '🌷', price: 3,
+        variants: [{ label: '1 vara – 3€', price: 3 }] },
+      { id: 'girasol',    name: 'Girasol',                     emoji: '🌻', price: 3,
+        variants: [{ label: '1 flor – 3€', price: 3 }, { label: '5 unidades – 12€', price: 12 }] },
+      { id: 'anastasia-s',name: 'Anastasia Spider',            emoji: '🌼', price: 3,  variants: null },
+      { id: 'anastasia-t',name: 'Anastasia Tubular',           emoji: '🌼', price: 3,  variants: null },
+      { id: 'gerbera',    name: 'Gerbera',                     emoji: '🌸', price: 2,  variants: null },
+      { id: 'rosa',       name: 'Rosa',                        emoji: '🌹', price: 3,  variants: null },
+      { id: 'gladiolo',   name: 'Gladiolo',                    emoji: '🌷', price: 2,  variants: null },
+      { id: 'clavel',     name: 'Clavel',                      emoji: '💮', price: 1,
+        variants: [{ label: '1 unidad – 1€', price: 1 }, { label: '10 unidades – 6€', price: 6 }, { label: '12 unidades – 12€', price: 12 }] },
+      { id: 'margaritas', name: 'Margaritas (5 varas)',         emoji: '🌼', price: 12, variants: null },
+      { id: 'siempreviva',name: 'Siempre Viva',                 emoji: '🌸', price: 6,  variants: null },
+      { id: 'tulipanes',  name: 'Tulipanes (10 varas)',         emoji: '🌷', price: 15, variants: null },
+      { id: 'mimosa',     name: 'Mimosa',                       emoji: '🌼', price: 6,
+        variants: [{ label: 'Pequeño – 6€', price: 6 }, { label: 'Grande – 12€', price: 12 }] },
+      { id: 'brassica',   name: 'Brassica',                     emoji: '💜', price: 3,  variants: null },
+      { id: 'ranunculos', name: 'Ranúnculos',                   emoji: '🌸', price: 10, variants: null },
+      { id: 'fresias',    name: 'Fresias',                      emoji: '🌸', price: 10, variants: null },
+      { id: 'astromelias',name: 'Astromelias',                  emoji: '🌺', price: 6,
+        variants: [{ label: 'Pequeña – 6€', price: 6 }, { label: 'Grande – 12€', price: 12 }] },
+      { id: 'craspedia',  name: 'Craspedia',                    emoji: '🟡', price: 0,  available: false, variants: null },
+      { id: 'ave-paraiso',name: 'Ave del Paraíso',              emoji: '🦜', price: 0,  available: false, variants: null },
+    ],
+    bouquets: [
+      { id: 'bouquet-6',  name: 'Bouquet',                     emoji: '💐', price: 6,
+        variants: [{ label: 'Bouquet – 6€', price: 6 }] },
+      { id: 'bouquet-12', name: 'Bouquet',                     emoji: '💐', price: 12,
+        variants: [{ label: 'Bouquet – 12€', price: 12 }] },
+      { id: 'bouquet-14', name: 'Bouquet',                     emoji: '💐', price: 14,
+        variants: [{ label: 'Bouquet – 14€', price: 14 }] },
+      { id: 'bouquet-15', name: 'Bouquet 6 Rosas',             emoji: '🌹', price: 15,
+        variants: [{ label: 'Bouquet 6 rosas – 15€', price: 15 }] },
+    ],
+  };
+
+  /* ─── CART STATE ─── */
+  let cart = [];
+  const STORAGE_KEY = 'lahuerta_cart';
+
+  function saveCart() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(cart)); } catch (_) {}
+  }
+  function loadCart() {
+    try {
+      const data = localStorage.getItem(STORAGE_KEY);
+      if (data) cart = JSON.parse(data);
+    } catch (_) { cart = []; }
+  }
+
+  /* ─── HELPERS ─── */
+  function fmt(price) {
+    return price.toFixed(2).replace('.', ',') + ' €';
+  }
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  }
+  function getVariantPrice(product, selectEl) {
+    if (product.variants && selectEl) {
+      const idx = parseInt(selectEl.value, 10);
+      return product.variants[idx] ? product.variants[idx].price : product.price;
+    }
+    return product.price;
+  }
+  function getVariantLabel(product, selectEl) {
+    if (product.variants && selectEl) {
+      const idx = parseInt(selectEl.value, 10);
+      return product.variants[idx] ? product.variants[idx].label : '';
+    }
+    return '';
+  }
+
+  /* ─── RENDER PRODUCT CARD ─── */
+  function buildCard(product) {
+    const unavailable = product.available === false;
+    const card = document.createElement('article');
+    card.className = 'product-card' + (unavailable ? ' unavailable' : '');
+    card.dataset.name = product.name.toLowerCase();
+
+    let variantHtml = '';
+    if (product.variants && product.variants.length > 1) {
+      variantHtml = '<select class="variant-select" aria-label="Variante">';
+      product.variants.forEach((v, i) => {
+        variantHtml += `<option value="${i}">${v.label}</option>`;
+      });
+      variantHtml += '</select>';
+    }
+
+    const priceLabel = unavailable ? 'No disponible'
+      : (product.variants ? (product.variants[0].label.split('–')[1] || '').trim() || fmt(product.variants[0].price) : fmt(product.price));
+
+    card.innerHTML = `
+      <div class="product-thumb">
+        <span role="img" aria-label="${product.name}">${product.emoji}</span>
+        ${unavailable ? '<span class="badge-unavail">No disponible</span>' : ''}
+      </div>
+      <div class="product-body">
+        <div class="product-name">${product.name}</div>
+        ${variantHtml}
+        <div class="product-price">${priceLabel}</div>
+        <button class="btn-add" ${unavailable ? 'disabled' : ''} aria-label="Agregar ${product.name} al carrito">
+          🛒 Agregar
+        </button>
+      </div>`;
+
+    if (!unavailable) {
+      const selectEl = card.querySelector('.variant-select');
+      const priceEl  = card.querySelector('.product-price');
+
+      if (selectEl) {
+        selectEl.addEventListener('change', () => {
+          const idx = parseInt(selectEl.value, 10);
+          priceEl.textContent = (product.variants[idx].label.split('–')[1] || '').trim() || fmt(product.variants[idx].price);
+        });
+      }
+
+      card.querySelector('.btn-add').addEventListener('click', () => {
+        const price = getVariantPrice(product, selectEl);
+        const variant = getVariantLabel(product, selectEl);
+        addToCart(product.id, product.name, product.emoji, price, variant);
+      });
+    }
+
+    return card;
+  }
+
+  /* ─── RENDER ALL GRIDS ─── */
+  function renderGrids() {
+    Object.entries(PRODUCTS).forEach(([cat, list]) => {
+      const grid = document.getElementById('grid' + cat.charAt(0).toUpperCase() + cat.slice(1));
+      if (!grid) return;
+      list.forEach(p => grid.appendChild(buildCard(p)));
+    });
+  }
+
+  /* ─── SEARCH ─── */
+  function handleSearch(query) {
+    query = query.trim().toLowerCase();
+    let found = 0;
+    document.querySelectorAll('.product-card').forEach(card => {
+      const match = !query || card.dataset.name.includes(query);
+      card.classList.toggle('hidden-search', !match);
+      if (match) found++;
+    });
+    document.querySelectorAll('.category-section').forEach(sec => {
+      const visible = sec.querySelectorAll('.product-card:not(.hidden-search)').length > 0;
+      sec.style.display = visible ? '' : 'none';
+    });
+    document.getElementById('noResults').style.display = found === 0 && query ? 'block' : 'none';
+  }
+
+  /* ─── CART ─── */
+  function addToCart(id, name, emoji, price, variant) {
+    const key = id + (variant ? '_' + variant : '');
+    const existing = cart.find(i => i.key === key);
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({ key, id, name, emoji, price, variant, qty: 1 });
+    }
+    saveCart();
+    updateCartUI();
+    showToast('✅ ' + name + ' añadido al carrito');
+  }
+
+  function updateCartUI() {
+    const count = cart.reduce((s, i) => s + i.qty, 0);
+    const countEl = document.getElementById('cartCount');
+    countEl.textContent = count;
+    countEl.classList.toggle('hidden', count === 0);
+
+    const body  = document.getElementById('cartBody');
+    const footer = document.getElementById('cartFooter');
+
+    if (cart.length === 0) {
+      body.innerHTML = '<div class="cart-empty"><div class="ce-icon">🛒</div><p>Tu carrito está vacío</p></div>';
+      footer.style.display = 'none';
+      return;
+    }
+
+    footer.style.display = '';
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    document.getElementById('cartTotal').textContent = fmt(total);
+
+    body.innerHTML = '';
+    cart.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'cart-item';
+      div.innerHTML = `
+        <div class="ci-thumb">${item.emoji}</div>
+        <div class="ci-info">
+          <div class="ci-name">${item.name}</div>
+          ${item.variant ? `<div class="ci-variant">${item.variant}</div>` : ''}
+          <div class="ci-price">${fmt(item.price)} × ${item.qty} = ${fmt(item.price * item.qty)}</div>
+          <div class="ci-qty">
+            <button class="qty-minus" data-key="${item.key}" aria-label="Disminuir cantidad">−</button>
+            <span>${item.qty}</span>
+            <button class="qty-plus" data-key="${item.key}" aria-label="Aumentar cantidad">+</button>
+          </div>
+        </div>
+        <button class="ci-remove" data-key="${item.key}" aria-label="Eliminar ${item.name}">✕</button>`;
+      body.appendChild(div);
+    });
+
+    body.querySelectorAll('.qty-minus').forEach(btn => {
+      btn.addEventListener('click', () => { changeQty(btn.dataset.key, -1); });
+    });
+    body.querySelectorAll('.qty-plus').forEach(btn => {
+      btn.addEventListener('click', () => { changeQty(btn.dataset.key, +1); });
+    });
+    body.querySelectorAll('.ci-remove').forEach(btn => {
+      btn.addEventListener('click', () => { removeItem(btn.dataset.key); });
+    });
+  }
+
+  function changeQty(key, delta) {
+    const item = cart.find(i => i.key === key);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) cart = cart.filter(i => i.key !== key);
+    saveCart();
+    updateCartUI();
+  }
+  function removeItem(key) {
+    cart = cart.filter(i => i.key !== key);
+    saveCart();
+    updateCartUI();
+  }
+  function clearCart() {
+    cart = [];
+    saveCart();
+    updateCartUI();
+  }
+
+  /* ─── WHATSAPP CHECKOUT ─── */
+  function checkoutWhatsApp() {
+    if (cart.length === 0) { showToast('El carrito está vacío'); return; }
+    const lines = cart.map(i => `- ${i.name}${i.variant ? ' (' + i.variant + ')' : ''} x${i.qty} = ${fmt(i.price * i.qty)}`);
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    const msg = `¡Hola! Quiero hacer el siguiente pedido:\n\n${lines.join('\n')}\n\n*Total: ${fmt(total)}*\n\nPor favor, confirma disponibilidad. ¡Gracias!`;
+    const url  = 'https://wa.me/34602687285?text=' + encodeURIComponent(msg);
+    window.open(url, '_blank', 'noopener');
+  }
+
+  /* ─── PANEL OPEN/CLOSE ─── */
+  function openCart() {
+    document.getElementById('cartPanel').classList.add('open');
+    document.getElementById('overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeCart() {
+    document.getElementById('cartPanel').classList.remove('open');
+    closeOverlay();
+  }
+  function openMenu() {
+    document.getElementById('sideMenu').classList.add('open');
+    document.getElementById('overlay').classList.add('active');
+    document.getElementById('hamburger').setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    document.getElementById('sideMenu').classList.remove('open');
+    document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+    closeOverlay();
+  }
+  function closeOverlay() {
+    if (!document.getElementById('cartPanel').classList.contains('open') &&
+        !document.getElementById('sideMenu').classList.contains('open')) {
+      document.getElementById('overlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+  function closeAll() {
+    document.getElementById('cartPanel').classList.remove('open');
+    document.getElementById('sideMenu').classList.remove('open');
+    document.getElementById('overlay').classList.remove('active');
+    document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  /* ─── INIT ─── */
+  document.addEventListener('DOMContentLoaded', () => {
+    loadCart();
+    renderGrids();
+    updateCartUI();
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+    /* Search */
+    const searchInput = document.getElementById('searchInput');
+    const clearSearch = document.getElementById('clearSearch');
+    searchInput.addEventListener('input', () => handleSearch(searchInput.value));
+    clearSearch.addEventListener('click', () => {
+      searchInput.value = '';
+      handleSearch('');
+      searchInput.focus();
+    });
+
+    /* Cart */
+    document.getElementById('openCart').addEventListener('click', openCart);
+    document.getElementById('closeCart').addEventListener('click', closeCart);
+    document.getElementById('btnCheckout').addEventListener('click', checkoutWhatsApp);
+    document.getElementById('btnClear').addEventListener('click', clearCart);
+
+    /* Menu */
+    document.getElementById('hamburger').addEventListener('click', openMenu);
+    document.getElementById('closeMenu').addEventListener('click', closeMenu);
+
+    /* Menu links close on click */
+    document.querySelectorAll('#sideMenu a').forEach(link => {
+      link.addEventListener('click', closeAll);
+    });
+
+    /* Overlay closes all */
+    document.getElementById('overlay').addEventListener('click', closeAll);
+
+    /* Back to top */
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+      backTop.classList.toggle('visible', window.scrollY > 300);
+    }, { passive: true });
+    backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    /* Footer year handled above */
+  });
+})();
+</script>
 </body>
 </html>
