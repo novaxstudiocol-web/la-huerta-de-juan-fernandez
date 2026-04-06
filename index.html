@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="La Huerta de Juan Fernández — Flores frescas de temporada, arreglos florales y plantas. Madrid, España. | Fresh seasonal flowers, floral arrangements and plants. Madrid, Spain." />
+  <meta name="keywords" content="flores, floristería, Madrid, Spain, flowers, plants, ramos, bouquets, arreglos florales" />
+  <meta property="og:title" content="La Huerta de Juan Fernández" />
+  <meta property="og:description" content="Floristería artesanal en Madrid, España. Flores frescas de temporada y arreglos únicos hechos con amor." />
+  <meta property="og:type" content="website" />
+  <title>La Huerta de Juan Fernández — Floristería Artesanal · Madrid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <header class="site-header" id="site-header">
+    <nav class="nav container">
+      <a href="#hero" class="nav__logo">
+        <span class="nav__logo-leaf">🌿</span>
+        <span class="nav__logo-text">La Huerta de Juan Fernández</span>
+      </a>
+
+      <ul class="nav__links" id="nav-links">
+        <li><a href="#productos" class="nav__link" data-es="Productos" data-en="Products">Productos</a></li>
+        <li><a href="#nosotros" class="nav__link" data-es="Nosotros" data-en="About">Nosotros</a></li>
+        <li><a href="#servicios" class="nav__link" data-es="Servicios" data-en="Services">Servicios</a></li>
+        <li><a href="#testimonios" class="nav__link" data-es="Testimonios" data-en="Reviews">Testimonios</a></li>
+        <li><a href="#contacto" class="nav__link" data-es="Contacto" data-en="Contact">Contacto</a></li>
+      </ul>
+
+      <div class="nav__actions">
+        <button class="lang-btn" id="lang-btn" aria-label="Switch language">
+          <span id="lang-label">EN</span>
+        </button>
+        <button class="nav__hamburger" id="hamburger" data-es="Abrir menú" data-en="Open menu" aria-label="Abrir menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="hero">
+    <div class="hero__bg">
+      <div class="hero__petals">
+        <span class="petal petal--1">🌸</span>
+        <span class="petal petal--2">🌺</span>
+        <span class="petal petal--3">🌹</span>
+        <span class="petal petal--4">🌼</span>
+        <span class="petal petal--5">🌷</span>
+        <span class="petal petal--6">💐</span>
+        <span class="petal petal--7">🌻</span>
+        <span class="petal petal--8">🌸</span>
+      </div>
+    </div>
+    <div class="hero__content container">
+      <span class="hero__badge" data-es="Madrid · España" data-en="Madrid · Spain">Madrid · España</span>
+      <h1 class="hero__title" data-es="Flores que cuentan historias" data-en="Flowers that tell stories">
+        Flores que cuentan historias
+      </h1>
+      <p class="hero__subtitle" data-es="Arreglos florales artesanales hechos con las flores más frescas de temporada, cultivadas con amor y entregadas con pasión." data-en="Artisan floral arrangements made with the freshest seasonal flowers, grown with love and delivered with passion.">
+        Arreglos florales artesanales hechos con las flores más frescas de temporada, cultivadas con amor y entregadas con pasión.
+      </p>
+      <div class="hero__ctas">
+        <a href="#productos" class="btn btn--primary" data-es="Ver Colección" data-en="View Collection">Ver Colección</a>
+        <a href="#contacto" class="btn btn--outline" data-es="Hacer un Pedido" data-en="Place an Order">Hacer un Pedido</a>
+      </div>
+      <div class="hero__stats">
+        <div class="stat">
+          <strong class="stat__num" data-count="15">15+</strong>
+          <span class="stat__label" data-es="Años de experiencia" data-en="Years of experience">Años de experiencia</span>
+        </div>
+        <div class="stat__divider"></div>
+        <div class="stat">
+          <strong class="stat__num" data-count="5000">5 000+</strong>
+          <span class="stat__label" data-es="Clientes felices" data-en="Happy clients">Clientes felices</span>
+        </div>
+        <div class="stat__divider"></div>
+        <div class="stat">
+          <strong class="stat__num" data-count="200">200+</strong>
+          <span class="stat__label" data-es="Variedades de flores" data-en="Flower varieties">Variedades de flores</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero__scroll-indicator">
+      <span></span>
+      <p data-es="Descubrir" data-en="Discover">Descubrir</p>
+    </div>
+  </section>
+
+  <!-- ========== MARQUEE BANNER ========== -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-track">
+      <span>🌹 Rosas · Roses</span>
+      <span>🌷 Tulipanes · Tulips</span>
+      <span>🌸 Cerezos · Cherry Blossoms</span>
+      <span>🌻 Girasoles · Sunflowers</span>
+      <span>💐 Ramos de Novia · Bridal Bouquets</span>
+      <span>🌺 Flores Exóticas · Exotic Flowers</span>
+      <span>🌿 Plantas de Interior · Indoor Plants</span>
+      <span>🌼 Margaritas · Daisies</span>
+      <span>🌹 Rosas · Roses</span>
+      <span>🌷 Tulipanes · Tulips</span>
+      <span>🌸 Cerezos · Cherry Blossoms</span>
+      <span>🌻 Girasoles · Sunflowers</span>
+      <span>💐 Ramos de Novia · Bridal Bouquets</span>
+      <span>🌺 Flores Exóticas · Exotic Flowers</span>
+      <span>🌿 Plantas de Interior · Indoor Plants</span>
+      <span>🌼 Margaritas · Daisies</span>
+    </div>
+  </div>
+
+  <!-- ========== PRODUCTS ========== -->
+  <section class="section" id="productos">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag" data-es="Nuestra Colección" data-en="Our Collection">Nuestra Colección</span>
+        <h2 class="section__title" data-es="Flores para cada momento" data-en="Flowers for every moment">Flores para cada momento</h2>
+        <p class="section__subtitle" data-es="Desde un gesto cotidiano hasta la boda de tus sueños, tenemos la flor perfecta para ti." data-en="From a simple daily gesture to your dream wedding, we have the perfect flower for you.">
+          Desde un gesto cotidiano hasta la boda de tus sueños, tenemos la flor perfecta para ti.
+        </p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="filter-tabs" id="filter-tabs" role="tablist">
+        <button class="filter-tab active" data-filter="all" data-es="Todos" data-en="All" role="tab" aria-selected="true">Todos</button>
+        <button class="filter-tab" data-filter="ramos" data-es="Ramos" data-en="Bouquets" role="tab" aria-selected="false">Ramos</button>
+        <button class="filter-tab" data-filter="plantas" data-es="Plantas" data-en="Plants" role="tab" aria-selected="false">Plantas</button>
+        <button class="filter-tab" data-filter="bodas" data-es="Bodas" data-en="Weddings" role="tab" aria-selected="false">Bodas</button>
+        <button class="filter-tab" data-filter="eventos" data-es="Eventos" data-en="Events" role="tab" aria-selected="false">Eventos</button>
+      </div>
+
+      <div class="product-grid" id="product-grid">
+
+        <article class="product-card" data-category="ramos">
+          <div class="product-card__image">
+            <div class="product-card__emoji">🌹</div>
+            <span class="product-card__badge" data-es="Más vendido" data-en="Best seller">Más vendido</span>
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__category" data-es="Ramos" data-en="Bouquets">Ramos</span>
+            <h3 class="product-card__title" data-es="Ramo Romántico de Rosas Rojas" data-en="Romantic Red Roses Bouquet">Ramo Romántico de Rosas Rojas</h3>
+            <p class="product-card__desc" data-es="12 rosas rojas de primera calidad con follaje verde y envueltas en papel kraft artesanal." data-en="12 premium red roses with green foliage wrapped in artisan kraft paper.">12 rosas rojas de primera calidad con follaje verde y envueltas en papel kraft artesanal.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">€ 45</span>
+              <a href="#contacto" class="btn btn--sm btn--primary" data-es="Pedir" data-en="Order">Pedir</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="ramos">
+          <div class="product-card__image product-card__image--2">
+            <div class="product-card__emoji">🌷</div>
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__category" data-es="Ramos" data-en="Bouquets">Ramos</span>
+            <h3 class="product-card__title" data-es="Ramo Primaveral de Tulipanes" data-en="Spring Tulip Bouquet">Ramo Primaveral de Tulipanes</h3>
+            <p class="product-card__desc" data-es="20 tulipanes mixtos de colores vibrantes, ideales para alegrar cualquier espacio." data-en="20 mixed tulips in vibrant colours, ideal for brightening any space.">20 tulipanes mixtos de colores vibrantes, ideales para alegrar cualquier espacio.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">€ 38</span>
+              <a href="#contacto" class="btn btn--sm btn--primary" data-es="Pedir" data-en="Order">Pedir</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="bodas">
+          <div class="product-card__image product-card__image--3">
+            <div class="product-card__emoji">💐</div>
+            <span class="product-card__badge product-card__badge--gold" data-es="Premium" data-en="Premium">Premium</span>
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__category" data-es="Bodas" data-en="Weddings">Bodas</span>
+            <h3 class="product-card__title" data-es="Ramo de Novia Clásico" data-en="Classic Bridal Bouquet">Ramo de Novia Clásico</h3>
+            <p class="product-card__desc" data-es="Diseño elegante con peonías, rosas blancas y eucalipto. Personalizable a medida." data-en="Elegant design with peonies, white roses and eucalyptus. Fully customisable.">Diseño elegante con peonías, rosas blancas y eucalipto. Personalizable a medida.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">€ 120</span>
+              <a href="#contacto" class="btn btn--sm btn--primary" data-es="Consultar" data-en="Enquire">Consultar</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="plantas">
+          <div class="product-card__image product-card__image--4">
+            <div class="product-card__emoji">🌿</div>
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__category" data-es="Plantas" data-en="Plants">Plantas</span>
+            <h3 class="product-card__title" data-es="Planta de Interior Monstera" data-en="Monstera Indoor Plant">Planta de Interior Monstera</h3>
+            <p class="product-card__desc" data-es="Monstera Deliciosa en maceta de cerámica artesanal. Fácil cuidado, gran presencia decorativa." data-en="Monstera Deliciosa in artisan ceramic pot. Easy care, great decorative presence.">Monstera Deliciosa en maceta de cerámica artesanal. Fácil cuidado, gran presencia decorativa.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">€ 55</span>
+              <a href="#contacto" class="btn btn--sm btn--primary" data-es="Pedir" data-en="Order">Pedir</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="eventos">
+          <div class="product-card__image product-card__image--5">
+            <div class="product-card__emoji">🌸</div>
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__category" data-es="Eventos" data-en="Events">Eventos</span>
+            <h3 class="product-card__title" data-es="Centro de Mesa para Eventos" data-en="Event Table Centrepiece">Centro de Mesa para Eventos</h3>
+            <p class="product-card__desc" data-es="Centros florales elegantes para banquetes, cenas de empresa y celebraciones especiales." data-en="Elegant floral centrepieces for banquets, corporate dinners and special celebrations.">Centros florales elegantes para banquetes, cenas de empresa y celebraciones especiales.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">€ 75</span>
+              <a href="#contacto" class="btn btn--sm btn--primary" data-es="Consultar" data-en="Enquire">Consultar</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="ramos">
+          <div class="product-card__image product-card__image--6">
+            <div class="product-card__emoji">🌻</div>
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__category" data-es="Ramos" data-en="Bouquets">Ramos</span>
+            <h3 class="product-card__title" data-es="Ramo de Girasoles Silvestres" data-en="Wild Sunflower Bouquet">Ramo de Girasoles Silvestres</h3>
+            <p class="product-card__desc" data-es="Girasoles frescos combinados con flores silvestres de temporada. Alegría garantizada." data-en="Fresh sunflowers combined with seasonal wildflowers. Guaranteed joy.">Girasoles frescos combinados con flores silvestres de temporada. Alegría garantizada.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">€ 32</span>
+              <a href="#contacto" class="btn btn--sm btn--primary" data-es="Pedir" data-en="Order">Pedir</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section class="section section--tinted" id="nosotros">
+    <div class="container about-grid">
+      <div class="about-visual">
+        <div class="about-blob">
+          <div class="about-emoji-stack">
+            <span class="ae ae--1">🌹</span>
+            <span class="ae ae--2">🌷</span>
+            <span class="ae ae--3">🌸</span>
+            <span class="ae ae--4">🌿</span>
+            <span class="ae ae--center">💐</span>
+          </div>
+        </div>
+        <div class="about-badge-float">
+          <span class="about-badge-icon">🏅</span>
+          <div>
+            <strong data-es="Floristería Artesanal" data-en="Artisan Florist">Floristería Artesanal</strong>
+            <small>Madrid, España</small>
+          </div>
+        </div>
+      </div>
+      <div class="about-content">
+        <span class="section__tag" data-es="Nuestra Historia" data-en="Our Story">Nuestra Historia</span>
+        <h2 class="section__title" data-es="Pasión por las flores desde 2009" data-en="A passion for flowers since 2009">Pasión por las flores desde 2009</h2>
+        <p data-es="La Huerta de Juan Fernández nació en el corazón de Madrid como un pequeño puesto de flores en el mercado local. Hoy, más de 15 años después, somos una floristería de referencia que sirve a miles de clientes en toda España y Europa." data-en="La Huerta de Juan Fernández was born in the heart of Madrid as a small flower stall at the local market. Today, more than 15 years later, we are a leading florist serving thousands of customers across Spain and Europe.">
+          La Huerta de Juan Fernández nació en el corazón de Madrid como un pequeño puesto de flores en el mercado local. Hoy, más de 15 años después, somos una floristería de referencia que sirve a miles de clientes en toda España y Europa.
+        </p>
+        <p data-es="Cada arreglo floral es creado a mano por nuestros floristas artesanos, utilizando flores frescas de temporada seleccionadas directamente de productores locales y de los mejores mercados florales de Europa." data-en="Every floral arrangement is handcrafted by our artisan florists using fresh seasonal flowers selected directly from local growers and the finest flower markets across Europe.">
+          Cada arreglo floral es creado a mano por nuestros floristas artesanos, utilizando flores frescas de temporada seleccionadas directamente de productores locales y de los mejores mercados florales de Europa.
+        </p>
+        <ul class="about-features">
+          <li>
+            <span class="about-feature-icon">🌱</span>
+            <div>
+              <strong data-es="Flores de Temporada" data-en="Seasonal Flowers">Flores de Temporada</strong>
+              <p data-es="Siempre frescas, siempre naturales." data-en="Always fresh, always natural.">Siempre frescas, siempre naturales.</p>
+            </div>
+          </li>
+          <li>
+            <span class="about-feature-icon">✂️</span>
+            <div>
+              <strong data-es="Diseño Artesanal" data-en="Artisan Design">Diseño Artesanal</strong>
+              <p data-es="Cada pieza única, creada con mimo." data-en="Every piece unique, crafted with care.">Cada pieza única, creada con mimo.</p>
+            </div>
+          </li>
+          <li>
+            <span class="about-feature-icon">🚚</span>
+            <div>
+              <strong data-es="Entrega en Madrid" data-en="Delivery in Madrid">Entrega en Madrid</strong>
+              <p data-es="Servicio de entrega a domicilio rápido y cuidadoso." data-en="Fast, careful home delivery service.">Servicio de entrega a domicilio rápido y cuidadoso.</p>
+            </div>
+          </li>
+          <li>
+            <span class="about-feature-icon">🌍</span>
+            <div>
+              <strong data-es="Alcance Internacional" data-en="International Reach">Alcance Internacional</strong>
+              <p data-es="Exportamos frescura y diseño a toda Europa." data-en="We export freshness and design across Europe.">Exportamos frescura y diseño a toda Europa.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES ========== -->
+  <section class="section" id="servicios">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag" data-es="Lo que hacemos" data-en="What we do">Lo que hacemos</span>
+        <h2 class="section__title" data-es="Servicios Profesionales" data-en="Professional Services">Servicios Profesionales</h2>
+        <p class="section__subtitle" data-es="Desde pequeños gestos personales hasta grandes eventos corporativos, cubrimos todos tus momentos florales." data-en="From small personal gestures to large corporate events, we cover all your floral moments.">
+          Desde pequeños gestos personales hasta grandes eventos corporativos, cubrimos todos tus momentos florales.
+        </p>
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="service-card__icon">💒</div>
+          <h3 class="service-card__title" data-es="Bodas y Ceremonias" data-en="Weddings & Ceremonies">Bodas y Ceremonias</h3>
+          <p data-es="Decoración floral completa para tu boda: ramos, centros de mesa, arcos, pétales y más." data-en="Complete floral decoration for your wedding: bouquets, centrepieces, arches, petals and more.">Decoración floral completa para tu boda: ramos, centros de mesa, arcos, pétales y más.</p>
+        </div>
+
+        <div class="service-card service-card--featured">
+          <div class="service-card__icon">🏢</div>
+          <h3 class="service-card__title" data-es="Eventos Corporativos" data-en="Corporate Events">Eventos Corporativos</h3>
+          <p data-es="Arreglos florales profesionales para oficinas, hoteles, restaurantes y eventos de empresa." data-en="Professional floral arrangements for offices, hotels, restaurants and business events.">Arreglos florales profesionales para oficinas, hoteles, restaurantes y eventos de empresa.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card__icon">🎁</div>
+          <h3 class="service-card__title" data-es="Regalos Personalizados" data-en="Personalised Gifts">Regalos Personalizados</h3>
+          <p data-es="Diseñamos el ramo perfecto para tu persona especial. Consulta nuestras opciones de personalización." data-en="We design the perfect bouquet for your special person. Ask about our personalisation options.">Diseñamos el ramo perfecto para tu persona especial. Consulta nuestras opciones de personalización.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card__icon">🏡</div>
+          <h3 class="service-card__title" data-es="Suscripción Floral" data-en="Flower Subscription">Suscripción Floral</h3>
+          <p data-es="Recibe flores frescas de temporada en tu casa o negocio cada semana o cada mes." data-en="Receive fresh seasonal flowers at your home or business weekly or monthly.">Recibe flores frescas de temporada en tu casa o negocio cada semana o cada mes.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card__icon">🌿</div>
+          <h3 class="service-card__title" data-es="Plantas y Jardines" data-en="Plants & Gardens">Plantas y Jardines</h3>
+          <p data-es="Asesoramiento y diseño de jardines interiores y exteriores con plantas de temporada." data-en="Advisory and design of indoor and outdoor gardens with seasonal plants.">Asesoramiento y diseño de jardines interiores y exteriores con plantas de temporada.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card__icon">🚀</div>
+          <h3 class="service-card__title" data-es="Entrega Express" data-en="Express Delivery">Entrega Express</h3>
+          <p data-es="Entregamos tus flores en Madrid en menos de 3 horas. Servicio disponible todos los días." data-en="We deliver your flowers in Madrid in under 3 hours. Service available every day.">Entregamos tus flores en Madrid en menos de 3 horas. Servicio disponible todos los días.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TESTIMONIALS ========== -->
+  <section class="section section--tinted" id="testimonios">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag" data-es="Lo que dicen" data-en="What they say">Lo que dicen</span>
+        <h2 class="section__title" data-es="Clientes que nos aman" data-en="Clients who love us">Clientes que nos aman</h2>
+      </div>
+      <div class="testimonials-slider" id="testimonials-slider">
+
+        <div class="testimonial-card active">
+          <div class="testimonial-stars">★★★★★</div>
+          <blockquote data-es='"El ramo de novia superó todas mis expectativas. Juan y su equipo lo personalizaron exactamente como yo soñaba. Las flores llegaron perfectas el día de mi boda."' data-en='"The bridal bouquet exceeded all my expectations. Juan and his team personalised it exactly as I had dreamed. The flowers arrived perfect on my wedding day."'>
+            "El ramo de novia superó todas mis expectativas. Juan y su equipo lo personalizaron exactamente como yo soñaba. Las flores llegaron perfectas el día de mi boda."
+          </blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">👰</div>
+            <div>
+              <strong>María García</strong>
+              <small>Madrid, España</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <blockquote data-es='"Llevamos 2 años con la suscripción floral semanal para nuestra oficina. La calidad es constante y el servicio impecable. Muy recomendable."' data-en='"We have had the weekly flower subscription for our office for 2 years. The quality is consistent and the service impeccable. Highly recommended."'>
+            "Llevamos 2 años con la suscripción floral semanal para nuestra oficina. La calidad es constante y el servicio impecable. Muy recomendable."
+          </blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">👨‍💼</div>
+            <div>
+              <strong>Carlos Martínez</strong>
+              <small data-es="Director, Empresa Tech Madrid" data-en="Director, Tech Company Madrid">Director, Empresa Tech Madrid</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <blockquote data-es='"I ordered flowers for my mother living in Madrid from London. The delivery was on time and the arrangement was absolutely stunning. Thank you!"' data-en='"I ordered flowers for my mother living in Madrid from London. The delivery was on time and the arrangement was absolutely stunning. Thank you!"'>
+            "I ordered flowers for my mother living in Madrid from London. The delivery was on time and the arrangement was absolutely stunning. Thank you!"
+          </blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">🇬🇧</div>
+            <div>
+              <strong>Sophie Williams</strong>
+              <small>London, UK</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <blockquote data-es='"Decoraron todo nuestro evento de empresa con una elegancia y creatividad increíbles. Cada detalle floral fue impecable. Volveremos sin duda."' data-en='"They decorated our entire corporate event with incredible elegance and creativity. Every floral detail was impeccable. We will definitely return."'>
+            "Decoraron todo nuestro evento de empresa con una elegancia y creatividad increíbles. Cada detalle floral fue impecable. Volveremos sin duda."
+          </blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">🇩🇪</div>
+            <div>
+              <strong>Anna Müller</strong>
+              <small data-es="Evento Corporativo, Frankfurt" data-en="Corporate Event, Frankfurt">Evento Corporativo, Frankfurt</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="testimonials-nav">
+        <button class="tns-btn tns-btn--prev" id="tns-prev" data-es="Anterior" data-en="Previous" aria-label="Anterior">‹</button>
+        <div class="tns-dots" id="tns-dots"></div>
+        <button class="tns-btn tns-btn--next" id="tns-next" data-es="Siguiente" data-en="Next" aria-label="Siguiente">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WHY US ========== -->
+  <section class="section why-us">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag" data-es="Por qué elegirnos" data-en="Why choose us">Por qué elegirnos</span>
+        <h2 class="section__title" data-es="La diferencia artesanal" data-en="The artisan difference">La diferencia artesanal</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-item">
+          <span class="why-icon">🌱</span>
+          <h4 data-es="100% Flores Naturales" data-en="100% Natural Flowers">100% Flores Naturales</h4>
+          <p data-es="Sin flores artificiales. Siempre frescas, siempre de temporada." data-en="No artificial flowers. Always fresh, always seasonal.">Sin flores artificiales. Siempre frescas, siempre de temporada.</p>
+        </div>
+        <div class="why-item">
+          <span class="why-icon">♻️</span>
+          <h4 data-es="Sostenibilidad" data-en="Sustainability">Sostenibilidad</h4>
+          <p data-es="Packaging 100% biodegradable y proveedores locales responsables." data-en="100% biodegradable packaging and responsible local suppliers.">Packaging 100% biodegradable y proveedores locales responsables.</p>
+        </div>
+        <div class="why-item">
+          <span class="why-icon">🎨</span>
+          <h4 data-es="Diseño Exclusivo" data-en="Exclusive Design">Diseño Exclusivo</h4>
+          <p data-es="Cada arreglo es único. Nuestros floristas son artistas." data-en="Every arrangement is unique. Our florists are artists.">Cada arreglo es único. Nuestros floristas son artistas.</p>
+        </div>
+        <div class="why-item">
+          <span class="why-icon">⚡</span>
+          <h4 data-es="Entrega Rápida" data-en="Fast Delivery">Entrega Rápida</h4>
+          <p data-es="Entrega el mismo día en Madrid. Envío exprés disponible." data-en="Same-day delivery in Madrid. Express shipping available.">Entrega el mismo día en Madrid. Envío exprés disponible.</p>
+        </div>
+        <div class="why-item">
+          <span class="why-icon">🤝</span>
+          <h4 data-es="Atención Personalizada" data-en="Personalised Service">Atención Personalizada</h4>
+          <p data-es="Te asesoramos para encontrar la flor perfecta para tu ocasión." data-en="We advise you to find the perfect flower for your occasion.">Te asesoramos para encontrar la flor perfecta para tu ocasión.</p>
+        </div>
+        <div class="why-item">
+          <span class="why-icon">💳</span>
+          <h4 data-es="Pago Seguro" data-en="Secure Payment">Pago Seguro</h4>
+          <p data-es="Múltiples métodos de pago. Transacciones 100% seguras." data-en="Multiple payment methods. 100% secure transactions.">Múltiples métodos de pago. Transacciones 100% seguras.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section class="section section--tinted" id="contacto">
+    <div class="container contact-grid">
+      <div class="contact-info">
+        <span class="section__tag" data-es="Contacto" data-en="Contact">Contacto</span>
+        <h2 class="section__title" data-es="Hablemos de flores" data-en="Let's talk flowers">Hablemos de flores</h2>
+        <p data-es="Estamos aquí para ayudarte a crear el arreglo floral perfecto. Contáctanos y te responderemos en menos de 24 horas." data-en="We are here to help you create the perfect floral arrangement. Contact us and we will reply within 24 hours.">
+          Estamos aquí para ayudarte a crear el arreglo floral perfecto. Contáctanos y te responderemos en menos de 24 horas.
+        </p>
+        <ul class="contact-details">
+          <li>
+            <span class="contact-icon">📍</span>
+            <div>
+              <strong data-es="Dirección" data-en="Address">Dirección</strong>
+              <p>Calle de las Flores 14, Madrid, España</p>
+            </div>
+          </li>
+          <li>
+            <span class="contact-icon">📞</span>
+            <div>
+              <strong data-es="Teléfono" data-en="Phone">Teléfono</strong>
+              <p><a href="tel:+34912345678">+34 91 234 56 78</a></p>
+            </div>
+          </li>
+          <li>
+            <span class="contact-icon">✉️</span>
+            <div>
+              <strong data-es="Email" data-en="Email">Email</strong>
+              <p><a href="mailto:hola@lahuertadejuanfernandez.es">hola@lahuertadejuanfernandez.es</a></p>
+            </div>
+          </li>
+          <li>
+            <span class="contact-icon">🕐</span>
+            <div>
+              <strong data-es="Horario" data-en="Opening Hours">Horario</strong>
+              <p data-es="Lun–Sáb: 09:00–19:00 · Dom: 10:00–14:00" data-en="Mon–Sat: 09:00–19:00 · Sun: 10:00–14:00">Lun–Sáb: 09:00–19:00 · Dom: 10:00–14:00</p>
+            </div>
+          </li>
+        </ul>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 3a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 1.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm5.5-.75a.875.875 0 1 1 0 1.75.875.875 0 0 1 0-1.75z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987H7.898V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contact-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombre" data-es="Nombre" data-en="Name">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="Juan García" autocomplete="given-name" />
+          </div>
+          <div class="form-group">
+            <label for="email" data-es="Email" data-en="Email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="juan@email.com" autocomplete="email" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="asunto" data-es="Asunto" data-en="Subject">Asunto</label>
+          <select id="asunto" name="asunto">
+            <option value="" data-es="Seleccionar..." data-en="Select...">Seleccionar...</option>
+            <option value="ramo" data-es="Pedir un ramo" data-en="Order a bouquet">Pedir un ramo</option>
+            <option value="boda" data-es="Decoración de boda" data-en="Wedding decoration">Decoración de boda</option>
+            <option value="evento" data-es="Evento corporativo" data-en="Corporate event">Evento corporativo</option>
+            <option value="suscripcion" data-es="Suscripción floral" data-en="Flower subscription">Suscripción floral</option>
+            <option value="otro" data-es="Otro" data-en="Other">Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="mensaje" data-es="Mensaje" data-en="Message">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Cuéntanos qué necesitas..."></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full" data-es="Enviar Mensaje 🌸" data-en="Send Message 🌸">Enviar Mensaje 🌸</button>
+        <div class="form-success" id="form-success" aria-live="polite">
+          <span>✅</span>
+          <p data-es="¡Mensaje enviado! Te responderemos pronto." data-en="Message sent! We will get back to you soon.">¡Mensaje enviado! Te responderemos pronto.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#hero" class="nav__logo">
+          <span class="nav__logo-leaf">🌿</span>
+          <span class="nav__logo-text">La Huerta de Juan Fernández</span>
+        </a>
+        <p data-es="Floristería artesanal en el corazón de Madrid desde 2009. Flores frescas, diseño único, amor en cada pétalo." data-en="Artisan florist in the heart of Madrid since 2009. Fresh flowers, unique design, love in every petal.">Floristería artesanal en el corazón de Madrid desde 2009. Flores frescas, diseño único, amor en cada pétalo.</p>
+      </div>
+      <div class="footer-col">
+        <h5 data-es="Navegación" data-en="Navigation">Navegación</h5>
+        <ul>
+          <li><a href="#productos" data-es="Productos" data-en="Products">Productos</a></li>
+          <li><a href="#nosotros" data-es="Nosotros" data-en="About">Nosotros</a></li>
+          <li><a href="#servicios" data-es="Servicios" data-en="Services">Servicios</a></li>
+          <li><a href="#testimonios" data-es="Testimonios" data-en="Reviews">Testimonios</a></li>
+          <li><a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 data-es="Servicios" data-en="Services">Servicios</h5>
+        <ul>
+          <li><span data-es="Bodas y Ceremonias" data-en="Weddings & Ceremonies">Bodas y Ceremonias</span></li>
+          <li><span data-es="Eventos Corporativos" data-en="Corporate Events">Eventos Corporativos</span></li>
+          <li><span data-es="Suscripción Floral" data-en="Flower Subscription">Suscripción Floral</span></li>
+          <li><span data-es="Entrega Express" data-en="Express Delivery">Entrega Express</span></li>
+          <li><span data-es="Plantas y Jardines" data-en="Plants & Gardens">Plantas y Jardines</span></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 data-es="Contacto" data-en="Contact">Contacto</h5>
+        <ul>
+          <li>📍 Calle de las Flores 14, Madrid</li>
+          <li>📞 <a href="tel:+34912345678">+34 91 234 56 78</a></li>
+          <li>✉️ <a href="mailto:hola@lahuertadejuanfernandez.es">hola@lahuertadejuanfernandez.es</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="footer-year"></span> La Huerta de Juan Fernández · Madrid, España · <span data-es="Todos los derechos reservados" data-en="All rights reserved">Todos los derechos reservados</span></p>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="back-to-top" data-es="Volver arriba" data-en="Back to top" aria-label="Volver arriba">↑</button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
