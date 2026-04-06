@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Huerta De Juan Fernández</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #ffffff; color: #333; }
+        header { background-color: #d9a300; padding: 20px; text-align: center; }
+        h1 { color: #005e3c; }
+        .product { margin: 20px; padding: 10px; border: 1px solid #ccc; display: inline-block; }
+        .whatsapp { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 10px; border-radius: 5px; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="logo.png" alt="La Huerta De Juan Fernández Logo">
+    <h1>Welcome to La Huerta De Juan Fernández</h1>
+</header>
+
+<main>
+    <section id="catalog">
+        <h2>Product Catalog</h2>
+        <div class="product">Follaje</div>
+        <div class="product">Flores</div>
+        <div class="product">Bouquets</div>
+    </section>
+    <section id="search">
+        <input type="text" placeholder="Search products..." id="searchBox">
+        <button onclick="searchProducts()">Search</button>
+    </section>
+</main>
+
+<a class="whatsapp" href="https://wa.me/34602687285">Chat with us on WhatsApp</a>
+
+<script>
+    function searchProducts() {
+        const query = document.getElementById('searchBox').value.toLowerCase();
+        alert(`Search functionality is not implemented yet. You searched for: ${query}`);
+    }
+</script>
+
+</body>
+</html>
