@@ -1,44 +1,1610 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Huerta De Juan Fernández</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #ffffff; color: #333; }
-        header { background-color: #d9a300; padding: 20px; text-align: center; }
-        h1 { color: #005e3c; }
-        .product { margin: 20px; padding: 10px; border: 1px solid #ccc; display: inline-block; }
-        .whatsapp { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 10px; border-radius: 5px; text-decoration: none; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="La Huerta De Juan Fernández – Floristería en Madrid. Flores, follaje y bouquets frescos. Plaza Tirso de Molina, Kiosco #5." />
+  <title>La Huerta De Juan Fernández</title>
+
+  <!-- ═══════════════════════════════════════════════════
+       ESTILOS
+  ═══════════════════════════════════════════════════ -->
+  <style>
+    /* ── Variables ──────────────────────────────────── */
+    :root {
+      --verde:       #1b3a1f;
+      --verde-dark:  #122a16;
+      --beige:       #f5f0e6;
+      --blanco:      #ffffff;
+      --gris:        #f1f1f1;
+      --negro:       #000000;
+      --sombra:      rgba(0,0,0,.15);
+      --radio:       10px;
+      --transition:  .25s ease;
+    }
+
+    /* ── Reset ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--beige);
+      color: var(--negro);
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a   { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    ul { list-style: none; }
+
+    /* ── Overlay ────────────────────────────────────── */
+    #overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.5);
+      z-index: 200;
+    }
+    #overlay.active { display: block; }
+
+    /* ══════════════════════════════════════════════════
+       HEADER
+    ══════════════════════════════════════════════════ */
+    header {
+      position: sticky; top: 0; z-index: 300;
+      background: var(--verde);
+      color: var(--blanco);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 2px 8px var(--sombra);
+    }
+
+    /* Hamburguesa */
+    #btn-menu {
+      font-size: 1.5rem;
+      color: var(--blanco);
+      padding: 4px 8px;
+      flex-shrink: 0;
+    }
+    #btn-menu:hover { opacity: .8; }
+
+    /* Logo */
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+      text-decoration: none;
+    }
+    .header-logo img {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+    /* Fallback SVG cuando no hay logo */
+    .logo-fallback {
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--verde-dark);
+      border: 2px solid rgba(255,255,255,.3);
+      border-radius: 6px;
+      padding: 6px 12px;
+      color: var(--blanco);
+      font-size: .7rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+    .header-title {
+      font-size: clamp(.8rem, 2vw, 1.1rem);
+      font-weight: 700;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Buscador */
+    .search-wrap {
+      display: flex;
+      align-items: center;
+      background: var(--blanco);
+      border-radius: 20px;
+      overflow: hidden;
+      flex: 1;
+      max-width: 340px;
+    }
+    #search-input {
+      border: none; outline: none;
+      padding: 7px 12px;
+      font-size: .9rem;
+      width: 100%;
+      color: var(--negro);
+    }
+    #btn-search {
+      padding: 7px 12px;
+      background: var(--verde-dark);
+      color: var(--blanco);
+      font-size: .9rem;
+    }
+    #btn-search:hover { background: #0d1e10; }
+
+    /* Iconos derecha */
+    .header-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .icon-btn {
+      position: relative;
+      font-size: 1.3rem;
+      color: var(--blanco);
+      padding: 6px 8px;
+      border-radius: 6px;
+      transition: background var(--transition);
+    }
+    .icon-btn:hover { background: var(--verde-dark); }
+    .cart-count {
+      position: absolute; top: 2px; right: 2px;
+      background: #e74c3c;
+      color: var(--blanco);
+      font-size: .6rem;
+      font-weight: 700;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ══════════════════════════════════════════════════
+       MENÚ LATERAL
+    ══════════════════════════════════════════════════ */
+    #sidebar {
+      position: fixed; top: 0; left: -280px;
+      width: 280px; height: 100%;
+      background: var(--verde-dark);
+      color: var(--blanco);
+      z-index: 400;
+      transition: left var(--transition);
+      display: flex; flex-direction: column;
+      overflow-y: auto;
+    }
+    #sidebar.open { left: 0; }
+
+    .sidebar-header {
+      background: rgba(0,0,0,.2);
+      padding: 20px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sidebar-header span { font-size: 1rem; font-weight: 700; }
+    #btn-close-sidebar {
+      font-size: 1.4rem;
+      color: var(--blanco);
+    }
+    #btn-close-sidebar:hover { opacity: .7; }
+
+    .sidebar-nav { padding: 10px 0; }
+    .sidebar-nav li a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 20px;
+      font-size: .95rem;
+      transition: background var(--transition);
+    }
+    .sidebar-nav li a:hover { background: rgba(255,255,255,.1); }
+    .sidebar-nav li a .nav-icon { font-size: 1.1rem; }
+
+    .sidebar-info {
+      margin-top: auto;
+      padding: 16px 20px;
+      background: rgba(0,0,0,.2);
+      font-size: .82rem;
+      line-height: 1.6;
+    }
+    .sidebar-info p { margin-bottom: 4px; }
+
+    /* ══════════════════════════════════════════════════
+       BANNER
+    ══════════════════════════════════════════════════ */
+    .banner {
+      position: relative;
+      width: 100%;
+      min-height: 220px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .banner-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    /* Placeholder cuando no hay imagen de banner */
+    .banner-placeholder {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--verde-dark) 0%, var(--verde) 60%, #2d5a33 100%);
+    }
+    .banner-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,.4);
+    }
+    .banner-content {
+      position: relative; z-index: 2;
+      text-align: center;
+      color: var(--blanco);
+      padding: 40px 20px;
+    }
+    .banner-content h2 {
+      font-size: clamp(1.4rem, 4vw, 2.4rem);
+      margin-bottom: 8px;
+      text-shadow: 0 2px 6px rgba(0,0,0,.5);
+    }
+    .banner-content p {
+      font-size: clamp(.9rem, 2vw, 1.1rem);
+      opacity: .92;
+    }
+
+    /* ══════════════════════════════════════════════════
+       MAIN LAYOUT
+    ══════════════════════════════════════════════════ */
+    .page-wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+
+    /* ── Filtros de categoría ───────────────────────── */
+    .cat-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .cat-btn {
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-size: .85rem;
+      font-weight: 600;
+      background: var(--blanco);
+      border: 2px solid var(--verde);
+      color: var(--verde);
+      transition: all var(--transition);
+    }
+    .cat-btn:hover,
+    .cat-btn.active {
+      background: var(--verde);
+      color: var(--blanco);
+    }
+
+    /* ── No resultados ──────────────────────────────── */
+    #no-results {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+      color: #777;
+      font-size: 1rem;
+    }
+
+    /* ── Sección de categoría ───────────────────────── */
+    .cat-section { margin-bottom: 40px; }
+    .cat-section h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--verde);
+      border-left: 4px solid var(--verde);
+      padding-left: 12px;
+      margin-bottom: 16px;
+    }
+
+    /* ── Grid de productos ──────────────────────────── */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 18px;
+    }
+
+    /* ── Tarjeta de producto ────────────────────────── */
+    .product-card {
+      background: var(--blanco);
+      border-radius: var(--radio);
+      overflow: hidden;
+      box-shadow: 0 2px 8px var(--sombra);
+      transition: transform var(--transition), box-shadow var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 18px rgba(0,0,0,.2);
+    }
+
+    .product-img-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 75%; /* 4:3 */
+      overflow: hidden;
+      background: var(--gris);
+    }
+    .product-img-wrap img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease;
+    }
+    .product-card:hover .product-img-wrap img { transform: scale(1.05); }
+
+    /* Placeholder de imagen */
+    .img-placeholder {
+      position: absolute; inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+      color: var(--verde);
+      font-size: .75rem;
+      text-align: center;
+      gap: 6px;
+    }
+    .img-placeholder span { font-size: 2rem; }
+
+    .badge-unavailable {
+      position: absolute; top: 8px; right: 8px;
+      background: #e74c3c;
+      color: var(--blanco);
+      font-size: .65rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 10px;
+    }
+
+    .product-info {
+      padding: 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .product-name {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--negro);
+      line-height: 1.3;
+    }
+    .product-desc {
+      font-size: .78rem;
+      color: #666;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    /* Variantes */
+    .variants {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 2px;
+    }
+    .variant-btn {
+      font-size: .73rem;
+      padding: 3px 8px;
+      border-radius: 12px;
+      border: 1px solid var(--verde);
+      color: var(--verde);
+      background: var(--blanco);
+      transition: all var(--transition);
+    }
+    .variant-btn:hover,
+    .variant-btn.selected {
+      background: var(--verde);
+      color: var(--blanco);
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+    .product-price {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--verde);
+    }
+    .btn-add {
+      background: var(--verde);
+      color: var(--blanco);
+      font-size: .8rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 16px;
+      transition: background var(--transition);
+    }
+    .btn-add:hover  { background: var(--verde-dark); }
+    .btn-add:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+
+    /* ══════════════════════════════════════════════════
+       PANEL CARRITO
+    ══════════════════════════════════════════════════ */
+    #cart-panel {
+      position: fixed; top: 0; right: -360px;
+      width: 340px; max-width: 100vw;
+      height: 100%;
+      background: var(--blanco);
+      box-shadow: -4px 0 20px var(--sombra);
+      z-index: 400;
+      transition: right var(--transition);
+      display: flex; flex-direction: column;
+    }
+    #cart-panel.open { right: 0; }
+
+    .cart-header {
+      background: var(--verde);
+      color: var(--blanco);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    #btn-close-cart {
+      font-size: 1.4rem;
+      color: var(--blanco);
+    }
+    #btn-close-cart:hover { opacity: .7; }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px;
+    }
+    .cart-empty {
+      text-align: center;
+      color: #999;
+      padding: 40px 20px;
+      font-size: .9rem;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gris);
+      align-items: flex-start;
+    }
+    .cart-item-info { flex: 1; }
+    .cart-item-name {
+      font-size: .88rem;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+    .cart-item-variant {
+      font-size: .75rem;
+      color: #777;
+    }
+    .cart-item-price {
+      font-size: .88rem;
+      color: var(--verde);
+      font-weight: 700;
+      margin-top: 2px;
+    }
+    .cart-qty {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .qty-btn {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--gris);
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition);
+    }
+    .qty-btn:hover { background: #ddd; }
+    .qty-num { font-size: .85rem; font-weight: 600; min-width: 20px; text-align: center; }
+
+    .cart-footer {
+      padding: 14px 16px;
+      border-top: 2px solid var(--gris);
+    }
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .btn-whatsapp-order {
+      width: 100%;
+      background: #25d366;
+      color: var(--blanco);
+      font-size: .95rem;
+      font-weight: 700;
+      padding: 12px;
+      border-radius: var(--radio);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background var(--transition);
+    }
+    .btn-whatsapp-order:hover { background: #1da851; }
+    .btn-clear {
+      width: 100%;
+      margin-top: 8px;
+      font-size: .8rem;
+      color: #e74c3c;
+      padding: 4px;
+      text-align: center;
+    }
+    .btn-clear:hover { text-decoration: underline; }
+
+    /* ══════════════════════════════════════════════════
+       BOTÓN FLOTANTE WHATSAPP
+    ══════════════════════════════════════════════════ */
+    .fab-whatsapp {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      z-index: 100;
+      background: #25d366;
+      color: var(--blanco);
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      font-size: 1.6rem;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 14px rgba(37,211,102,.5);
+      transition: transform var(--transition), box-shadow var(--transition);
+      text-decoration: none;
+    }
+    .fab-whatsapp:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(37,211,102,.7);
+    }
+
+    /* ══════════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════════ */
+    footer {
+      background: var(--verde-dark);
+      color: var(--blanco);
+      padding: 40px 20px 20px;
+    }
+    .footer-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 28px;
+      margin-bottom: 24px;
+    }
+    .footer-col h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      border-bottom: 2px solid rgba(255,255,255,.2);
+      padding-bottom: 6px;
+    }
+    .footer-col p,
+    .footer-col a {
+      font-size: .85rem;
+      line-height: 1.8;
+      opacity: .88;
+    }
+    .footer-col a:hover { opacity: 1; text-decoration: underline; }
+    .footer-bottom {
+      text-align: center;
+      font-size: .78rem;
+      opacity: .6;
+      border-top: 1px solid rgba(255,255,255,.15);
+      padding-top: 16px;
+    }
+
+    /* ══════════════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════════════ */
+    /* Tablet */
+    @media (min-width: 768px) {
+      header { padding: 12px 24px; gap: 16px; }
+      .banner { min-height: 320px; }
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+    }
+
+    /* Desktop */
+    @media (min-width: 1024px) {
+      .banner { min-height: 420px; }
+      .page-wrap { padding: 28px 32px 60px; }
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+    }
+
+    /* Ultra HD */
+    @media (min-width: 2560px) {
+      .page-wrap { max-width: 1800px; }
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+    }
+
+    /* Móvil pequeño */
+    @media (max-width: 400px) {
+      .header-title { display: none; }
+      .search-wrap { max-width: 160px; }
+      .products-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
 <body>
 
+<!-- ═══════════════════════════════════════════════════
+     OVERLAY (cierre menú/carrito)
+═══════════════════════════════════════════════════ -->
+<div id="overlay"></div>
+
+<!-- ═══════════════════════════════════════════════════
+     MENÚ LATERAL
+═══════════════════════════════════════════════════ -->
+<nav id="sidebar" aria-label="Menú principal">
+  <div class="sidebar-header">
+    <span>🌿 Menú</span>
+    <button id="btn-close-sidebar" aria-label="Cerrar menú">✕</button>
+  </div>
+  <ul class="sidebar-nav">
+    <li><a href="#catalogo"><span class="nav-icon">🌸</span> Catálogo</a></li>
+    <li><a href="#follaje"><span class="nav-icon">🌿</span> Follaje</a></li>
+    <li><a href="#flores"><span class="nav-icon">🌺</span> Flores</a></li>
+    <li><a href="#bouquets"><span class="nav-icon">💐</span> Bouquets</a></li>
+    <li><a href="https://wa.me/34602687285" target="_blank" rel="noopener"><span class="nav-icon">💬</span> WhatsApp</a></li>
+    <li><a href="mailto:castro59freddy@gmail.com"><span class="nav-icon">✉️</span> Email</a></li>
+  </ul>
+  <div class="sidebar-info">
+    <p>📍 Plaza Tirso de Molina, Kiosco #5</p>
+    <p>📮 CP 28012 · Madrid</p>
+    <p>⏰ Lun–Dom: 10:00 AM – 9:00 PM</p>
+    <p>📞 +34 602 687 285</p>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER
+═══════════════════════════════════════════════════ -->
 <header>
-    <img src="logo.png" alt="La Huerta De Juan Fernández Logo">
-    <h1>Welcome to La Huerta De Juan Fernández</h1>
+  <button id="btn-menu" aria-label="Abrir menú">☰</button>
+
+  <!-- Logo: reemplaza images/logo/logo.png con tu imagen -->
+  <a class="header-logo" href="#" aria-label="Inicio">
+    <picture>
+      <source srcset="images/logo/logo.webp" type="image/webp" />
+      <source srcset="images/logo/logo.png"  type="image/png"  />
+      <img
+        src="images/logo/logo.png"
+        alt="La Huerta De Juan Fernández"
+        id="logo-img"
+        onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='flex';"
+      />
+    </picture>
+    <div class="logo-fallback" id="logo-fallback" style="display:none;" aria-hidden="true">
+      🌿<br>La Huerta
+    </div>
+    <span class="header-title">La Huerta De Juan Fernández</span>
+  </a>
+
+  <!-- Buscador -->
+  <div class="search-wrap" role="search">
+    <input
+      type="search"
+      id="search-input"
+      placeholder="Buscar producto…"
+      aria-label="Buscar productos"
+      autocomplete="off"
+    />
+    <button id="btn-search" aria-label="Buscar">🔍</button>
+  </div>
+
+  <!-- Iconos -->
+  <div class="header-icons">
+    <a
+      class="icon-btn"
+      href="https://wa.me/34602687285"
+      target="_blank"
+      rel="noopener"
+      aria-label="Contactar por WhatsApp"
+      title="WhatsApp"
+    >💬</a>
+    <button class="icon-btn" id="btn-cart" aria-label="Abrir carrito">
+      🛒
+      <span class="cart-count" id="cart-count">0</span>
+    </button>
+  </div>
 </header>
 
-<main>
-    <section id="catalog">
-        <h2>Product Catalog</h2>
-        <div class="product">Follaje</div>
-        <div class="product">Flores</div>
-        <div class="product">Bouquets</div>
-    </section>
-    <section id="search">
-        <input type="text" placeholder="Search products..." id="searchBox">
-        <button onclick="searchProducts()">Search</button>
-    </section>
+<!-- ═══════════════════════════════════════════════════
+     BANNER
+═══════════════════════════════════════════════════ -->
+<section class="banner" aria-label="Bienvenida">
+  <!-- Imagen banner: reemplaza images/banner/banner.webp con tu foto -->
+  <picture>
+    <source srcset="images/banner/banner.webp" type="image/webp" />
+    <source srcset="images/banner/banner.jpg"  type="image/jpeg" />
+    <img
+      class="banner-img"
+      src="images/banner/banner.jpg"
+      alt="Banner La Huerta De Juan Fernández"
+      onerror="this.style.display='none';"
+      loading="lazy"
+    />
+  </picture>
+  <div class="banner-placeholder" aria-hidden="true"></div>
+  <div class="banner-overlay" aria-hidden="true"></div>
+  <div class="banner-content">
+    <h2>🌿 La Huerta De Juan Fernández</h2>
+    <p>Flores frescas cada día · Plaza Tirso de Molina, Kiosco #5 · Madrid</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     CATÁLOGO
+═══════════════════════════════════════════════════ -->
+<main class="page-wrap" id="catalogo">
+
+  <!-- Filtros -->
+  <div class="cat-filter" role="group" aria-label="Filtrar por categoría">
+    <button class="cat-btn active" data-cat="all">Todos</button>
+    <button class="cat-btn" data-cat="follaje">🌿 Follaje</button>
+    <button class="cat-btn" data-cat="flores">🌺 Flores</button>
+    <button class="cat-btn" data-cat="bouquets">💐 Bouquets</button>
+  </div>
+
+  <p id="no-results">No se encontraron productos.</p>
+
+  <!-- ── FOLLAJE ──────────────────────────────────── -->
+  <section class="cat-section" id="follaje" data-category="follaje">
+    <h3>🌿 Follaje</h3>
+    <div class="products-grid">
+
+      <div class="product-card" data-name="tuya" data-category="follaje">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/tuya.webp" type="image/webp"/>
+            <img src="images/productos/tuya.jpg" alt="Tuya" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌿</span>Tuya</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Tuya</div>
+          <div class="product-footer">
+            <span class="product-price">5€</span>
+            <button class="btn-add" data-name="Tuya" data-price="5">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="paniculata" data-category="follaje">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/paniculata.webp" type="image/webp"/>
+            <img src="images/productos/paniculata.jpg" alt="Paniculata" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌿</span>Paniculata</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Paniculata</div>
+          <div class="product-footer">
+            <span class="product-price">6€</span>
+            <button class="btn-add" data-name="Paniculata" data-price="6">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="eucalipto" data-category="follaje">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/eucalipto.webp" type="image/webp"/>
+            <img src="images/productos/eucalipto.jpg" alt="Eucalipto" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌿</span>Eucalipto</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Eucalipto</div>
+          <div class="product-desc">Pequeño o Grande</div>
+          <div class="variants">
+            <button class="variant-btn selected" data-variant="Pequeño" data-price="5">Pequeño 5€</button>
+            <button class="variant-btn" data-variant="Grande" data-price="10">Grande 10€</button>
+          </div>
+          <div class="product-footer">
+            <span class="product-price" id="price-eucalipto">5€</span>
+            <button class="btn-add" data-name="Eucalipto" data-price="5" data-variant="Pequeño">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="ruscus" data-category="follaje">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/ruscus.webp" type="image/webp"/>
+            <img src="images/productos/ruscus.jpg" alt="Ruscus" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌿</span>Ruscus</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Ruscus</div>
+          <div class="product-desc">10 varas</div>
+          <div class="product-footer">
+            <span class="product-price">7€</span>
+            <button class="btn-add" data-name="Ruscus (10 varas)" data-price="7">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── FLORES ───────────────────────────────────── -->
+  <section class="cat-section" id="flores" data-category="flores">
+    <h3>🌺 Flores</h3>
+    <div class="products-grid">
+
+      <div class="product-card" data-name="lilium oriental" data-category="flores">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/lilium-oriental.webp" type="image/webp"/>
+            <img src="images/productos/lilium-oriental.jpg" alt="Lilium Oriental" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌸</span>Lilium Oriental</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Lilium Oriental</div>
+          <div class="product-desc">Con aroma · 1 vara</div>
+          <div class="product-footer">
+            <span class="product-price">4€</span>
+            <button class="btn-add" data-name="Lilium Oriental" data-price="4">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="lilium nacional" data-category="flores">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/lilium-nacional.webp" type="image/webp"/>
+            <img src="images/productos/lilium-nacional.jpg" alt="Lilium Nacional" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌸</span>Lilium Nacional</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Lilium Nacional</div>
+          <div class="product-desc">1 vara</div>
+          <div class="product-footer">
+            <span class="product-price">3€</span>
+            <button class="btn-add" data-name="Lilium Nacional" data-price="3">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="girasol" data-category="flores">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/girasol.webp" type="image/webp"/>
+            <img src="images/productos/girasol.jpg" alt="Girasol" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌻</span>Girasol</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Girasol</div>
+          <div class="variants">
+            <button class="variant-btn selected" data-variant="1 flor" data-price="3">1 flor 3€</button>
+            <button class="variant-btn" data-variant="5 uds" data-price="12">5 uds 12€</button>
+          </div>
+          <div class="product-footer">
+            <span class="product-price" id="price-girasol">3€</span>
+            <button class="btn-add" data-name="Girasol" data-price="3" data-variant="1 flor">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="anastasia spider" data-category="flores">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/anastasia-spider.webp" type="image/webp"/>
+            <img src="images/productos/anastasia-spider.jpg" alt="Anastasia Spider" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌼</span>Anastasia Spider</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Anastasia Spider</div>
+          <div class="product-footer">
+            <span class="product-price">3€</span>
+            <button class="btn-add" data-name="Anastasia Spider" data-price="3">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="anastasia tubular" data-category="flores">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/anastasia-tubular.webp" type="image/webp"/>
+            <img src="images/productos/anastasia-tubular.jpg" alt="Anastasia Tubular" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌼</span>Anastasia Tubular</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Anastasia Tubular</div>
+          <div class="product-footer">
+            <span class="product-price">3€</span>
+            <button class="btn-add" data-name="Anastasia Tubular" data-price="3">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="gerbera" data-category="flores">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/gerbera.webp" type="image/webp"/>
+            <img src="images/productos/gerbera.jpg" alt="Gerbera" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌸</span>Gerbera</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Gerbera</div>
+          <div class="product-footer">
+            <span class="product-price">2€</span>
+            <button class="btn-add" data-name="Gerbera" data-price="2">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="rosa" data-category="flores">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/rosa.webp" type="image/webp"/>
+            <img src="images/productos/rosa.jpg" alt="Rosa" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌹</span>Rosa</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Rosa</div>
+          <div class="product-footer">
+            <span class="product-price">3€</span>
+            <button class="btn-add" data-name="Rosa" data-price="3">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="gladiolo" data-category="flores">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/gladiolo.webp" type="image/webp"/>
+            <img src="images/productos/gladiolo.jpg" alt="Gladiolo" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌸</span>Gladiolo</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Gladiolo</div>
+          <div class="product-footer">
+            <span class="product-price">2€</span>
+            <button class="btn-add" data-name="Gladiolo" data-price="2">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="clavel" data-category="flores">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/clavel.webp" type="image/webp"/>
+            <img src="images/productos/clavel.jpg" alt="Clavel" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌺</span>Clavel</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Clavel</div>
+          <div class="variants">
+            <button class="variant-btn selected" data-variant="1 ud" data-price="1">1 ud 1€</button>
+            <button class="variant-btn" data-variant="10 uds" data-price="6">10 uds 6€</button>
+            <button class="variant-btn" data-variant="12 uds" data-price="12">12 uds 12€</button>
+          </div>
+          <div class="product-footer">
+            <span class="product-price" id="price-clavel">1€</span>
+            <button class="btn-add" data-name="Clavel" data-price="1" data-variant="1 ud">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="margaritas" data-category="flores">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/margaritas.webp" type="image/webp"/>
+            <img src="images/productos/margaritas.jpg" alt="Margaritas" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌼</span>Margaritas</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Margaritas</div>
+          <div class="product-desc">5 varas</div>
+          <div class="product-footer">
+            <span class="product-price">12€</span>
+            <button class="btn-add" data-name="Margaritas (5 varas)" data-price="12">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="siempre viva" data-category="flores">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/siempre-viva.webp" type="image/webp"/>
+            <img src="images/productos/siempre-viva.jpg" alt="Siempre Viva" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌸</span>Siempre Viva</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Siempre Viva</div>
+          <div class="product-footer">
+            <span class="product-price">6€</span>
+            <button class="btn-add" data-name="Siempre Viva" data-price="6">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="tulipanes" data-category="flores">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/tulipanes.webp" type="image/webp"/>
+            <img src="images/productos/tulipanes.jpg" alt="Tulipanes" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌷</span>Tulipanes</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Tulipanes</div>
+          <div class="product-desc">10 varas</div>
+          <div class="product-footer">
+            <span class="product-price">15€</span>
+            <button class="btn-add" data-name="Tulipanes (10 varas)" data-price="15">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="mimosa" data-category="flores">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/mimosa.webp" type="image/webp"/>
+            <img src="images/productos/mimosa.jpg" alt="Mimosa" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌼</span>Mimosa</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Mimosa</div>
+          <div class="variants">
+            <button class="variant-btn selected" data-variant="Pequeño" data-price="6">Pequeño 6€</button>
+            <button class="variant-btn" data-variant="Grande" data-price="12">Grande 12€</button>
+          </div>
+          <div class="product-footer">
+            <span class="product-price" id="price-mimosa">6€</span>
+            <button class="btn-add" data-name="Mimosa" data-price="6" data-variant="Pequeño">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="brassica" data-category="flores">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/brassica.webp" type="image/webp"/>
+            <img src="images/productos/brassica.jpg" alt="Brassica" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌸</span>Brassica</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Brassica</div>
+          <div class="product-footer">
+            <span class="product-price">3€</span>
+            <button class="btn-add" data-name="Brassica" data-price="3">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="ranúnculos" data-category="flores">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/ranunculos.webp" type="image/webp"/>
+            <img src="images/productos/ranunculos.jpg" alt="Ranúnculos" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌺</span>Ranúnculos</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Ranúnculos</div>
+          <div class="product-footer">
+            <span class="product-price">10€</span>
+            <button class="btn-add" data-name="Ranúnculos" data-price="10">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="fresias" data-category="flores">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/fresias.webp" type="image/webp"/>
+            <img src="images/productos/fresias.jpg" alt="Fresias" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌸</span>Fresias</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Fresias</div>
+          <div class="product-footer">
+            <span class="product-price">10€</span>
+            <button class="btn-add" data-name="Fresias" data-price="10">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="astromelias" data-category="flores">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/astromelias.webp" type="image/webp"/>
+            <img src="images/productos/astromelias.jpg" alt="Astromelias" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌸</span>Astromelias</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Astromelias</div>
+          <div class="variants">
+            <button class="variant-btn selected" data-variant="Pequeña" data-price="6">Pequeña 6€</button>
+            <button class="variant-btn" data-variant="Grande" data-price="12">Grande 12€</button>
+          </div>
+          <div class="product-footer">
+            <span class="product-price" id="price-astromelias">6€</span>
+            <button class="btn-add" data-name="Astromelias" data-price="6" data-variant="Pequeña">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="craspedia" data-category="flores">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/craspedia.webp" type="image/webp"/>
+            <img src="images/productos/craspedia.jpg" alt="Craspedia" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌼</span>Craspedia</div>
+          <span class="badge-unavailable">No disponible</span>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Craspedia</div>
+          <div class="product-footer">
+            <span class="product-price">–</span>
+            <button class="btn-add" disabled>No disponible</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="ave del paraíso" data-category="flores">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/ave-del-paraiso.webp" type="image/webp"/>
+            <img src="images/productos/ave-del-paraiso.jpg" alt="Ave del Paraíso" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌺</span>Ave del Paraíso</div>
+          <span class="badge-unavailable">No disponible</span>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Ave del Paraíso</div>
+          <div class="product-footer">
+            <span class="product-price">–</span>
+            <button class="btn-add" disabled>No disponible</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── BOUQUETS ─────────────────────────────────── -->
+  <section class="cat-section" id="bouquets" data-category="bouquets">
+    <h3>💐 Bouquets Variados</h3>
+    <div class="products-grid">
+
+      <div class="product-card" data-name="bouquet 6" data-category="bouquets">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/bouquet-6.webp" type="image/webp"/>
+            <img src="images/productos/bouquet-6.jpg" alt="Bouquet 6€" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>💐</span>Bouquet</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Bouquet</div>
+          <div class="product-footer">
+            <span class="product-price">6€</span>
+            <button class="btn-add" data-name="Bouquet" data-price="6">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="bouquet 12" data-category="bouquets">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/bouquet-12.webp" type="image/webp"/>
+            <img src="images/productos/bouquet-12.jpg" alt="Bouquet 12€" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>💐</span>Bouquet</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Bouquet</div>
+          <div class="product-footer">
+            <span class="product-price">12€</span>
+            <button class="btn-add" data-name="Bouquet 12€" data-price="12">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="bouquet 14" data-category="bouquets">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/bouquet-14.webp" type="image/webp"/>
+            <img src="images/productos/bouquet-14.jpg" alt="Bouquet 14€" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>💐</span>Bouquet</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Bouquet</div>
+          <div class="product-footer">
+            <span class="product-price">14€</span>
+            <button class="btn-add" data-name="Bouquet 14€" data-price="14">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-name="bouquet 15 rosas" data-category="bouquets">
+        <div class="product-img-wrap">
+          <picture>
+            <source srcset="images/productos/bouquet-rosas.webp" type="image/webp"/>
+            <img src="images/productos/bouquet-rosas.jpg" alt="Bouquet 6 Rosas" loading="lazy"
+              onerror="this.closest('.product-img-wrap').querySelector('.img-placeholder').style.display='flex';this.style.display='none';"/>
+          </picture>
+          <div class="img-placeholder" style="display:none;"><span>🌹</span>Bouquet Rosas</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Bouquet 6 Rosas</div>
+          <div class="product-footer">
+            <span class="product-price">15€</span>
+            <button class="btn-add" data-name="Bouquet 6 Rosas" data-price="15">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
 </main>
 
-<a class="whatsapp" href="https://wa.me/34602687285">Chat with us on WhatsApp</a>
+<!-- ═══════════════════════════════════════════════════
+     PANEL CARRITO
+═══════════════════════════════════════════════════ -->
+<aside id="cart-panel" aria-label="Carrito de compras">
+  <div class="cart-header">
+    <span>🛒 Tu Carrito</span>
+    <button id="btn-close-cart" aria-label="Cerrar carrito">✕</button>
+  </div>
+  <div class="cart-items" id="cart-items">
+    <p class="cart-empty">Tu carrito está vacío 🌸</p>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total:</span>
+      <span id="cart-total">0€</span>
+    </div>
+    <button class="btn-whatsapp-order" id="btn-order">
+      💬 Pedir por WhatsApp
+    </button>
+    <button class="btn-clear" id="btn-clear-cart">Vaciar carrito</button>
+  </div>
+</aside>
 
+<!-- ═══════════════════════════════════════════════════
+     FAB WHATSAPP
+═══════════════════════════════════════════════════ -->
+<a
+  class="fab-whatsapp"
+  href="https://wa.me/34602687285"
+  target="_blank"
+  rel="noopener"
+  aria-label="Contáctanos por WhatsApp"
+  title="WhatsApp"
+>💬</a>
+
+<!-- ═══════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>🌿 La Huerta De Juan Fernández</h4>
+      <p>Floristería fresca y artesanal en el corazón de Madrid.</p>
+      <p style="margin-top:8px;">
+        <a href="https://wa.me/34602687285" target="_blank" rel="noopener">💬 +34 602 687 285</a><br/>
+        <a href="mailto:castro59freddy@gmail.com">✉️ castro59freddy@gmail.com</a>
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>⏰ Horarios</h4>
+      <p>Lunes a Domingo</p>
+      <p>10:00 AM – 9:00 PM</p>
+    </div>
+    <div class="footer-col">
+      <h4>📍 Ubicación</h4>
+      <p>Plaza Tirso de Molina</p>
+      <p>Kiosco #5</p>
+      <p>CP 28012 · Madrid, España</p>
+    </div>
+    <div class="footer-col">
+      <h4>🛍️ Categorías</h4>
+      <p><a href="#follaje">🌿 Follaje</a></p>
+      <p><a href="#flores">🌺 Flores</a></p>
+      <p><a href="#bouquets">💐 Bouquets</a></p>
+    </div>
+  </div>
+  <p class="footer-bottom">
+    © <span id="year"></span> La Huerta De Juan Fernández · Madrid, España
+  </p>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════ -->
 <script>
-    function searchProducts() {
-        const query = document.getElementById('searchBox').value.toLowerCase();
-        alert(`Search functionality is not implemented yet. You searched for: ${query}`);
+(function () {
+  'use strict';
+
+  /* ── Año en footer ─────────────────────────────── */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ── Carrito (LocalStorage) ────────────────────── */
+  let cart = [];
+  try { cart = JSON.parse(localStorage.getItem('hjf-cart') || '[]'); } catch (e) { cart = []; }
+
+  function saveCart() {
+    try { localStorage.setItem('hjf-cart', JSON.stringify(cart)); } catch (e) {}
+  }
+
+  function renderCart() {
+    const container = document.getElementById('cart-items');
+    const countEl   = document.getElementById('cart-count');
+    const totalEl   = document.getElementById('cart-total');
+
+    const totalItems = cart.reduce(function (acc, item) { return acc + item.qty; }, 0);
+    countEl.textContent = totalItems;
+
+    if (cart.length === 0) {
+      container.innerHTML = '<p class="cart-empty">Tu carrito está vacío 🌸</p>';
+      totalEl.textContent = '0€';
+      return;
     }
+
+    let total = 0;
+    const html = cart.map(function (item, idx) {
+      total += item.price * item.qty;
+      return [
+        '<div class="cart-item">',
+        '  <div class="cart-item-info">',
+        '    <div class="cart-item-name">' + esc(item.name) + '</div>',
+        item.variant ? '    <div class="cart-item-variant">' + esc(item.variant) + '</div>' : '',
+        '    <div class="cart-item-price">' + item.price + '€</div>',
+        '    <div class="cart-qty">',
+        '      <button class="qty-btn" data-action="dec" data-idx="' + idx + '">−</button>',
+        '      <span class="qty-num">' + item.qty + '</span>',
+        '      <button class="qty-btn" data-action="inc" data-idx="' + idx + '">+</button>',
+        '    </div>',
+        '  </div>',
+        '</div>'
+      ].join('');
+    }).join('');
+
+    container.innerHTML = html;
+    totalEl.textContent = total.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '€';
+  }
+
+  function addToCart(name, price, variant) {
+    const key = name + '\x00' + (variant || '');
+    const found = cart.find(function (i) { return i.key === key; });
+    if (found) {
+      found.qty += 1;
+    } else {
+      cart.push({ key: key, name: name, price: Number(price), variant: variant || '', qty: 1 });
+    }
+    saveCart();
+    renderCart();
+  }
+
+  function esc(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  /* ── Botones Agregar ───────────────────────────── */
+  document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.btn-add');
+    if (btn && !btn.disabled) {
+      addToCart(btn.dataset.name, btn.dataset.price, btn.dataset.variant);
+    }
+  });
+
+  /* ── Qty en carrito ────────────────────────────── */
+  document.getElementById('cart-items').addEventListener('click', function (e) {
+    const btn = e.target.closest('.qty-btn');
+    if (!btn) return;
+    const idx = Number(btn.dataset.idx);
+    if (btn.dataset.action === 'inc') {
+      cart[idx].qty += 1;
+    } else {
+      cart[idx].qty -= 1;
+      if (cart[idx].qty <= 0) cart.splice(idx, 1);
+    }
+    saveCart();
+    renderCart();
+  });
+
+  /* ── Vaciar carrito ────────────────────────────── */
+  document.getElementById('btn-clear-cart').addEventListener('click', function () {
+    cart = [];
+    saveCart();
+    renderCart();
+  });
+
+  /* ── Pedir por WhatsApp ────────────────────────── */
+  document.getElementById('btn-order').addEventListener('click', function () {
+    if (cart.length === 0) return;
+    const lines = cart.map(function (item) {
+      return '• ' + item.name + (item.variant ? ' (' + item.variant + ')' : '') +
+             ' x' + item.qty + ' = ' + (item.price * item.qty) + '€';
+    });
+    const total = cart.reduce(function (acc, i) { return acc + i.price * i.qty; }, 0);
+    const msg = 'Hola! Me gustaría pedir:\n' + lines.join('\n') +
+                '\n\nTotal: ' + total.toFixed(2) + '€\n\nGracias 🌸';
+    window.open('https://wa.me/34602687285?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+  });
+
+  /* ── Abrir/Cerrar Carrito ──────────────────────── */
+  function openCart()  { document.getElementById('cart-panel').classList.add('open'); document.getElementById('overlay').classList.add('active'); }
+  function closeCart() { document.getElementById('cart-panel').classList.remove('open'); checkOverlay(); }
+  document.getElementById('btn-cart').addEventListener('click', openCart);
+  document.getElementById('btn-close-cart').addEventListener('click', closeCart);
+
+  /* ── Abrir/Cerrar Menú ─────────────────────────── */
+  function openMenu()  { document.getElementById('sidebar').classList.add('open'); document.getElementById('overlay').classList.add('active'); }
+  function closeMenu() { document.getElementById('sidebar').classList.remove('open'); checkOverlay(); }
+  function checkOverlay() {
+    const cartOpen = document.getElementById('cart-panel').classList.contains('open');
+    const menuOpen = document.getElementById('sidebar').classList.contains('open');
+    if (!cartOpen && !menuOpen) document.getElementById('overlay').classList.remove('active');
+  }
+  document.getElementById('btn-menu').addEventListener('click', openMenu);
+  document.getElementById('btn-close-sidebar').addEventListener('click', closeMenu);
+  document.getElementById('overlay').addEventListener('click', function () { closeMenu(); closeCart(); });
+
+  /* Cerrar menú al hacer clic en enlace */
+  document.querySelectorAll('#sidebar .sidebar-nav a').forEach(function (a) {
+    a.addEventListener('click', closeMenu);
+  });
+
+  /* ── Búsqueda en tiempo real ───────────────────── */
+  function doSearch(query) {
+    query = query.trim().toLowerCase();
+    const cards = document.querySelectorAll('.product-card');
+    const sections = document.querySelectorAll('.cat-section');
+    let anyVisible = false;
+
+    sections.forEach(function (sec) {
+      let secVisible = false;
+      sec.querySelectorAll('.product-card').forEach(function (card) {
+        const name = (card.dataset.name || '').toLowerCase();
+        const show = !query || name.includes(query);
+        card.style.display = show ? '' : 'none';
+        if (show) { secVisible = true; anyVisible = true; }
+      });
+      sec.style.display = secVisible ? '' : 'none';
+    });
+
+    document.getElementById('no-results').style.display = anyVisible ? 'none' : 'block';
+  }
+
+  document.getElementById('search-input').addEventListener('input', function () {
+    doSearch(this.value);
+    /* Reset filtros al buscar */
+    document.querySelectorAll('.cat-btn').forEach(function (b) { b.classList.remove('active'); });
+    document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
+  });
+
+  document.getElementById('btn-search').addEventListener('click', function () {
+    doSearch(document.getElementById('search-input').value);
+  });
+
+  /* ── Filtros por categoría ─────────────────────── */
+  document.querySelectorAll('.cat-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.cat-btn').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('search-input').value = '';
+
+      const cat = btn.dataset.cat;
+      const sections = document.querySelectorAll('.cat-section');
+      sections.forEach(function (sec) {
+        const show = cat === 'all' || sec.dataset.category === cat;
+        sec.style.display = show ? '' : 'none';
+        sec.querySelectorAll('.product-card').forEach(function (c) { c.style.display = ''; });
+      });
+      document.getElementById('no-results').style.display = 'none';
+    });
+  });
+
+  /* ── Variantes ─────────────────────────────────── */
+  document.addEventListener('click', function (e) {
+    const vBtn = e.target.closest('.variant-btn');
+    if (!vBtn) return;
+    const card    = vBtn.closest('.product-card');
+    const varName = card.dataset.name;
+
+    /* Deselect siblings */
+    card.querySelectorAll('.variant-btn').forEach(function (b) { b.classList.remove('selected'); });
+    vBtn.classList.add('selected');
+
+    const price   = vBtn.dataset.price;
+    const variant = vBtn.dataset.variant;
+
+    /* Actualizar precio mostrado */
+    const priceId = 'price-' + varName.replace(/\s+/g, '-').toLowerCase();
+    const priceEl = document.getElementById(priceId);
+    if (priceEl) priceEl.textContent = price + '€';
+
+    /* Actualizar botón agregar */
+    const addBtn = card.querySelector('.btn-add');
+    if (addBtn) {
+      addBtn.dataset.price   = price;
+      addBtn.dataset.variant = variant;
+    }
+  });
+
+  /* ── Render inicial ────────────────────────────── */
+  renderCart();
+}());
 </script>
 
 </body>
