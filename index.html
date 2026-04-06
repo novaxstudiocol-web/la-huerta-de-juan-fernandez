@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="La Huerta De Juan Fernández – Floristería en Madrid. Flores frescas, bouquets y follaje. Plaza Tirso de Molina, Kiosco #5 CP 28012." />
+  <meta name="keywords" content="floristería, flores, bouquets, Madrid, Tirso de Molina, rosas, lilium, girasoles, tulipanes" />
+  <meta property="og:title" content="La Huerta De Juan Fernández" />
+  <meta property="og:description" content="Floristería en Madrid. Flores frescas para toda ocasión." />
+  <meta property="og:type" content="website" />
+  <title>La Huerta De Juan Fernández – Floristería en Madrid</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===== VARIABLES ===== */
+    :root {
+      --gold: #D4AF37;
+      --gold-light: #f0d060;
+      --gold-dark: #b8941e;
+      --green-dark: #1b3a1f;
+      --green-mid: #2d5c33;
+      --white: #ffffff;
+      --beige: #f5f0e6;
+      --beige-dark: #ede5d0;
+      --black: #111111;
+      --text-dark: #1b3a1f;
+      --shadow: rgba(0, 0, 0, 0.12);
+      --shadow-md: rgba(0, 0, 0, 0.2);
+      --radius: 12px;
+      --transition: 0.3s ease;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--beige);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    ul { list-style: none; }
+
+    /* ===== UTILITY ===== */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
+    }
+
+    /* ===== HEADER ===== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      background: var(--white);
+      border-bottom: 2px solid var(--gold);
+      box-shadow: 0 2px 12px var(--shadow);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      height: 70px;
+    }
+
+    /* Hamburger */
+    .btn-hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 20px;
+      padding: 0;
+      flex-shrink: 0;
+    }
+    .btn-hamburger span {
+      display: block;
+      height: 2px;
+      background: var(--green-dark);
+      border-radius: 2px;
+      transition: var(--transition);
+      transform-origin: center;
+    }
+    .btn-hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .btn-hamburger.active span:nth-child(2) { opacity: 0; }
+    .btn-hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+    /* Logo */
+    .logo-wrap {
+      justify-self: center;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .logo-svg { height: 48px; width: auto; }
+    @media (max-width: 480px) { .logo-svg { height: 38px; } }
+
+    /* Header actions */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      transition: background var(--transition);
+    }
+    .btn-icon:hover { background: var(--beige); }
+    .btn-icon svg { width: 22px; height: 22px; }
+
+    .btn-cart { position: relative; }
+    .cart-count {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 0.65rem;
+      font-weight: 700;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 3px;
+      line-height: 1;
+      display: none;
+    }
+    .cart-count.visible { display: flex; }
+
+    /* Search bar */
+    .search-bar {
+      display: none;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--beige-dark);
+      box-shadow: 0 4px 12px var(--shadow);
+      z-index: 899;
+    }
+    .search-bar.visible { display: flex; gap: 0.5rem; }
+    .search-bar input {
+      flex: 1;
+      padding: 0.6rem 1rem;
+      border: 2px solid var(--beige-dark);
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+    .search-bar input:focus { border-color: var(--gold); }
+    .btn-search-close {
+      padding: 0.5rem 1rem;
+      background: var(--beige-dark);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      transition: background var(--transition);
+    }
+    .btn-search-close:hover { background: var(--gold); color: var(--white); }
+
+    /* ===== SIDE MENU ===== */
+    .menu-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 950;
+    }
+    .menu-overlay.visible { display: block; }
+
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -320px;
+      width: 300px;
+      height: 100%;
+      background: var(--white);
+      z-index: 960;
+      overflow-y: auto;
+      transition: left 0.35s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .side-menu.open { left: 0; }
+
+    .side-menu-header {
+      background: var(--green-dark);
+      color: var(--white);
+      padding: 1.5rem 1.25rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .side-menu-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+    }
+    .btn-close-menu {
+      color: var(--white);
+      font-size: 1.5rem;
+      line-height: 1;
+      padding: 0.25rem;
+      transition: color var(--transition);
+    }
+    .btn-close-menu:hover { color: var(--gold); }
+
+    .side-menu-body { padding: 1.25rem; flex: 1; }
+
+    .menu-section { margin-bottom: 1.5rem; }
+    .menu-section-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--beige-dark);
+    }
+    .menu-nav-item {
+      display: block;
+      padding: 0.6rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      transition: background var(--transition), color var(--transition);
+    }
+    .menu-nav-item:hover { background: var(--beige); color: var(--green-dark); }
+
+    .menu-info-block {
+      display: flex;
+      gap: 0.6rem;
+      padding: 0.5rem 0;
+      font-size: 0.88rem;
+      color: #555;
+      align-items: flex-start;
+    }
+    .menu-info-block svg { flex-shrink: 0; margin-top: 2px; }
+
+    .side-menu-footer {
+      padding: 1.25rem;
+      border-top: 1px solid var(--beige-dark);
+      flex-shrink: 0;
+    }
+    .btn-whatsapp-menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.75rem;
+      background: #25D366;
+      color: var(--white);
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: background var(--transition);
+    }
+    .btn-whatsapp-menu:hover { background: #1ebe5a; }
+
+    /* ===== BANNER ===== */
+    .banner {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 60%, #3a7041 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 3.5rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.15) 0%, transparent 70%);
+    }
+    .banner-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+    .banner-subtitle {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 0.75rem;
+    }
+    .banner-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 5vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .banner-title span { color: var(--gold); }
+    .banner-desc {
+      font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+      opacity: 0.85;
+      margin-bottom: 1.75rem;
+      line-height: 1.7;
+    }
+    .banner-actions {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--gold);
+      color: var(--white);
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.03em;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 14px rgba(212,175,55,0.35);
+    }
+    .btn-primary:hover { background: var(--gold-dark); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(212,175,55,0.5); }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,0.5);
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+
+    /* ===== AVAILABILITY NOTICE ===== */
+    .availability-notice {
+      background: linear-gradient(90deg, var(--gold-dark) 0%, var(--gold) 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 0.9rem 1rem;
+    }
+    .availability-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .availability-notice p {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .btn-check-availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 1rem;
+      background: var(--white);
+      color: var(--gold-dark);
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .btn-check-availability:hover { background: var(--beige); transform: translateY(-1px); }
+
+    /* ===== MAIN CONTENT ===== */
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem 3rem;
+    }
+
+    /* No results */
+    .no-results {
+      text-align: center;
+      padding: 2rem;
+      color: #888;
+      font-style: italic;
+      display: none;
+    }
+
+    /* ===== CATEGORY SECTION ===== */
+    .category-section { margin-bottom: 3rem; }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .category-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--green-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .category-icon svg { width: 22px; height: 22px; color: var(--gold); fill: var(--gold); }
+    .category-title-group { flex: 1; }
+    .category-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      line-height: 1.1;
+    }
+    .category-count {
+      font-size: 0.8rem;
+      color: #888;
+      margin-top: 2px;
+    }
+    .category-divider {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+    }
+
+    /* ===== PRODUCT GRID ===== */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+    @media (max-width: 480px) {
+      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+    }
+
+    /* ===== PRODUCT CARD ===== */
+    .product-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 8px var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px var(--shadow-md); }
+    .product-card.hidden { display: none; }
+
+    .product-card-image {
+      height: 140px;
+      background: linear-gradient(135deg, var(--beige) 0%, var(--beige-dark) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .product-card-image .emoji {
+      font-size: 3rem;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+      transition: transform var(--transition);
+    }
+    .product-card:hover .emoji { transform: scale(1.1) rotate(-5deg); }
+
+    .badge-unavailable {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #e74c3c;
+      color: var(--white);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 2px 7px;
+      border-radius: 999px;
+      text-transform: uppercase;
+    }
+
+    .product-card-body {
+      padding: 0.9rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--green-dark);
+      margin-bottom: 0.25rem;
+      line-height: 1.3;
+    }
+    .product-detail {
+      font-size: 0.78rem;
+      color: #777;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Variant selector */
+    .variant-select {
+      width: 100%;
+      padding: 0.35rem 0.5rem;
+      border: 1px solid var(--beige-dark);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.8rem;
+      color: var(--text-dark);
+      background: var(--beige);
+      margin-bottom: 0.6rem;
+      outline: none;
+      cursor: pointer;
+      transition: border-color var(--transition);
+    }
+    .variant-select:focus { border-color: var(--gold); }
+
+    .product-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-top: auto;
+    }
+    .product-price {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--gold-dark);
+    }
+    .product-price-unavailable {
+      font-size: 0.8rem;
+      color: #aaa;
+      font-style: italic;
+    }
+
+    .btn-add {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.4rem 0.75rem;
+      background: var(--green-dark);
+      color: var(--white);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      transition: background var(--transition), transform var(--transition);
+      white-space: nowrap;
+    }
+    .btn-add:hover { background: var(--green-mid); transform: scale(1.04); }
+    .btn-add:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+    .btn-add svg { width: 14px; height: 14px; }
+
+    /* ===== CART PANEL ===== */
+    .cart-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 970;
+    }
+    .cart-overlay.visible { display: block; }
+
+    .cart-panel {
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      background: var(--white);
+      z-index: 980;
+      display: flex;
+      flex-direction: column;
+      transition: right 0.35s ease;
+      box-shadow: -4px 0 24px rgba(0,0,0,0.15);
+    }
+    .cart-panel.open { right: 0; }
+
+    .cart-header {
+      background: var(--green-dark);
+      color: var(--white);
+      padding: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .cart-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+    }
+    .btn-close-cart {
+      color: var(--white);
+      font-size: 1.5rem;
+      line-height: 1;
+      padding: 0.25rem;
+      transition: color var(--transition);
+    }
+    .btn-close-cart:hover { color: var(--gold); }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+    .cart-empty {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #999;
+    }
+    .cart-empty svg { width: 48px; height: 48px; margin: 0 auto 1rem; opacity: 0.3; }
+    .cart-empty p { font-size: 0.95rem; }
+
+    .cart-item {
+      display: flex;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--beige-dark);
+      align-items: center;
+    }
+    .cart-item-emoji {
+      font-size: 1.8rem;
+      width: 48px;
+      height: 48px;
+      background: var(--beige);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .cart-item-info { flex: 1; min-width: 0; }
+    .cart-item-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cart-item-variant { font-size: 0.75rem; color: #888; }
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      flex-shrink: 0;
+    }
+    .btn-qty {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--beige-dark);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition);
+      line-height: 1;
+    }
+    .btn-qty:hover { background: var(--gold); color: var(--white); }
+    .qty-display {
+      min-width: 22px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+    .cart-item-price {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--gold-dark);
+      flex-shrink: 0;
+      min-width: 45px;
+      text-align: right;
+    }
+    .btn-remove-item {
+      color: #ccc;
+      font-size: 1rem;
+      padding: 0.2rem;
+      transition: color var(--transition);
+      flex-shrink: 0;
+    }
+    .btn-remove-item:hover { color: #e74c3c; }
+
+    .cart-footer {
+      padding: 1rem 1.25rem;
+      border-top: 2px solid var(--beige-dark);
+      flex-shrink: 0;
+    }
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .cart-total-label { color: #666; }
+    .cart-total-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--gold-dark);
+    }
+    .btn-checkout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.85rem;
+      background: #25D366;
+      color: var(--white);
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: background var(--transition), transform var(--transition);
+      box-shadow: 0 4px 14px rgba(37,211,102,0.3);
+    }
+    .btn-checkout:hover { background: #1ebe5a; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,211,102,0.4); }
+    .btn-clear-cart {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-top: 0.5rem;
+      padding: 0.4rem;
+      font-size: 0.8rem;
+      color: #aaa;
+      transition: color var(--transition);
+    }
+    .btn-clear-cart:hover { color: #e74c3c; }
+
+    /* ===== TOAST ===== */
+    .toast-container {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      pointer-events: none;
+    }
+    .toast {
+      background: var(--green-dark);
+      color: var(--white);
+      padding: 0.65rem 1.25rem;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      white-space: nowrap;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      background: var(--green-dark);
+      color: rgba(255,255,255,0.85);
+      padding: 3rem 1.5rem 1.5rem;
+      margin-top: 2rem;
+    }
+    .footer-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+    .footer-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .footer-tagline { font-size: 0.85rem; opacity: 0.75; margin-bottom: 1rem; }
+    .footer-social { display: flex; gap: 0.5rem; }
+    .social-link {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .social-link:hover { background: var(--gold); border-color: var(--gold); }
+    .social-link svg { width: 16px; height: 16px; fill: var(--white); }
+
+    .footer-section-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .footer-info-item {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+      align-items: flex-start;
+    }
+    .footer-info-item svg { flex-shrink: 0; margin-top: 2px; opacity: 0.7; }
+    .footer-info-item a:hover { color: var(--gold); }
+
+    .footer-hours-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      padding: 0.2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-hours-row:last-child { border-bottom: none; }
+    .footer-hours-day { opacity: 0.75; }
+    .footer-hours-time { font-weight: 600; color: var(--gold-light); }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 1.5rem auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.8rem;
+      opacity: 0.6;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 767px) {
+      .header-inner { height: 60px; gap: 0.75rem; }
+      .banner { padding: 2.5rem 1rem; }
+      .main-content { padding: 1.5rem 0.75rem 2.5rem; }
+      .cart-panel { max-width: 100%; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .btn-add span { display: none; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== TOAST CONTAINER ===== -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <!-- Hamburger -->
+      <button class="btn-hamburger" id="btnHamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="sideMenu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- Logo -->
+      <a href="#" class="logo-wrap" aria-label="La Huerta De Juan Fernández – Inicio">
+        <svg class="logo-svg" viewBox="0 0 260 60" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="logoTitle">
+          <title id="logoTitle">La Huerta De Juan Fernández</title>
+          <!-- Decorative leaf left -->
+          <g transform="translate(2,10)">
+            <path d="M22,20 Q10,12 4,2 Q16,6 22,20Z" fill="#D4AF37" opacity="0.85"/>
+            <path d="M22,20 Q8,18 2,28 Q14,22 22,20Z" fill="#D4AF37" opacity="0.65"/>
+            <line x1="4" y1="4" x2="22" y2="20" stroke="#D4AF37" stroke-width="1" opacity="0.5"/>
+          </g>
+          <!-- Decorative leaf right -->
+          <g transform="translate(236,10)">
+            <path d="M0,20 Q12,12 18,2 Q6,6 0,20Z" fill="#D4AF37" opacity="0.85"/>
+            <path d="M0,20 Q14,18 20,28 Q8,22 0,20Z" fill="#D4AF37" opacity="0.65"/>
+            <line x1="18" y1="4" x2="0" y2="20" stroke="#D4AF37" stroke-width="1" opacity="0.5"/>
+          </g>
+          <!-- Main title text -->
+          <text x="130" y="26" text-anchor="middle"
+                font-family="Georgia, 'Playfair Display', serif"
+                font-size="15" font-weight="bold" fill="#1b3a1f" letter-spacing="1">
+            LA HUERTA DE
+          </text>
+          <!-- Decorative line -->
+          <line x1="28" y1="31" x2="232" y2="31" stroke="#D4AF37" stroke-width="1"/>
+          <polygon points="130,29 133,33 127,33" fill="#D4AF37"/>
+          <!-- Sub title -->
+          <text x="130" y="46" text-anchor="middle"
+                font-family="Georgia, 'Playfair Display', serif"
+                font-size="13" font-weight="bold" fill="#D4AF37" letter-spacing="2">
+            JUAN FERNÁNDEZ
+          </text>
+          <!-- Bottom line -->
+          <line x1="45" y1="52" x2="215" y2="52" stroke="#D4AF37" stroke-width="0.5" opacity="0.6"/>
+          <!-- Small flower center -->
+          <circle cx="130" cy="56" r="2" fill="#D4AF37" opacity="0.7"/>
+          <circle cx="123" cy="56" r="1.5" fill="#D4AF37" opacity="0.4"/>
+          <circle cx="137" cy="56" r="1.5" fill="#D4AF37" opacity="0.4"/>
+        </svg>
+      </a>
+
+      <!-- Actions -->
+      <div class="header-actions">
+        <!-- Search -->
+        <button class="btn-icon" id="btnSearchToggle" aria-label="Buscar productos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+        <!-- WhatsApp -->
+        <a href="https://wa.me/34602687285?text=Hola%20La%20Huerta%2C%20me%20gustar%C3%ADa%20hacer%20un%20pedido" target="_blank" rel="noopener noreferrer" class="btn-icon" aria-label="Contactar por WhatsApp">
+          <svg viewBox="0 0 24 24" fill="#25D366">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+          </svg>
+        </a>
+        <!-- Cart -->
+        <button class="btn-icon btn-cart" id="btnCartToggle" aria-label="Ver carrito" aria-expanded="false" aria-controls="cartPanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          <span class="cart-count" id="cartCount" aria-label="productos en carrito">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-bar" id="searchBar" role="search">
+      <input type="search" id="searchInput" placeholder="Buscar flores, bouquets…" aria-label="Buscar productos" autocomplete="off" />
+      <button class="btn-search-close" id="btnSearchClose">Cerrar</button>
+    </div>
+  </header>
+
+  <!-- ===== SIDE MENU ===== -->
+  <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
+  <nav class="side-menu" id="sideMenu" aria-label="Menú principal">
+    <div class="side-menu-header">
+      <h2>🌸 Menú</h2>
+      <button class="btn-close-menu" id="btnCloseMenu" aria-label="Cerrar menú">✕</button>
+    </div>
+    <div class="side-menu-body">
+      <!-- Navigation -->
+      <div class="menu-section">
+        <p class="menu-section-title">Categorías</p>
+        <a class="menu-nav-item" href="#follaje" onclick="closeMenu()">🌿 Follaje</a>
+        <a class="menu-nav-item" href="#flores" onclick="closeMenu()">🌸 Flores</a>
+        <a class="menu-nav-item" href="#bouquets" onclick="closeMenu()">💐 Bouquets Variados</a>
+      </div>
+      <!-- Occasions -->
+      <div class="menu-section">
+        <p class="menu-section-title">Ocasiones</p>
+        <a class="menu-nav-item" href="#flores" onclick="closeMenu()">💝 Aniversario</a>
+        <a class="menu-nav-item" href="#bouquets" onclick="closeMenu()">🎂 Cumpleaños</a>
+        <a class="menu-nav-item" href="#flores" onclick="closeMenu()">💒 Boda</a>
+        <a class="menu-nav-item" href="#flores" onclick="closeMenu()">🙏 Condolencias</a>
+        <a class="menu-nav-item" href="#flores" onclick="closeMenu()">🎉 Celebración</a>
+      </div>
+      <!-- Info -->
+      <div class="menu-section">
+        <p class="menu-section-title">Información de pedidos</p>
+        <div class="menu-info-block">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Pedidos hasta las 14:00h para entrega el mismo día</span>
+        </div>
+        <div class="menu-info-block">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Flores frescas de temporada diariamente</span>
+        </div>
+      </div>
+      <!-- Location -->
+      <div class="menu-section">
+        <p class="menu-section-title">Ubicación</p>
+        <div class="menu-info-block">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Plaza Tirso de Molina<br/>Kiosco #5 – CP 28012<br/>Madrid, España</span>
+        </div>
+      </div>
+    </div>
+    <div class="side-menu-footer">
+      <a href="https://wa.me/34602687285?text=Hola%20La%20Huerta%2C%20me%20gustar%C3%ADa%20consultar%20disponibilidad" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Consultar disponibilidad
+      </a>
+    </div>
+  </nav>
+
+  <!-- ===== BANNER ===== -->
+  <section class="banner" aria-labelledby="bannerTitle">
+    <div class="banner-content">
+      <p class="banner-subtitle">✦ Floristería en Madrid ✦</p>
+      <h1 class="banner-title" id="bannerTitle">Bienvenidos a nuestra<br/><span>tienda de flores</span></h1>
+      <p class="banner-desc">Flores frescas, bouquets y follaje para toda ocasión.<br/>Plaza Tirso de Molina – Kiosco #5 – Madrid</p>
+      <div class="banner-actions">
+        <a href="#flores" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Ver catálogo
+        </a>
+        <a href="https://wa.me/34602687285?text=Hola%20La%20Huerta%2C%20me%20gustar%C3%ADa%20hacer%20un%20pedido" target="_blank" rel="noopener noreferrer" class="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Pedir por WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AVAILABILITY NOTICE ===== -->
+  <div class="availability-notice" role="alert">
+    <div class="availability-inner">
+      <p>⚠️ TU PEDIDO SUJETO A DISPOSICIÓN DE FLORES SEGÚN TEMPORADA</p>
+      <a href="https://wa.me/34602687285?text=Hola%20La%20Huerta%2C%20quiero%20consultar%20disponibilidad%20de%20flores" target="_blank" rel="noopener noreferrer" class="btn-check-availability">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Consultar disponibilidad
+      </a>
+    </div>
+  </div>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-content" id="mainContent">
+    <p class="no-results" id="noResults">No se encontraron productos con ese nombre.</p>
+
+    <!-- ===== FOLLAJE ===== -->
+    <section class="category-section" id="follaje" aria-labelledby="titleFollaje">
+      <div class="category-header">
+        <div class="category-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="var(--gold)"><path d="M17 8C8 10 5.9 16.17 3.82 21c0 0 2.68-2.68 6.18-3 4-.35 8.5-3.5 8.5-8.5L17 8z"/></svg>
+        </div>
+        <div class="category-title-group">
+          <h2 class="category-title" id="titleFollaje">Follaje</h2>
+          <p class="category-count">4 productos</p>
+        </div>
+        <div class="category-divider" aria-hidden="true"></div>
+      </div>
+      <div class="products-grid" id="gridFollaje">
+
+        <article class="product-card" data-name="tuya follaje" data-category="follaje">
+          <div class="product-card-image"><span class="emoji">🌿</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Tuya</h3>
+            <p class="product-detail">Follaje decorativo</p>
+            <div class="product-card-footer">
+              <span class="product-price">5 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Tuya" data-price="5" data-emoji="🌿">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="paniculata follaje" data-category="follaje">
+          <div class="product-card-image"><span class="emoji">🌾</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Paniculata</h3>
+            <p class="product-detail">Follaje decorativo</p>
+            <div class="product-card-footer">
+              <span class="product-price">6 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Paniculata" data-price="6" data-emoji="🌾">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="eucalipto follaje" data-category="follaje">
+          <div class="product-card-image"><span class="emoji">🍃</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Eucalipto</h3>
+            <p class="product-detail">Follaje aromático</p>
+            <select class="variant-select" aria-label="Tamaño de Eucalipto" onchange="updateCardPrice(this)">
+              <option value="5" data-variant="Pequeño">Pequeño – 5 €</option>
+              <option value="10" data-variant="Grande">Grande – 10 €</option>
+            </select>
+            <div class="product-card-footer">
+              <span class="product-price">5 €</span>
+              <button class="btn-add" onclick="addToCartVariant(this)" data-name="Eucalipto" data-emoji="🍃">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="ruscus follaje varas" data-category="follaje">
+          <div class="product-card-image"><span class="emoji">🌱</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Ruscus</h3>
+            <p class="product-detail">10 varas – Follaje perenne</p>
+            <div class="product-card-footer">
+              <span class="product-price">7 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Ruscus (10 varas)" data-price="7" data-emoji="🌱">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===== FLORES ===== -->
+    <section class="category-section" id="flores" aria-labelledby="titleFlores">
+      <div class="category-header">
+        <div class="category-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="var(--gold)"><path d="M12 2a5 5 0 015 5c0 2.76-2.24 5-5 5S7 9.76 7 7a5 5 0 015-5zm0 13c2.67 0 8 1.34 8 4v2H4v-2c0-2.66 5.33-4 8-4z"/></svg>
+        </div>
+        <div class="category-title-group">
+          <h2 class="category-title" id="titleFlores">Flores</h2>
+          <p class="category-count">20 productos</p>
+        </div>
+        <div class="category-divider" aria-hidden="true"></div>
+      </div>
+      <div class="products-grid" id="gridFlores">
+
+        <article class="product-card" data-name="lilium oriental aroma vara flores" data-category="flores">
+          <div class="product-card-image"><span class="emoji">🌸</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Lilium Oriental</h3>
+            <p class="product-detail">Con aroma – 1 vara</p>
+            <div class="product-card-footer">
+              <span class="product-price">4 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Lilium Oriental con aroma" data-price="4" data-emoji="🌸">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="lilium nacional vara flores" data-category="flores">
+          <div class="product-card-image"><span class="emoji">🌷</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Lilium Nacional</h3>
+            <p class="product-detail">1 vara</p>
+            <div class="product-card-footer">
+              <span class="product-price">3 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Lilium Nacional" data-price="3" data-emoji="🌷">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="girasol flor flores" data-category="flores">
+          <div class="product-card-image"><span class="emoji">🌻</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Girasol</h3>
+            <p class="product-detail">Flor alegre y luminosa</p>
+            <select class="variant-select" aria-label="Cantidad de Girasol" onchange="updateCardPrice(this)">
+              <option value="3" data-variant="1 flor">1 flor – 3 €</option>
+              <option value="12" data-variant="5 unidades">5 unidades – 12 €</option>
+            </select>
+            <div class="product-card-footer">
+              <span class="product-price">3 €</span>
+              <button class="btn-add" onclick="addToCartVariant(this)" data-name="Girasol" data-emoji="🌻">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="anastasia spider flores" data-category="flores">
+          <div class="product-card-image"><span class="emoji">🌼</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Anastasia Spider</h3>
+            <p class="product-detail">Crisantemo decorativo</p>
+            <div class="product-card-footer">
+              <span class="product-price">3 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Anastasia Spider" data-price="3" data-emoji="🌼">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="anastasia tubular flores" data-category="flores">
+          <div class="product-card-image"><span class="emoji">💮</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Anastasia Tubular</h3>
+            <p class="product-detail">Crisantemo decorativo</p>
+            <div class="product-card-footer">
+              <span class="product-price">3 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Anastasia Tubular" data-price="3" data-emoji="💮">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="gerbera flores" data-category="flores">
+          <div class="product-card-image"><span class="emoji">🌺</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Gerbera</h3>
+            <p class="product-detail">Flor colorida y alegre</p>
+            <div class="product-card-footer">
+              <span class="product-price">2 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Gerbera" data-price="2" data-emoji="🌺">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="rosa flores" data-category="flores">
+          <div class="product-card-image"><span class="emoji">🌹</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Rosa</h3>
+            <p class="product-detail">Flor romántica por excelencia</p>
+            <div class="product-card-footer">
+              <span class="product-price">3 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Rosa" data-price="3" data-emoji="🌹">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="gladiolo flores" data-category="flores">
+          <div class="product-card-image"><span class="emoji">🌷</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Gladiolo</h3>
+            <p class="product-detail">Flor de tallo alto elegante</p>
+            <div class="product-card-footer">
+              <span class="product-price">2 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Gladiolo" data-price="2" data-emoji="🌷">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="clavel flores" data-category="flores">
+          <div class="product-card-image"><span class="emoji">🪷</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Clavel</h3>
+            <p class="product-detail">Flor clásica y fragante</p>
+            <select class="variant-select" aria-label="Cantidad de Clavel" onchange="updateCardPrice(this)">
+              <option value="1" data-variant="1 unidad">1 unidad – 1 €</option>
+              <option value="6" data-variant="10 unidades">10 unidades – 6 €</option>
+              <option value="12" data-variant="12 unidades">12 unidades – 12 €</option>
+            </select>
+            <div class="product-card-footer">
+              <span class="product-price">1 €</span>
+              <button class="btn-add" onclick="addToCartVariant(this)" data-name="Clavel" data-emoji="🪷">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="margaritas varas flores" data-category="flores">
+          <div class="product-card-image"><span class="emoji">🌼</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Margaritas</h3>
+            <p class="product-detail">5 varas – Frescas y delicadas</p>
+            <div class="product-card-footer">
+              <span class="product-price">12 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Margaritas (5 varas)" data-price="12" data-emoji="🌼">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="siempre viva flores" data-category="flores">
+          <div class="product-card-image"><span class="emoji">🌸</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Siempre Viva</h3>
+            <p class="product-detail">Flor de larga duración</p>
+            <div class="product-card-footer">
+              <span class="product-price">6 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Siempre Viva" data-price="6" data-emoji="🌸">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="tulipanes varas flores" data-category="flores">
+          <div class="product-card-image"><span class="emoji">🌷</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Tulipanes</h3>
+            <p class="product-detail">10 varas – Elegantes y coloridos</p>
+            <div class="product-card-footer">
+              <span class="product-price">15 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Tulipanes (10 varas)" data-price="15" data-emoji="🌷">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="mimosa flores" data-category="flores">
+          <div class="product-card-image"><span class="emoji">🌼</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Mimosa</h3>
+            <p class="product-detail">Flor amarilla aromática</p>
+            <select class="variant-select" aria-label="Tamaño de Mimosa" onchange="updateCardPrice(this)">
+              <option value="6" data-variant="Pequeño">Pequeño – 6 €</option>
+              <option value="12" data-variant="Grande">Grande – 12 €</option>
+            </select>
+            <div class="product-card-footer">
+              <span class="product-price">6 €</span>
+              <button class="btn-add" onclick="addToCartVariant(this)" data-name="Mimosa" data-emoji="🌼">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="brassica flores col" data-category="flores">
+          <div class="product-card-image"><span class="emoji">🌿</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Brassica</h3>
+            <p class="product-detail">Planta ornamental decorativa</p>
+            <div class="product-card-footer">
+              <span class="product-price">3 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Brassica" data-price="3" data-emoji="🌿">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="ranunculos flores" data-category="flores">
+          <div class="product-card-image"><span class="emoji">🌸</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Ranúnculos</h3>
+            <p class="product-detail">Flor primaveral delicada</p>
+            <div class="product-card-footer">
+              <span class="product-price">10 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Ranúnculos" data-price="10" data-emoji="🌸">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="fresias flores" data-category="flores">
+          <div class="product-card-image"><span class="emoji">🌺</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Fresias</h3>
+            <p class="product-detail">Flor aromática y colorida</p>
+            <div class="product-card-footer">
+              <span class="product-price">10 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Fresias" data-price="10" data-emoji="🌺">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="astromelias flores alstromeria" data-category="flores">
+          <div class="product-card-image"><span class="emoji">🌸</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Astromelias</h3>
+            <p class="product-detail">Flor exótica y duradera</p>
+            <select class="variant-select" aria-label="Tamaño de Astromelias" onchange="updateCardPrice(this)">
+              <option value="6" data-variant="Pequeña">Pequeña – 6 €</option>
+              <option value="12" data-variant="Grande">Grande – 12 €</option>
+            </select>
+            <div class="product-card-footer">
+              <span class="product-price">6 €</span>
+              <button class="btn-add" onclick="addToCartVariant(this)" data-name="Astromelias" data-emoji="🌸">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Craspedia – Not available -->
+        <article class="product-card" data-name="craspedia flores" data-category="flores">
+          <div class="product-card-image">
+            <span class="emoji">🌕</span>
+            <span class="badge-unavailable">No disponible</span>
+          </div>
+          <div class="product-card-body">
+            <h3 class="product-name">Craspedia</h3>
+            <p class="product-detail">Flor de temporada</p>
+            <div class="product-card-footer">
+              <span class="product-price-unavailable">Consultar disponibilidad</span>
+              <button class="btn-add" disabled aria-disabled="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>No disponible</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Ave del paraíso – Not available -->
+        <article class="product-card" data-name="ave del paraiso flores tropicales" data-category="flores">
+          <div class="product-card-image">
+            <span class="emoji">🦜</span>
+            <span class="badge-unavailable">No disponible</span>
+          </div>
+          <div class="product-card-body">
+            <h3 class="product-name">Ave del Paraíso</h3>
+            <p class="product-detail">Flor tropical exótica</p>
+            <div class="product-card-footer">
+              <span class="product-price-unavailable">Consultar disponibilidad</span>
+              <button class="btn-add" disabled aria-disabled="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>No disponible</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===== BOUQUETS ===== -->
+    <section class="category-section" id="bouquets" aria-labelledby="titleBouquets">
+      <div class="category-header">
+        <div class="category-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="var(--gold)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        </div>
+        <div class="category-title-group">
+          <h2 class="category-title" id="titleBouquets">Bouquets Variados</h2>
+          <p class="category-count">Para toda ocasión – 4 opciones</p>
+        </div>
+        <div class="category-divider" aria-hidden="true"></div>
+      </div>
+      <div class="products-grid" id="gridBouquets">
+
+        <article class="product-card" data-name="bouquet variado flores ramo" data-category="bouquets">
+          <div class="product-card-image"><span class="emoji">💐</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Bouquet Sencillo</h3>
+            <p class="product-detail">Ramo floral variado · Para toda ocasión</p>
+            <div class="product-card-footer">
+              <span class="product-price">6 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Bouquet Sencillo" data-price="6" data-emoji="💐">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="bouquet variado flores ramo mediano" data-category="bouquets">
+          <div class="product-card-image"><span class="emoji">💐</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Bouquet Mediano</h3>
+            <p class="product-detail">Ramo floral variado · Para toda ocasión</p>
+            <div class="product-card-footer">
+              <span class="product-price">12 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Bouquet Mediano" data-price="12" data-emoji="💐">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="bouquet variado flores ramo grande" data-category="bouquets">
+          <div class="product-card-image"><span class="emoji">💐</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Bouquet Grande</h3>
+            <p class="product-detail">Ramo floral variado · Para toda ocasión</p>
+            <div class="product-card-footer">
+              <span class="product-price">14 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Bouquet Grande" data-price="14" data-emoji="💐">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-name="bouquet rosas flores especial" data-category="bouquets">
+          <div class="product-card-image"><span class="emoji">🌹</span></div>
+          <div class="product-card-body">
+            <h3 class="product-name">Bouquet de Rosas</h3>
+            <p class="product-detail">6 rosas · Para toda ocasión especial</p>
+            <div class="product-card-footer">
+              <span class="product-price">15 €</span>
+              <button class="btn-add" onclick="addToCart(this)" data-name="Bouquet de Rosas (6 rosas)" data-price="15" data-emoji="🌹">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== CART PANEL ===== -->
+  <div class="cart-overlay" id="cartOverlay" aria-hidden="true"></div>
+  <aside class="cart-panel" id="cartPanel" aria-label="Carrito de compras" aria-expanded="false">
+    <div class="cart-header">
+      <h2>🛒 Mi Carrito</h2>
+      <button class="btn-close-cart" id="btnCloseCart" aria-label="Cerrar carrito">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty" id="cartEmpty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <p>Tu carrito está vacío.<br/>¡Agrega flores para comenzar!</p>
+      </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total estimado:</span>
+        <span class="cart-total-value" id="cartTotal">0,00 €</span>
+      </div>
+      <a id="btnCheckout" href="#" target="_blank" rel="noopener noreferrer" class="btn-checkout" onclick="checkout()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Pedir por WhatsApp
+      </a>
+      <button class="btn-clear-cart" onclick="clearCart()">Vaciar carrito</button>
+    </div>
+  </aside>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div>
+        <p class="footer-brand-name">La Huerta De Juan Fernández</p>
+        <p class="footer-tagline">Flores frescas para toda ocasión en Madrid</p>
+        <div class="footer-social">
+          <a href="https://wa.me/34602687285" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <!-- Contact -->
+      <div>
+        <p class="footer-section-title">Contacto</p>
+        <div class="footer-info-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+          <a href="tel:+34602687285">+34 602 687 285</a>
+        </div>
+        <div class="footer-info-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:castro59freddy@gmail.com">castro59freddy@gmail.com</a>
+        </div>
+        <div class="footer-info-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Plaza Tirso de Molina, Kiosco #5<br/>CP 28012 – Madrid</span>
+        </div>
+      </div>
+      <!-- Hours -->
+      <div>
+        <p class="footer-section-title">Horarios</p>
+        <div class="footer-hours-row">
+          <span class="footer-hours-day">Lunes – Viernes</span>
+          <span class="footer-hours-time">09:00 – 19:00</span>
+        </div>
+        <div class="footer-hours-row">
+          <span class="footer-hours-day">Sábados</span>
+          <span class="footer-hours-time">09:00 – 15:00</span>
+        </div>
+        <div class="footer-hours-row">
+          <span class="footer-hours-day">Domingos</span>
+          <span class="footer-hours-time">10:00 – 14:00</span>
+        </div>
+      </div>
+      <!-- WhatsApp CTA -->
+      <div>
+        <p class="footer-section-title">Pedidos</p>
+        <p style="font-size:0.85rem;opacity:0.8;margin-bottom:0.75rem;line-height:1.5;">Realiza tu pedido fácilmente por WhatsApp. Flores frescas entregadas con amor. 🌸</p>
+        <a href="https://wa.me/34602687285?text=Hola%20La%20Huerta%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#25D366;color:#fff;border-radius:999px;font-weight:700;font-size:0.85rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Pedir ahora
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 La Huerta De Juan Fernández. Todos los derechos reservados.</span>
+      <span>Diseñado con ❤️ en Madrid</span>
+    </div>
+  </footer>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    'use strict';
+
+    /* ─── CART STATE ─── */
+    let cart = [];
+    const STORAGE_KEY = 'lahuerta_cart_v2';
+    const WHATSAPP_NUMBER = '34602687285';
+
+    function loadCart() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        cart = saved ? JSON.parse(saved) : [];
+      } catch (e) {
+        cart = [];
+      }
+    }
+
+    function saveCart() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(cart)); } catch (e) { /* quota */ }
+    }
+
+    /* ─── CART LOGIC ─── */
+    function addToCart(btn) {
+      const name = btn.dataset.name;
+      const price = parseFloat(btn.dataset.price);
+      const emoji = btn.dataset.emoji || '🌸';
+      addItem({ name, price, variant: '', emoji });
+    }
+
+    function addToCartVariant(btn) {
+      const card = btn.closest('.product-card');
+      const select = card.querySelector('.variant-select');
+      const name = btn.dataset.name;
+      const emoji = btn.dataset.emoji || '🌸';
+      if (!select) return;
+      const option = select.options[select.selectedIndex];
+      const price = parseFloat(option.value);
+      const variant = option.dataset.variant || '';
+      addItem({ name, price, variant, emoji });
+    }
+
+    function addItem(item) {
+      const key = item.name + '|' + item.variant;
+      const existing = cart.find(c => c.key === key);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ key, name: item.name, variant: item.variant, price: item.price, emoji: item.emoji, qty: 1 });
+      }
+      saveCart();
+      renderCart();
+      showToast(`${item.emoji} ${item.name}${item.variant ? ' (' + item.variant + ')' : ''} añadido al carrito`);
+    }
+
+    function changeQty(key, delta) {
+      const idx = cart.findIndex(c => c.key === key);
+      if (idx === -1) return;
+      cart[idx].qty += delta;
+      if (cart[idx].qty <= 0) cart.splice(idx, 1);
+      saveCart();
+      renderCart();
+    }
+
+    function removeItem(key) {
+      cart = cart.filter(c => c.key !== key);
+      saveCart();
+      renderCart();
+    }
+
+    function clearCart() {
+      if (!cart.length) return;
+      if (!confirm('¿Vaciar el carrito?')) return;
+      cart = [];
+      saveCart();
+      renderCart();
+    }
+
+    /* ─── CART RENDER ─── */
+    function renderCart() {
+      const container = document.getElementById('cartItems');
+      const emptyEl = document.getElementById('cartEmpty');
+      const footerEl = document.getElementById('cartFooter');
+      const countEl = document.getElementById('cartCount');
+      const totalEl = document.getElementById('cartTotal');
+
+      const totalQty = cart.reduce((s, c) => s + c.qty, 0);
+      const totalPrice = cart.reduce((s, c) => s + c.price * c.qty, 0);
+
+      // count badge
+      if (totalQty > 0) {
+        countEl.textContent = totalQty > 99 ? '99+' : totalQty;
+        countEl.classList.add('visible');
+      } else {
+        countEl.classList.remove('visible');
+      }
+
+      // total
+      totalEl.textContent = totalPrice.toFixed(2).replace('.', ',') + ' €';
+
+      // empty / footer
+      if (cart.length === 0) {
+        emptyEl.style.display = '';
+        footerEl.style.display = 'none';
+        // Remove items except the empty placeholder
+        Array.from(container.querySelectorAll('.cart-item')).forEach(el => el.remove());
+        return;
+      }
+
+      emptyEl.style.display = 'none';
+      footerEl.style.display = '';
+
+      // Re-render items
+      const existingItems = container.querySelectorAll('.cart-item');
+      existingItems.forEach(el => el.remove());
+
+      const fragment = document.createDocumentFragment();
+      cart.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <div class="cart-item-emoji">${item.emoji}</div>
+          <div class="cart-item-info">
+            <div class="cart-item-name">${escapeHtml(item.name)}</div>
+            ${item.variant ? `<div class="cart-item-variant">${escapeHtml(item.variant)}</div>` : ''}
+          </div>
+          <div class="cart-item-controls">
+            <button class="btn-qty" aria-label="Restar uno" onclick="changeQty(${JSON.stringify(item.key)}, -1)">−</button>
+            <span class="qty-display" aria-label="cantidad">${item.qty}</span>
+            <button class="btn-qty" aria-label="Sumar uno" onclick="changeQty(${JSON.stringify(item.key)}, 1)">+</button>
+          </div>
+          <span class="cart-item-price">${(item.price * item.qty).toFixed(2).replace('.', ',')} €</span>
+          <button class="btn-remove-item" aria-label="Eliminar ${escapeHtml(item.name)}" onclick="removeItem(${JSON.stringify(item.key)})">✕</button>
+        `;
+        fragment.appendChild(div);
+      });
+      container.insertBefore(fragment, emptyEl);
+    }
+
+    /* ─── CHECKOUT ─── */
+    function checkout() {
+      if (!cart.length) return;
+      const lines = cart.map(c =>
+        `• ${c.emoji} ${c.name}${c.variant ? ' (' + c.variant + ')' : ''} x${c.qty} = ${(c.price * c.qty).toFixed(2)}€`
+      );
+      const total = cart.reduce((s, c) => s + c.price * c.qty, 0);
+      const msg = `Hola La Huerta, quiero hacer el siguiente pedido:\n\n${lines.join('\n')}\n\n*Total: ${total.toFixed(2)}€*\n\n¿Está disponible?`;
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+
+    /* ─── CART PANEL TOGGLE ─── */
+    function openCart() {
+      document.getElementById('cartPanel').classList.add('open');
+      document.getElementById('cartOverlay').classList.add('visible');
+      document.getElementById('btnCartToggle').setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeCart() {
+      document.getElementById('cartPanel').classList.remove('open');
+      document.getElementById('cartOverlay').classList.remove('visible');
+      document.getElementById('btnCartToggle').setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    /* ─── SIDE MENU ─── */
+    function openMenu() {
+      document.getElementById('sideMenu').classList.add('open');
+      document.getElementById('menuOverlay').classList.add('visible');
+      document.getElementById('menuOverlay').removeAttribute('aria-hidden');
+      document.getElementById('btnHamburger').classList.add('active');
+      document.getElementById('btnHamburger').setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      document.getElementById('sideMenu').classList.remove('open');
+      document.getElementById('menuOverlay').classList.remove('visible');
+      document.getElementById('menuOverlay').setAttribute('aria-hidden', 'true');
+      document.getElementById('btnHamburger').classList.remove('active');
+      document.getElementById('btnHamburger').setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    /* ─── SEARCH ─── */
+    function openSearch() {
+      const bar = document.getElementById('searchBar');
+      bar.classList.add('visible');
+      document.getElementById('searchInput').focus();
+    }
+    function closeSearch() {
+      document.getElementById('searchBar').classList.remove('visible');
+      document.getElementById('searchInput').value = '';
+      filterProducts('');
+    }
+
+    function filterProducts(query) {
+      const q = query.toLowerCase().trim();
+      const cards = document.querySelectorAll('.product-card');
+      let visible = 0;
+      cards.forEach(card => {
+        const name = (card.dataset.name || '').toLowerCase();
+        if (!q || name.includes(q)) {
+          card.classList.remove('hidden');
+          visible++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+      document.getElementById('noResults').style.display = (q && visible === 0) ? 'block' : 'none';
+    }
+
+    /* ─── VARIANT PRICE UPDATE ─── */
+    function updateCardPrice(select) {
+      const card = select.closest('.product-card');
+      const priceEl = card.querySelector('.product-price');
+      if (priceEl) priceEl.textContent = parseFloat(select.value).toFixed(0) + ' €';
+    }
+
+    /* ─── TOAST ─── */
+    function showToast(msg) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.textContent = msg;
+      container.appendChild(toast);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => toast.classList.add('show'));
+      });
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 350);
+      }, 2800);
+    }
+
+    /* ─── ESCAPE HTML ─── */
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    /* ─── EVENT LISTENERS ─── */
+    document.addEventListener('DOMContentLoaded', () => {
+      loadCart();
+      renderCart();
+
+      // Hamburger
+      document.getElementById('btnHamburger').addEventListener('click', openMenu);
+      document.getElementById('btnCloseMenu').addEventListener('click', closeMenu);
+      document.getElementById('menuOverlay').addEventListener('click', closeMenu);
+
+      // Cart
+      document.getElementById('btnCartToggle').addEventListener('click', openCart);
+      document.getElementById('btnCloseCart').addEventListener('click', closeCart);
+      document.getElementById('cartOverlay').addEventListener('click', closeCart);
+
+      // Search
+      document.getElementById('btnSearchToggle').addEventListener('click', openSearch);
+      document.getElementById('btnSearchClose').addEventListener('click', closeSearch);
+      document.getElementById('searchInput').addEventListener('input', e => filterProducts(e.target.value));
+      document.getElementById('searchInput').addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeSearch();
+      });
+
+      // Close menus on Escape
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          closeMenu();
+          closeCart();
+          closeSearch();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
