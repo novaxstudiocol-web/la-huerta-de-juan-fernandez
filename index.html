@@ -1,45 +1,574 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Huerta De Juan Fernández</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #ffffff; color: #333; }
-        header { background-color: #d9a300; padding: 20px; text-align: center; }
-        h1 { color: #005e3c; }
-        .product { margin: 20px; padding: 10px; border: 1px solid #ccc; display: inline-block; }
-        .whatsapp { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 10px; border-radius: 5px; text-decoration: none; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="La Huerta De Juan Fernández — Floristería en Madrid. Flores frescas, follaje y bouquets. Plaza Tirso de Molina, Kiosco 5.">
+  <title>La Huerta De Juan Fernández · Floristería Madrid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--verde:#1b3a1f;--verde-dark:#122a16;--verde-light:#2d5a34;--oro:#D4AF37;--oro-light:#e8c84a;--beige:#f5f0e6;--beige-dark:#ede5d5;--blanco:#ffffff;--gris:#666;--gris-lt:#999;--sh-sm:0 2px 12px rgba(0,0,0,.08);--sh:0 4px 24px rgba(0,0,0,.12);--sh-lg:0 8px 40px rgba(0,0,0,.18);--ease:all .3s ease;--radius:10px}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Lato',sans-serif;background:var(--beige);color:#333;overflow-x:hidden}
+    img{max-width:100%;height:auto;display:block}
+    a{text-decoration:none;color:inherit}
+    ul{list-style:none}
+    button{cursor:pointer;border:none;background:none;font-family:inherit}
+    /* HEADER */
+    header{background:var(--verde);position:sticky;top:0;z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,.35)}
+    .hdr{max-width:1400px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:78px}
+    .logo-wrap{display:flex;justify-content:center;align-items:center;padding:8px 0}
+    .logo-wrap img{max-height:58px;max-width:200px;width:auto;object-fit:contain}
+    .logo-txt{color:var(--oro);font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;text-align:center;line-height:1.25;letter-spacing:.04em}
+    .logo-txt span{display:block;font-size:.65rem;font-weight:300;font-family:'Lato',sans-serif;color:rgba(212,175,55,.75);letter-spacing:.22em;text-transform:uppercase;margin-top:3px}
+    .nav-left,.nav-right{display:flex;align-items:center;gap:2px}
+    .nav-right{justify-content:flex-end}
+    .nav-link{color:rgba(255,255,255,.82);font-size:.75rem;font-weight:400;text-transform:uppercase;letter-spacing:.14em;padding:6px 10px;border-radius:4px;transition:var(--ease);white-space:nowrap}
+    .nav-link:hover,.nav-link.active{color:var(--oro);background:rgba(212,175,55,.1)}
+    .hdr-actions{display:flex;align-items:center;gap:6px;justify-content:flex-end}
+    .btn-icon{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.82);transition:var(--ease);position:relative}
+    .btn-icon:hover{color:var(--oro);background:rgba(212,175,55,.1)}
+    .btn-icon svg{width:20px;height:20px}
+    .cart-badge{position:absolute;top:2px;right:2px;background:var(--oro);color:var(--verde-dark);font-size:.58rem;font-weight:700;width:15px;height:15px;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0);transition:var(--ease)}
+    .cart-badge.visible{opacity:1;transform:scale(1)}
+    .search-wrap{position:relative;display:flex;align-items:center}
+    .search-input{width:0;opacity:0;border:none;background:rgba(255,255,255,.1);color:white;padding:7px 14px;border-radius:20px;font-family:'Lato',sans-serif;font-size:.82rem;transition:var(--ease);outline:none}
+    .search-input::placeholder{color:rgba(255,255,255,.45)}
+    .search-input.open{width:210px;opacity:1;margin-right:6px}
+    .hamburger{display:none}
+    /* MOBILE NAV */
+    .mob-nav{background:var(--verde-dark);overflow:hidden;max-height:0;transition:max-height .4s ease}
+    .mob-nav.open{max-height:500px}
+    .mob-nav ul{padding:8px 20px 16px}
+    .mob-nav li{border-bottom:1px solid rgba(255,255,255,.1)}
+    .mob-nav a{display:block;padding:13px 8px;color:rgba(255,255,255,.82);font-size:.9rem;text-transform:uppercase;letter-spacing:.08em;transition:var(--ease)}
+    .mob-nav a:hover{color:var(--oro)}
+    /* BANNER */
+    .banner{position:relative;min-height:500px;background:linear-gradient(to right,rgba(27,58,31,.88) 0%,rgba(27,58,31,.5) 55%,rgba(27,58,31,.2) 100%),url('images/banner/banner.jpg') center/cover no-repeat;background-color:var(--verde);display:flex;align-items:center;overflow:hidden}
+    .banner-content{max-width:1400px;margin:0 auto;padding:70px 44px;width:100%}
+    .banner-eyebrow{color:var(--oro);font-size:.75rem;letter-spacing:.32em;text-transform:uppercase;font-weight:700;margin-bottom:14px}
+    .banner-title{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,6vw,4.6rem);color:var(--blanco);line-height:1.08;margin-bottom:18px;max-width:580px}
+    .banner-title em{color:var(--oro);font-style:italic}
+    .banner-text{color:rgba(255,255,255,.82);font-size:1rem;line-height:1.75;max-width:440px;margin-bottom:34px}
+    .banner-cta{display:inline-flex;align-items:center;gap:10px;background:var(--oro);color:var(--verde-dark);font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.16em;padding:14px 34px;border-radius:40px;transition:var(--ease);box-shadow:0 4px 22px rgba(212,175,55,.35)}
+    .banner-cta:hover{background:var(--blanco);transform:translateY(-2px);box-shadow:0 8px 32px rgba(212,175,55,.4)}
+    .banner-cta svg{width:17px;height:17px}
+    /* AVAILABILITY */
+    .avail-bar{background:var(--oro);padding:17px 40px;display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap}
+    .avail-txt{font-size:.76rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--verde-dark);display:flex;align-items:center;gap:9px}
+    .avail-txt svg{width:17px;height:17px;flex-shrink:0}
+    .btn-wa{display:inline-flex;align-items:center;gap:8px;background:var(--verde-dark);color:var(--blanco);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:10px 24px;border-radius:40px;transition:var(--ease);white-space:nowrap}
+    .btn-wa:hover{background:var(--verde);transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.3)}
+    .btn-wa svg{width:15px;height:15px}
+    /* OCCASIONS */
+    .occasions{background:var(--verde)}
+    .occ-inner{max-width:1400px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none}
+    .occ-inner::-webkit-scrollbar{display:none}
+    .occ-item{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px;padding:18px 26px;cursor:pointer;transition:var(--ease);border-bottom:3px solid transparent;color:rgba(255,255,255,.65)}
+    .occ-item:hover,.occ-item.active{color:var(--oro);border-bottom-color:var(--oro)}
+    .occ-item svg{width:22px;height:22px}
+    .occ-item span{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;white-space:nowrap}
+    /* CATALOG */
+    .cat-sec{max-width:1400px;margin:0 auto;padding:64px 20px}
+    .sec-head{text-align:center;margin-bottom:50px}
+    .sec-eyebrow{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--oro);font-weight:700;margin-bottom:10px}
+    .sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,2.9rem);color:var(--verde);margin-bottom:14px;line-height:1.2}
+    .sec-title em{color:var(--oro);font-style:italic}
+    .sec-rule{width:56px;height:3px;background:var(--oro);margin:0 auto;border-radius:2px}
+    .filters{display:flex;justify-content:center;gap:8px;margin-bottom:48px;flex-wrap:wrap}
+    .flt-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 22px;border-radius:40px;font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;transition:var(--ease);border:2px solid transparent;color:var(--verde);background:var(--beige-dark)}
+    .flt-btn svg{width:15px;height:15px}
+    .flt-btn:hover{border-color:var(--verde)}
+    .flt-btn.active{background:var(--verde);color:var(--blanco);border-color:var(--verde)}
+    .no-res{display:none;text-align:center;padding:60px 20px;color:var(--gris)}
+    .no-res.show{display:block}
+    .prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:26px}
+    /* PRODUCT CARD */
+    .prod-card{background:var(--blanco);border-radius:var(--radius);overflow:hidden;box-shadow:var(--sh-sm);transition:var(--ease);display:flex;flex-direction:column}
+    .prod-card:hover{transform:translateY(-6px);box-shadow:var(--sh-lg)}
+    .prod-card.unavail{opacity:.6}
+    .prod-img{position:relative;aspect-ratio:4/5;overflow:hidden;background:linear-gradient(135deg,var(--verde) 0%,var(--verde-light) 100%)}
+    .prod-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;z-index:0}
+    .prod-ph svg{width:38px;height:38px;color:rgba(212,175,55,.35)}
+    .prod-ph span{color:rgba(255,255,255,.28);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:0 12px}
+    .prod-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .4s ease}
+    .img-p{opacity:1;z-index:1}
+    .img-h{opacity:0;z-index:2}
+    .prod-card:hover .img-h{opacity:1}
+    .prod-card:hover .img-p{opacity:0}
+    .badge-unavail{position:absolute;top:11px;right:11px;z-index:10;background:rgba(0,0,0,.68);color:white;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px}
+    .prod-info{padding:16px 17px 19px;display:flex;flex-direction:column;flex:1;gap:5px}
+    .prod-cat{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--oro);font-weight:700}
+    .prod-name{font-family:'Playfair Display',serif;font-size:1.08rem;color:var(--verde);font-weight:600;line-height:1.3}
+    .prod-desc{font-size:.78rem;color:var(--gris);line-height:1.55;flex:1}
+    .prod-foot{display:flex;align-items:center;justify-content:space-between;margin-top:11px}
+    .prod-price{font-family:'Playfair Display',serif;font-size:1.38rem;color:var(--verde);font-weight:700}
+    .prod-price.na{font-size:.78rem;color:var(--gris-lt);font-family:'Lato',sans-serif;font-style:italic}
+    .btn-add{display:flex;align-items:center;gap:5px;background:var(--verde);color:var(--blanco);padding:7px 15px;border-radius:30px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;transition:var(--ease)}
+    .btn-add:hover{background:var(--oro);color:var(--verde-dark)}
+    .btn-add svg{width:13px;height:13px}
+    .btn-add:disabled{background:#ccc;cursor:not-allowed;color:#888}
+    /* CART */
+    .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:2000;opacity:0;pointer-events:none;transition:opacity .35s ease}
+    .cart-overlay.open{opacity:1;pointer-events:all}
+    .cart-aside{position:fixed;top:0;right:0;width:420px;max-width:100%;height:100%;background:var(--blanco);z-index:2001;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s ease;box-shadow:-10px 0 40px rgba(0,0,0,.2)}
+    .cart-aside.open{transform:translateX(0)}
+    .cart-hd{background:var(--verde);color:var(--blanco);padding:19px 22px;display:flex;align-items:center;justify-content:space-between}
+    .cart-hd h2{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:600}
+    .cart-cls{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.75);transition:var(--ease)}
+    .cart-cls:hover{background:rgba(255,255,255,.12);color:white}
+    .cart-cls svg{width:19px;height:19px}
+    .cart-bd{flex:1;overflow-y:auto;padding:14px}
+    .cart-empty{text-align:center;padding:56px 20px;color:var(--gris)}
+    .cart-empty svg{width:56px;height:56px;color:#ddd;margin:0 auto 14px}
+    .cart-empty p{font-size:.9rem}
+    .cart-item{display:flex;gap:13px;padding:13px 0;border-bottom:1px solid #f0f0f0;align-items:center}
+    .ci-thumb{width:68px;height:68px;border-radius:6px;object-fit:cover;flex-shrink:0;background:linear-gradient(135deg,var(--verde),var(--verde-light))}
+    .ci-info{flex:1}
+    .ci-name{font-family:'Playfair Display',serif;font-size:.92rem;color:var(--verde);font-weight:600;margin-bottom:3px}
+    .ci-unit{font-size:.8rem;color:var(--gris)}
+    .ci-ctrl{display:flex;align-items:center;gap:9px;margin-top:7px}
+    .qty-btn{width:27px;height:27px;border-radius:50%;border:1.5px solid var(--verde);color:var(--verde);display:flex;align-items:center;justify-content:center;font-size:.95rem;transition:var(--ease);line-height:1}
+    .qty-btn:hover{background:var(--verde);color:white}
+    .qty-val{font-size:.9rem;font-weight:700;min-width:18px;text-align:center}
+    .ci-rm{width:29px;height:29px;border-radius:50%;color:#aaa;display:flex;align-items:center;justify-content:center;transition:var(--ease);flex-shrink:0}
+    .ci-rm:hover{color:#e74c3c;background:#fdf0f0}
+    .ci-rm svg{width:15px;height:15px}
+    .cart-ft{padding:19px 22px;border-top:2px solid var(--beige-dark);background:var(--beige)}
+    .cart-tot-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+    .cart-tot-lbl{font-family:'Playfair Display',serif;font-size:1.08rem;color:var(--verde);font-weight:600}
+    .cart-tot-val{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--verde);font-weight:700}
+    .btn-checkout{width:100%;padding:13px;background:var(--oro);color:var(--verde-dark);font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;border-radius:40px;transition:var(--ease);margin-bottom:9px}
+    .btn-checkout:hover{background:var(--verde);color:var(--blanco)}
+    .btn-wa-order{width:100%;padding:11px;background:#25d366;color:white;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;border-radius:40px;transition:var(--ease);display:flex;align-items:center;justify-content:center;gap:7px}
+    .btn-wa-order:hover{background:#1da851}
+    .btn-wa-order svg{width:17px;height:17px}
+    /* CONTACT */
+    .contact-sec{background:var(--verde);padding:60px 20px;color:var(--blanco)}
+    .contact-in{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:40px}
+    .contact-blk h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--oro);margin-bottom:16px}
+    .contact-item{display:flex;gap:11px;align-items:flex-start;margin-bottom:13px}
+    .contact-item svg{width:17px;height:17px;color:var(--oro);flex-shrink:0;margin-top:2px}
+    .contact-item p{font-size:.88rem;color:rgba(255,255,255,.78);line-height:1.55}
+    .contact-item a{color:var(--oro);transition:var(--ease)}
+    .contact-item a:hover{color:var(--blanco)}
+    footer{background:var(--verde-dark);color:rgba(255,255,255,.55);text-align:center;padding:20px;font-size:.78rem;line-height:1.65}
+    .ftr-brand{color:var(--oro);font-family:'Playfair Display',serif;font-size:.95rem;margin-bottom:5px}
+    /* WA FLOAT */
+    .wa-float{position:fixed;bottom:26px;right:26px;z-index:1500;width:58px;height:58px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.5);transition:var(--ease);animation:waPulse 2.5s infinite}
+    .wa-float:hover{background:#1da851;transform:scale(1.1);animation:none}
+    .wa-float svg{width:29px;height:29px;color:white}
+    @keyframes waPulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.5)}50%{box-shadow:0 4px 34px rgba(37,211,102,.8)}}
+    /* RESPONSIVE */
+    @media(max-width:900px){.nav-left,.nav-right{display:none}.hamburger{display:flex}}
+    @media(max-width:600px){.banner{min-height:370px}.banner-content{padding:44px 22px}.avail-bar{flex-direction:column;padding:16px 18px;gap:12px;text-align:center}.avail-txt{justify-content:center}.prod-grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:14px}.cat-sec{padding:40px 14px}.cart-aside{width:100%}}
+  </style>
 </head>
 <body>
 
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<!-- CART SIDEBAR -->
+<aside class="cart-aside" id="cartAside" role="complementary" aria-label="Carrito de compras">
+  <div class="cart-hd">
+    <h2>Tu Pedido</h2>
+    <button class="cart-cls" onclick="closeCart()" aria-label="Cerrar carrito">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="cart-bd" id="cartBd">
+    <div id="cartEmpty" class="cart-empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <p>Tu pedido est&#225; vac&#237;o</p>
+      <p style="font-size:.78rem;margin-top:5px;color:#bbb">A&#241;ade flores para comenzar</p>
+    </div>
+    <div id="cartList"></div>
+  </div>
+  <div class="cart-ft" id="cartFt" style="display:none">
+    <div class="cart-tot-row">
+      <span class="cart-tot-lbl">Total</span>
+      <span class="cart-tot-val" id="cartTotal">0,00 &#8364;</span>
+    </div>
+    <button class="btn-checkout" onclick="waOrder()">Consultar Pedido</button>
+    <button class="btn-wa-order" id="btnWaOrder">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.551 4.126 1.52 5.864L.057 23.93l6.226-1.434A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.79 9.79 0 01-5.006-1.375l-.36-.214-3.691.85.87-3.605-.235-.371A9.815 9.815 0 012.182 12c0-5.42 4.398-9.818 9.818-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+      Pedir por WhatsApp
+    </button>
+  </div>
+</aside>
+
+<!-- HEADER -->
 <header>
-    <img src="logo.png" alt="La Huerta De Juan Fernández Logo">
-    <h1>Welcome to La Huerta De Juan Fernández</h1>
+  <div class="hdr">
+    <nav class="nav-left" aria-label="Cat&#233;gor&#237;as">
+      <a href="#catalogo" class="nav-link" onclick="filterCat('follaje');return false;">Follaje</a>
+      <a href="#catalogo" class="nav-link" onclick="filterCat('flores');return false;">Flores</a>
+      <a href="#catalogo" class="nav-link" onclick="filterCat('bouquets');return false;">Bouquets</a>
+    </nav>
+    <!--
+      =====================================================
+      LOGO: sube tu imagen a  images/logo/logo.png
+      Formatos: .png  .webp  .jpg  .svg
+      Tama&#241;o recomendado: 400x200 px (fondo transparente)
+      El texto aparece como reserva si la imagen no existe
+      =====================================================
+    -->
+    <div class="logo-wrap">
+      <img src="images/logo/logo.png" alt="La Huerta De Juan Fern&#225;ndez" id="logoImg" style="display:none"
+           onload="this.style.display='block';document.getElementById('logoTxt').style.display='none'">
+      <div class="logo-txt" id="logoTxt">
+        La Huerta De Juan Fern&#225;ndez
+        <span>Florist&#237;a &middot; Madrid</span>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:flex-end;gap:4px">
+      <nav class="nav-right" aria-label="Informaci&#243;n">
+        <a href="#horario" class="nav-link">Horario</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+      </nav>
+      <div class="hdr-actions">
+        <div class="search-wrap">
+          <input type="search" class="search-input" id="searchInput" placeholder="Buscar flores&#8230;" oninput="onSearch(this.value)" aria-label="Buscar productos">
+          <button class="btn-icon" onclick="toggleSearch()" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </button>
+        </div>
+        <button class="btn-icon" onclick="openCart()" aria-label="Abrir carrito">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-badge" id="cartBadge" aria-live="polite">0</span>
+        </button>
+        <button class="btn-icon hamburger" onclick="toggleMobNav()" aria-label="Men&#250;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <nav class="mob-nav" id="mobNav" aria-label="Men&#250; m&#243;vil">
+    <ul>
+      <li><a href="#catalogo" onclick="filterCat('todos');closeMobNav()">Todos los Productos</a></li>
+      <li><a href="#catalogo" onclick="filterCat('follaje');closeMobNav()">Follaje</a></li>
+      <li><a href="#catalogo" onclick="filterCat('flores');closeMobNav()">Flores</a></li>
+      <li><a href="#catalogo" onclick="filterCat('bouquets');closeMobNav()">Bouquets</a></li>
+      <li><a href="#contacto" onclick="closeMobNav()">Horario y Contacto</a></li>
+    </ul>
+  </nav>
 </header>
 
-<main>
-    <section id="catalog">
-        <h2>Product Catalog</h2>
-        <div class="product">Follaje</div>
-        <div class="product">Flores</div>
-        <div class="product">Bouquets</div>
-    </section>
-    <section id="search">
-        <input type="text" placeholder="Search products..." id="searchBox">
-        <button onclick="searchProducts()">Search</button>
-    </section>
-</main>
+<!--
+  =====================================================
+  BANNER: sube tu imagen a  images/banner/banner.jpg
+  Formatos: .jpg  .webp  .png
+  Tama&#241;o recomendado: 1920x800 px
+  Sin imagen muestra fondo verde elegante con gradiente
+  =====================================================
+-->
+<section class="banner" id="inicio">
+  <div class="banner-content">
+    <p class="banner-eyebrow">Florist&#237;a en Madrid &middot; Plaza Tirso de Molina</p>
+    <h1 class="banner-title">Flores que<br><em>enamoran</em></h1>
+    <p class="banner-text">La Huerta De Juan Fern&#225;ndez &mdash; flores frescas de temporada, follaje y bouquets elaborados con cuidado y pasi&#243;n.</p>
+    <a href="#catalogo" class="banner-cta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,8 16,12 12,16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      Ver Cat&#225;logo
+    </a>
+  </div>
+</section>
 
-<a class="whatsapp" href="https://wa.me/34602687285">Chat with us on WhatsApp</a>
+<!-- AVAILABILITY NOTICE -->
+<div class="avail-bar" role="alert">
+  <p class="avail-txt">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    Tu pedido sujeto a disposici&#243;n de flores seg&#250;n temporada
+  </p>
+  <a href="https://wa.me/34602687285?text=Hola%2C%20quisiera%20consultar%20la%20disponibilidad%20de%20flores" class="btn-wa" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.551 4.126 1.52 5.864L.057 23.93l6.226-1.434A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.79 9.79 0 01-5.006-1.375l-.36-.214-3.691.85.87-3.605-.235-.371A9.815 9.815 0 012.182 12c0-5.42 4.398-9.818 9.818-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+    Consulta Aqu&#237; la Disponibilidad
+  </a>
+</div>
+
+<!-- OCCASIONS STRIP -->
+<section class="occasions" aria-label="Filtrar por ocasi&#243;n">
+  <div class="occ-inner">
+    <button class="occ-item active" onclick="filterOcc('all',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+      <span>Todos</span>
+    </button>
+    <button class="occ-item" onclick="filterOcc('aniversario',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      <span>Aniversario</span>
+    </button>
+    <button class="occ-item" onclick="filterOcc('cumpleanos',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="10" width="20" height="12" rx="2"/><path d="M12 2v4M7 7c0-1.5 2-3 5-3s5 1.5 5 3"/><line x1="2" y1="16" x2="22" y2="16"/></svg>
+      <span>Cumplea&#241;os</span>
+    </button>
+    <button class="occ-item" onclick="filterOcc('boda',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s-8-4-8-10V5l8-3 8 3v7c0 6-8 10-8 10z"/></svg>
+      <span>Boda</span>
+    </button>
+    <button class="occ-item" onclick="filterOcc('condolencias',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      <span>Condolencias</span>
+    </button>
+    <button class="occ-item" onclick="filterOcc('celebracion',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+      <span>Celebraci&#243;n</span>
+    </button>
+  </div>
+</section>
+
+<!-- CATALOG -->
+<section id="catalogo" class="cat-sec">
+  <div class="sec-head">
+    <p class="sec-eyebrow">Flores frescas de temporada</p>
+    <h2 class="sec-title">Nuestro <em>Cat&#225;logo</em></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="filters" role="group" aria-label="Filtrar por categor&#237;a">
+    <button class="flt-btn active" data-filter="todos" onclick="filterCat('todos')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Todos
+    </button>
+    <button class="flt-btn" data-filter="follaje" onclick="filterCat('follaje')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8C8 10 5.9 16.17 3.82 22L5.71 22.45C7.84 16.63 10 12 17 8z"/><path d="M11.5 8a5 5 0 005 5"/></svg>
+      Follaje
+    </button>
+    <button class="flt-btn" data-filter="flores" onclick="filterCat('flores')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2a2 2 0 000 4 2 2 0 000-4zm0 16a2 2 0 000 4 2 2 0 000-4zM2 12a2 2 0 004 0 2 2 0 00-4 0zm16 0a2 2 0 004 0 2 2 0 00-4 0z"/></svg>
+      Flores
+    </button>
+    <button class="flt-btn" data-filter="bouquets" onclick="filterCat('bouquets')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22V12"/><path d="M12 12C12 12 7 9 7 5a5 5 0 0110 0c0 4-5 7-5 7z"/></svg>
+      Bouquets
+    </button>
+  </div>
+  <div class="no-res" id="noRes"><p>No se encontraron productos para tu b&#250;squeda.</p></div>
+  <div class="prod-grid" id="prodGrid"></div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-sec" id="contacto">
+  <div class="contact-in">
+    <div class="contact-blk" id="horario">
+      <h3>Horario</h3>
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+        <p>Lunes a Domingo<br><strong style="color:white">10:00 AM &ndash; 9:00 PM</strong></p>
+      </div>
+    </div>
+    <div class="contact-blk">
+      <h3>Ubicaci&#243;n</h3>
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <p>Plaza Tirso de Molina<br>Kiosco #5<br>CP 28012, Madrid</p>
+      </div>
+    </div>
+    <div class="contact-blk">
+      <h3>Contacto</h3>
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <p><a href="tel:+34602687285">+34 602 687 285</a></p>
+      </div>
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <p><a href="mailto:castro59freddy@gmail.com">castro59freddy@gmail.com</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="ftr-brand">La Huerta De Juan Fern&#225;ndez</p>
+  <p>Florist&#237;a &middot; Plaza Tirso de Molina, Kiosco #5, CP 28012 Madrid</p>
+  <p style="margin-top:7px;font-size:.72rem">Flores frescas de temporada &middot; Pedidos sujetos a disponibilidad</p>
+</footer>
+
+<a href="https://wa.me/34602687285?text=Hola%2C%20me%20gustar%C3%ADa%20hacer%20un%20pedido" class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.551 4.126 1.52 5.864L.057 23.93l6.226-1.434A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.79 9.79 0 01-5.006-1.375l-.36-.214-3.691.85.87-3.605-.235-.371A9.815 9.815 0 012.182 12c0-5.42 4.398-9.818 9.818-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+</a>
 
 <script>
-    function searchProducts() {
-        const query = document.getElementById('searchBox').value.toLowerCase();
-        alert(`Search functionality is not implemented yet. You searched for: ${query}`);
-    }
+'use strict';
+/* ── CATALOGUE ───────────────────────────────────────────────────────────────
+   img1 = imagen principal  →  images/productos/[nombre]-1.webp
+   img2 = imagen hover      →  images/productos/[nombre]-2.webp
+   Sube TUS imágenes a esa carpeta. Sin imagen se muestra fondo verde elegante.
+   ─────────────────────────────────────────────────────────────────────────── */
+var P=[
+  {id:'tuya',name:'Tuya',cat:'follaje',occ:['boda','celebracion','aniversario','cumpleanos'],price:5,avail:true,desc:'Follaje verde fresco y aromático. Perfecto para composiciones florales.',img1:'images/productos/tuya-1.webp',img2:'images/productos/tuya-2.webp'},
+  {id:'paniculata',name:'Paniculata',cat:'follaje',occ:['boda','celebracion','cumpleanos'],price:6,avail:true,desc:'Follaje delicado y vaporoso. Ideal como complemento en ramos y centros.',img1:'images/productos/paniculata-1.webp',img2:'images/productos/paniculata-2.webp'},
+  {id:'eucalipto-p',name:'Eucalipto Pequeño',cat:'follaje',occ:['boda','celebracion','aniversario'],price:5,avail:true,desc:'Ramas pequeñas de eucalipto con aroma fresco e inconfundible.',img1:'images/productos/eucalipto-1.webp',img2:'images/productos/eucalipto-2.webp'},
+  {id:'eucalipto-g',name:'Eucalipto Grande',cat:'follaje',occ:['boda','celebracion','aniversario'],price:10,avail:true,desc:'Ramas grandes de eucalipto, perfectas para decoraciones y arreglos amplios.',img1:'images/productos/eucalipto-1.webp',img2:'images/productos/eucalipto-2.webp'},
+  {id:'ruscus',name:'Ruscus',cat:'follaje',occ:['condolencias','boda','celebracion'],price:7,avail:true,desc:'10 varas de ruscus. Follaje resistente y elegante para cualquier arreglo.',img1:'images/productos/ruscus-1.webp',img2:'images/productos/ruscus-2.webp'},
+  {id:'lilium-o',name:'Lilium Oriental',cat:'flores',occ:['aniversario','cumpleanos','celebracion','condolencias'],price:4,avail:true,desc:'Lilium oriental con aroma (1 vara). Flor elegante y muy perfumada.',img1:'images/productos/lilium-oriental-1.webp',img2:'images/productos/lilium-oriental-2.webp'},
+  {id:'lilium-n',name:'Lilium Nacional',cat:'flores',occ:['aniversario','cumpleanos','condolencias'],price:3,avail:true,desc:'Lilium nacional (1 vara). Hermosa flor de temporada.',img1:'images/productos/lilium-nacional-1.webp',img2:'images/productos/lilium-nacional-2.webp'},
+  {id:'girasol-1',name:'Girasol',cat:'flores',occ:['cumpleanos','celebracion','aniversario'],price:3,avail:true,desc:'1 flor de girasol. Símbolo de alegría y energía solar.',img1:'images/productos/girasol-1.webp',img2:'images/productos/girasol-2.webp'},
+  {id:'girasol-5',name:'Girasol (5 unidades)',cat:'flores',occ:['cumpleanos','celebracion','aniversario'],price:12,avail:true,desc:'5 girasoles frescos. Un ramo lleno de color y vitalidad.',img1:'images/productos/girasol-1.webp',img2:'images/productos/girasol-2.webp'},
+  {id:'anastasia-s',name:'Anastasia Spider',cat:'flores',occ:['cumpleanos','celebracion','boda'],price:3,avail:true,desc:'Crisantemo anastasia spider. Elegante, duradero y muy llamativo.',img1:'images/productos/anastasia-spider-1.webp',img2:'images/productos/anastasia-spider-2.webp'},
+  {id:'anastasia-t',name:'Anastasia Tubular',cat:'flores',occ:['cumpleanos','celebracion','boda'],price:3,avail:true,desc:'Crisantemo anastasia tubular. Pétalos únicos y muy decorativos.',img1:'images/productos/anastasia-tubular-1.webp',img2:'images/productos/anastasia-tubular-2.webp'},
+  {id:'gerbera',name:'Gerbera',cat:'flores',occ:['cumpleanos','celebracion','aniversario'],price:2,avail:true,desc:'Gerbera vibrante y colorida. Alegra cualquier espacio o regalo.',img1:'images/productos/gerbera-1.webp',img2:'images/productos/gerbera-2.webp'},
+  {id:'rosa',name:'Rosa',cat:'flores',occ:['aniversario','cumpleanos','boda','celebracion'],price:3,avail:true,desc:'Rosa fresca de temporada. El símbolo eterno del amor.',img1:'images/productos/rosa-1.webp',img2:'images/productos/rosa-2.webp'},
+  {id:'gladiolo',name:'Gladiolo',cat:'flores',occ:['condolencias','celebracion','cumpleanos'],price:2,avail:true,desc:'Gladiolo majestuoso. Flor de gran porte y elegancia clásica.',img1:'images/productos/gladiolo-1.webp',img2:'images/productos/gladiolo-2.webp'},
+  {id:'clavel-1',name:'Clavel',cat:'flores',occ:['condolencias','celebracion','cumpleanos'],price:1,avail:true,desc:'1 clavel fresco. También disponible: 10 unidades por 6€, 12 unidades por 12€.',img1:'images/productos/clavel-1.webp',img2:'images/productos/clavel-2.webp'},
+  {id:'clavel-10',name:'Claveles (10 unidades)',cat:'flores',occ:['condolencias','celebracion','cumpleanos'],price:6,avail:true,desc:'10 claveles frescos. Un ramo clásico y muy elegante.',img1:'images/productos/clavel-1.webp',img2:'images/productos/clavel-2.webp'},
+  {id:'clavel-12',name:'Claveles (12 unidades)',cat:'flores',occ:['condolencias','celebracion','cumpleanos'],price:12,avail:true,desc:'Una docena de claveles frescos. El regalo perfecto para cualquier ocasión.',img1:'images/productos/clavel-1.webp',img2:'images/productos/clavel-2.webp'},
+  {id:'margaritas',name:'Margaritas',cat:'flores',occ:['cumpleanos','celebracion'],price:12,avail:true,desc:'5 varas de margaritas frescas. Naturales y llenas de vida.',img1:'images/productos/margaritas-1.webp',img2:'images/productos/margaritas-2.webp'},
+  {id:'siempre-viva',name:'Siempre Viva',cat:'flores',occ:['condolencias','celebracion'],price:6,avail:true,desc:'Flor de siempre viva. Duradera y especial para arreglos y coronas.',img1:'images/productos/siempre-viva-1.webp',img2:'images/productos/siempre-viva-2.webp'},
+  {id:'tulipanes',name:'Tulipanes',cat:'flores',occ:['aniversario','cumpleanos','boda'],price:15,avail:true,desc:'10 varas de tulipanes. Elegancia holandesa en tu hogar o regalo.',img1:'images/productos/tulipanes-1.webp',img2:'images/productos/tulipanes-2.webp'},
+  {id:'mimosa-p',name:'Mimosa Pequeño',cat:'flores',occ:['cumpleanos','celebracion'],price:6,avail:true,desc:'Mimosa pequeña. Flores amarillas esponjosas, perfectas para primavera.',img1:'images/productos/mimosa-1.webp',img2:'images/productos/mimosa-2.webp'},
+  {id:'mimosa-g',name:'Mimosa Grande',cat:'flores',occ:['cumpleanos','celebracion','boda'],price:12,avail:true,desc:'Mimosa grande. Un ramo espectacular de flores amarillas muy fragantes.',img1:'images/productos/mimosa-1.webp',img2:'images/productos/mimosa-2.webp'},
+  {id:'brassica',name:'Brassica',cat:'flores',occ:['boda','celebracion'],price:3,avail:true,desc:'Brassica ornamental. Textura y color únicos para composiciones creativas.',img1:'images/productos/brassica-1.webp',img2:'images/productos/brassica-2.webp'},
+  {id:'ranunculos',name:'Ranúnculos',cat:'flores',occ:['aniversario','boda','cumpleanos'],price:10,avail:true,desc:'Ranúnculos frescos. Flores de temporada delicadas y muy románticas.',img1:'images/productos/ranunculos-1.webp',img2:'images/productos/ranunculos-2.webp'},
+  {id:'fresias',name:'Fresias',cat:'flores',occ:['aniversario','cumpleanos','boda'],price:10,avail:true,desc:'Fresias aromáticas. Fragancia inconfundible y flores elegantes y delicadas.',img1:'images/productos/fresias-1.webp',img2:'images/productos/fresias-2.webp'},
+  {id:'astromelias-p',name:'Astromelias Pequeña',cat:'flores',occ:['cumpleanos','celebracion','condolencias'],price:6,avail:true,desc:'Astromelias pequeñas. Flores exóticas de larga duración y gran colorido.',img1:'images/productos/astromelias-1.webp',img2:'images/productos/astromelias-2.webp'},
+  {id:'astromelias-g',name:'Astromelias Grande',cat:'flores',occ:['cumpleanos','celebracion','condolencias'],price:12,avail:true,desc:'Astromelias grandes. Un ramo exuberante de flores exóticas y duraderas.',img1:'images/productos/astromelias-1.webp',img2:'images/productos/astromelias-2.webp'},
+  {id:'craspedia',name:'Craspedia',cat:'flores',occ:['boda','celebracion'],price:0,avail:false,desc:'Craspedia (pompones dorados). Actualmente no disponible en temporada.',img1:'images/productos/craspedia-1.webp',img2:'images/productos/craspedia-2.webp'},
+  {id:'ave-paraiso',name:'Ave del Paraíso',cat:'flores',occ:['aniversario','boda','celebracion'],price:0,avail:false,desc:'Ave del Paraíso. Flor tropical espectacular. Actualmente no disponible.',img1:'images/productos/ave-del-paraiso-1.webp',img2:'images/productos/ave-del-paraiso-2.webp'},
+  {id:'bouquet-6',name:'Bouquet',cat:'bouquets',occ:['cumpleanos','celebracion','aniversario'],price:6,avail:true,desc:'Bouquet variado con flores frescas de temporada seleccionadas con cuidado.',img1:'images/productos/bouquet-1-1.webp',img2:'images/productos/bouquet-1-2.webp'},
+  {id:'bouquet-12',name:'Bouquet',cat:'bouquets',occ:['cumpleanos','celebracion','aniversario','boda'],price:12,avail:true,desc:'Bouquet variado especial con flores frescas de mayor elaboración.',img1:'images/productos/bouquet-2-1.webp',img2:'images/productos/bouquet-2-2.webp'},
+  {id:'bouquet-14',name:'Bouquet',cat:'bouquets',occ:['aniversario','boda','cumpleanos'],price:14,avail:true,desc:'Bouquet premium. Selección exclusiva de flores para una ocasión especial.',img1:'images/productos/bouquet-3-1.webp',img2:'images/productos/bouquet-3-2.webp'},
+  {id:'bouquet-rosas',name:'Bouquet 6 Rosas',cat:'bouquets',occ:['aniversario','boda','cumpleanos','celebracion'],price:15,avail:true,desc:'Bouquet especial con 6 rosas frescas. El regalo más romántico y especial.',img1:'images/productos/bouquet-4-1.webp',img2:'images/productos/bouquet-4-2.webp'}
+];
+/* ── STATE ── */
+var cart=[],curCat='todos',curOcc='all',curQ='',srchOpen=false;
+var CATS={follaje:'Follaje',flores:'Flores',bouquets:'Bouquets'};
+/* ── CART STORAGE ── */
+function loadCart(){try{var r=localStorage.getItem('huerta-cart-v2');if(r)cart=JSON.parse(r);}catch(e){cart=[];}}
+function saveCart(){try{localStorage.setItem('huerta-cart-v2',JSON.stringify(cart));}catch(e){}}
+/* ── CART UI ── */
+function openCart(){document.getElementById('cartAside').classList.add('open');document.getElementById('cartOverlay').classList.add('open');document.body.style.overflow='hidden';}
+function closeCart(){document.getElementById('cartAside').classList.remove('open');document.getElementById('cartOverlay').classList.remove('open');document.body.style.overflow='';}
+/* ── ADD / REMOVE / QTY ── */
+function addToCart(id){
+  var p=P.find(function(x){return x.id===id;});
+  if(!p||!p.avail)return;
+  var it=cart.find(function(x){return x.id===id;});
+  if(it){it.qty+=1;}else{cart.push({id:p.id,name:p.name,price:p.price,qty:1,img:p.img1});}
+  saveCart();renderCart();updateBadge();openCart();
+}
+function removeFromCart(id){cart=cart.filter(function(x){return x.id!==id;});saveCart();renderCart();updateBadge();}
+function updateQty(id,d){
+  var it=cart.find(function(x){return x.id===id;});
+  if(!it)return;
+  it.qty+=d;
+  if(it.qty<=0){removeFromCart(id);return;}
+  saveCart();renderCart();updateBadge();
+}
+function updateBadge(){
+  var n=cart.reduce(function(s,i){return s+i.qty;},0);
+  var b=document.getElementById('cartBadge');
+  b.textContent=n>99?'99+':String(n);
+  b.classList.toggle('visible',n>0);
+}
+function fmt(n){return n.toFixed(2).replace('.',',')+'\u00a0\u20ac';}
+/* ── RENDER CART ── */
+function renderCart(){
+  var list=document.getElementById('cartList');
+  var empty=document.getElementById('cartEmpty');
+  var ft=document.getElementById('cartFt');
+  if(cart.length===0){list.innerHTML='';empty.style.display='block';ft.style.display='none';return;}
+  empty.style.display='none';ft.style.display='block';
+  var tot=0,html='';
+  cart.forEach(function(it){
+    var sub=it.price*it.qty;tot+=sub;
+    html+='<div class="cart-item">'+
+      '<img src="'+esc(it.img)+'" alt="'+esc(it.name)+'" class="ci-thumb" onerror="this.removeAttribute(\'onerror\');this.src=\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\';">'+
+      '<div class="ci-info">'+
+        '<p class="ci-name">'+esc(it.name)+'</p>'+
+        '<p class="ci-unit">'+fmt(it.price)+' &middot; Subtotal: '+fmt(sub)+'</p>'+
+        '<div class="ci-ctrl">'+
+          '<button class="qty-btn" onclick="updateQty(\''+it.id+'\',-1)" aria-label="Reducir">\u2212</button>'+
+          '<span class="qty-val">'+it.qty+'</span>'+
+          '<button class="qty-btn" onclick="updateQty(\''+it.id+'\',1)" aria-label="Aumentar">+</button>'+
+        '</div>'+
+      '</div>'+
+      '<button class="ci-rm" onclick="removeFromCart(\''+it.id+'\')" aria-label="Eliminar '+esc(it.name)+'">'+
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'+
+      '</button>'+
+    '</div>';
+  });
+  list.innerHTML=html;
+  document.getElementById('cartTotal').textContent=fmt(tot);
+  var lines=cart.map(function(i){return '\u2022 '+i.name+' x'+i.qty+' = '+fmt(i.price*i.qty);});
+  var msg=encodeURIComponent('Hola, quisiera hacer el siguiente pedido:\n\n'+lines.join('\n')+'\n\nTotal: '+fmt(tot)+'\n\n\u00bfEst\u00e1 disponible?');
+  document.getElementById('btnWaOrder').onclick=function(){window.open('https://wa.me/34602687285?text='+msg,'_blank','noopener');};
+}
+function waOrder(){document.getElementById('btnWaOrder').click();}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+/* ── RENDER PRODUCTS ── */
+function getFiltered(){
+  return P.filter(function(p){
+    var okC=curCat==='todos'||p.cat===curCat;
+    var okO=curOcc==='all'||(p.occ&&p.occ.indexOf(curOcc)!==-1);
+    var q=curQ.toLowerCase();
+    var okQ=!q||p.name.toLowerCase().indexOf(q)!==-1||p.desc.toLowerCase().indexOf(q)!==-1;
+    return okC&&okO&&okQ;
+  });
+}
+function renderProducts(){
+  var grid=document.getElementById('prodGrid');
+  var noR=document.getElementById('noRes');
+  var f=getFiltered();
+  if(f.length===0){grid.innerHTML='';noR.classList.add('show');return;}
+  noR.classList.remove('show');
+  var html='';
+  f.forEach(function(p){
+    var na=!p.avail;
+    var ph='<span class="prod-price'+(na?' na':'')+'">'+( na?'No disponible':fmt(p.price))+'</span>';
+    var btn=na
+      ?'<button class="btn-add" disabled>No disponible</button>'
+      :'<button class="btn-add" onclick="addToCart(\''+p.id+'\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>A\u00f1adir</button>';
+    html+='<article class="prod-card'+(na?' unavail':'')+'" data-cat="'+p.cat+'" data-id="'+p.id+'">'+
+      '<div class="prod-img">'+
+        '<div class="prod-ph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>'+esc(p.name)+'</span></div>'+
+        '<img src="'+esc(p.img1)+'" alt="'+esc(p.name)+'" class="img-p" loading="lazy" onerror="this.removeAttribute(\'onerror\');this.style.display=\'none\';">'+
+        '<img src="'+esc(p.img2)+'" alt="'+esc(p.name)+' \u2014 vista alternativa" class="img-h" loading="lazy" onerror="this.removeAttribute(\'onerror\');this.style.display=\'none\';">'+
+        (na?'<span class="badge-unavail">No disponible</span>':'')+
+      '</div>'+
+      '<div class="prod-info">'+
+        '<p class="prod-cat">'+(CATS[p.cat]||p.cat)+'</p>'+
+        '<h3 class="prod-name">'+esc(p.name)+'</h3>'+
+        '<p class="prod-desc">'+esc(p.desc)+'</p>'+
+        '<div class="prod-foot">'+ph+btn+'</div>'+
+      '</div>'+
+    '</article>';
+  });
+  grid.innerHTML=html;
+}
+/* ── FILTERS ── */
+function filterCat(c){
+  curCat=c;
+  document.querySelectorAll('.flt-btn').forEach(function(b){b.classList.toggle('active',b.dataset.filter===c);});
+  renderProducts();
+  document.getElementById('catalogo').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function filterOcc(o,btn){
+  curOcc=o;
+  document.querySelectorAll('.occ-item').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  renderProducts();
+  document.getElementById('catalogo').scrollIntoView({behavior:'smooth',block:'start'});
+}
+/* ── SEARCH ── */
+function toggleSearch(){
+  srchOpen=!srchOpen;
+  var inp=document.getElementById('searchInput');
+  inp.classList.toggle('open',srchOpen);
+  if(srchOpen){inp.focus();}else{inp.value='';curQ='';renderProducts();}
+}
+function onSearch(v){curQ=v;renderProducts();}
+/* ── MOBILE NAV ── */
+function toggleMobNav(){document.getElementById('mobNav').classList.toggle('open');}
+function closeMobNav(){document.getElementById('mobNav').classList.remove('open');}
+/* ── KEYBOARD ── */
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){closeCart();if(srchOpen)toggleSearch();closeMobNav();}
+});
+/* ── INIT ── */
+loadCart();renderProducts();renderCart();updateBadge();
 </script>
-
 </body>
 </html>
