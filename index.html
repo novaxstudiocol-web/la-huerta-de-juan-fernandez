@@ -1,44 +1,2415 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Huerta De Juan Fernández</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #ffffff; color: #333; }
-        header { background-color: #d9a300; padding: 20px; text-align: center; }
-        h1 { color: #005e3c; }
-        .product { margin: 20px; padding: 10px; border: 1px solid #ccc; display: inline-block; }
-        .whatsapp { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 10px; border-radius: 5px; text-decoration: none; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="La Huerta De Juan Fernández – Flores frescas, Bouquets especiales y más. Floristería en Madrid, Plaza Tirso de Molina Kiosco #5." />
+  <title>La Huerta De Juan Fernández | Floristería en Madrid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+       RESET & BASE
+    ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --verde: #1b3a1f;
+      --verde-claro: #2d5a33;
+      --oro: #D4AF37;
+      --oro-hover: #b8961e;
+      --blanco: #ffffff;
+      --beige: #f5f0e6;
+      --beige-oscuro: #ede5d4;
+      --texto: #2c2c2c;
+      --texto-suave: #5a5a5a;
+      --sombra: 0 4px 20px rgba(0,0,0,0.12);
+      --sombra-hover: 0 8px 32px rgba(0,0,0,0.18);
+      --radius: 12px;
+      --trans: 0.3s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: var(--blanco);
+      color: var(--texto);
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    ul { list-style: none; }
+
+    /* =========================================================
+       TYPOGRAPHY
+    ========================================================= */
+    .font-playfair { font-family: 'Playfair Display', serif; }
+
+    h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--verde); }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: var(--verde);
+      text-align: center;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--texto-suave);
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .section-divider {
+      width: 60px;
+      height: 3px;
+      background: var(--oro);
+      margin: 0.6rem auto 1.2rem;
+      border-radius: 2px;
+    }
+
+    /* =========================================================
+       NAVIGATION
+    ========================================================= */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--verde);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+      animation: fadeDown 0.5s ease forwards;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-100%); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    /* Logo */
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .nav-logo img {
+      height: 44px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-logo-fallback {
+      display: none;
+      align-items: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--oro);
+      font-weight: 700;
+      line-height: 1.2;
+      max-width: 200px;
+    }
+
+    /* Nav Links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: rgba(255,255,255,0.88);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      transition: color var(--trans), background var(--trans);
+    }
+
+    .nav-links a svg { flex-shrink: 0; }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--oro);
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* Nav Actions */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .nav-icon-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      color: rgba(255,255,255,0.88);
+      transition: color var(--trans), background var(--trans);
+    }
+
+    .nav-icon-btn:hover { color: var(--oro); background: rgba(255,255,255,0.08); }
+
+    .cart-badge {
+      position: absolute;
+      top: 2px; right: 2px;
+      background: var(--oro);
+      color: var(--verde);
+      font-size: 0.62rem;
+      font-weight: 700;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(0);
+      transition: opacity var(--trans), transform var(--trans);
+    }
+
+    .cart-badge.visible { opacity: 1; transform: scale(1); }
+
+    /* Search Bar */
+    .search-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      max-width: 0;
+      transition: max-width 0.4s ease, opacity 0.4s ease;
+      opacity: 0;
+    }
+
+    .search-wrapper.open {
+      max-width: 260px;
+      opacity: 1;
+    }
+
+    #nav-search-input {
+      width: 240px;
+      padding: 0.45rem 0.9rem;
+      border: 1.5px solid var(--oro);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.1);
+      color: var(--blanco);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.88rem;
+      outline: none;
+      transition: background var(--trans);
+    }
+
+    #nav-search-input::placeholder { color: rgba(255,255,255,0.55); }
+    #nav-search-input:focus { background: rgba(255,255,255,0.15); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      padding: 4px;
+      border-radius: 6px;
+      transition: background var(--trans);
+    }
+
+    .hamburger:hover { background: rgba(255,255,255,0.08); }
+
+    .hamburger span {
+      display: block;
+      height: 2px;
+      background: rgba(255,255,255,0.88);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile Nav Overlay */
+    #mobile-nav {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: var(--verde);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    #mobile-nav.open { opacity: 1; pointer-events: all; }
+
+    #mobile-nav a {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      color: rgba(255,255,255,0.9);
+      transition: color var(--trans);
+    }
+
+    #mobile-nav a:hover { color: var(--oro); }
+
+    #mobile-nav-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      color: rgba(255,255,255,0.8);
+      font-size: 1.8rem;
+      line-height: 1;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* =========================================================
+       HERO BANNER
+    ========================================================= */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding-top: 70px;
+    }
+
+    .hero-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero-bg-fallback {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--verde) 0%, #0e2211 50%, #1a3320 100%);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10, 25, 12, 0.55) 0%,
+        rgba(10, 25, 12, 0.65) 60%,
+        rgba(10, 25, 12, 0.8) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      max-width: 800px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--oro);
+      border: 1px solid var(--oro);
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      opacity: 0;
+      animation: fadeIn 0.6s ease 0.4s forwards;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
+      color: var(--blanco);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeIn 0.8s ease 0.6s forwards;
+    }
+
+    .hero-title span { color: var(--oro); }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: rgba(255,255,255,0.85);
+      font-weight: 300;
+      margin-bottom: 2.2rem;
+      opacity: 0;
+      animation: slideUp 0.8s ease 1s forwards;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeIn 0.6s ease 1.2s forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      background: var(--oro);
+      color: var(--verde);
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.05em;
+      border-radius: 40px;
+      transition: background var(--trans), transform var(--trans), box-shadow var(--trans);
+      text-transform: uppercase;
+    }
+
+    .btn-primary:hover {
+      background: var(--oro-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212,175,55,0.4);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      background: transparent;
+      color: var(--blanco);
+      border: 2px solid var(--oro);
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.05em;
+      border-radius: 40px;
+      transition: background var(--trans), color var(--trans), transform var(--trans);
+      text-transform: uppercase;
+    }
+
+    .btn-outline:hover {
+      background: var(--oro);
+      color: var(--verde);
+      transform: translateY(-2px);
+    }
+
+    /* Floating petals */
+    .petals-container {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .petal {
+      position: absolute;
+      opacity: 0;
+      animation: petalFall linear infinite;
+    }
+
+    @keyframes petalFall {
+      0%   { opacity: 0; transform: translateY(-20px) rotate(0deg); }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.4; }
+      100% { opacity: 0; transform: translateY(110vh) rotate(720deg); }
+    }
+
+    /* Scroll indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      animation: fadeIn 1s ease 2s forwards;
+      opacity: 0;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+      animation: scrollLine 1.5s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      0%, 100% { transform: scaleY(1); opacity: 1; }
+      50% { transform: scaleY(0.5); opacity: 0.4; }
+    }
+
+    /* =========================================================
+       CATALOG SECTION
+    ========================================================= */
+    #catalogo {
+      padding: 5rem 1.5rem;
+      background: var(--beige);
+    }
+
+    .catalog-container { max-width: 1280px; margin: 0 auto; }
+
+    /* Category Filter Tabs */
+    .category-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .cat-tab {
+      padding: 0.5rem 1.25rem;
+      border-radius: 24px;
+      border: 1.5px solid var(--verde);
+      background: transparent;
+      color: var(--verde);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background var(--trans), color var(--trans), border-color var(--trans);
+    }
+
+    .cat-tab:hover,
+    .cat-tab.active {
+      background: var(--verde);
+      color: var(--blanco);
+      border-color: var(--verde);
+    }
+
+    /* Product Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1.8rem;
+    }
+
+    /* Product Card */
+    .product-card {
+      background: var(--blanco);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--sombra);
+      transition: transform var(--trans), box-shadow var(--trans);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .product-card.in-view {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: var(--sombra-hover);
+    }
+
+    .product-card:hover .product-img {
+      transform: scale(1.07);
+    }
+
+    .product-img-wrap {
+      height: 220px;
+      overflow: hidden;
+      background: var(--beige);
+      position: relative;
+    }
+
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--trans);
+    }
+
+    .product-img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--beige) 0%, var(--beige-oscuro) 100%);
+    }
+
+    .product-body {
+      padding: 1.1rem 1.2rem 1.3rem;
+    }
+
+    .product-cat-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--oro);
+      margin-bottom: 0.3rem;
+    }
+
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--verde);
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.8rem;
+    }
+
+    .product-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--verde);
+    }
+
+    .btn-add {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      background: var(--verde);
+      color: var(--blanco);
+      border-radius: 20px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      transition: background var(--trans), transform var(--trans);
+    }
+
+    .btn-add:hover {
+      background: var(--verde-claro);
+      transform: scale(1.04);
+    }
+
+    /* No results message */
+    #no-results {
+      display: none;
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--texto-suave);
+      font-size: 1rem;
+      grid-column: 1 / -1;
+    }
+
+    #no-results svg { margin: 0 auto 1rem; display: block; opacity: 0.4; }
+
+    /* =========================================================
+       ABOUT / NOSOTROS SECTION
+    ========================================================= */
+    #nosotros {
+      padding: 5rem 1.5rem;
+      background: var(--blanco);
+    }
+
+    .about-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .about-img-wrap {
+      border-radius: var(--radius);
+      overflow: hidden;
+      height: 420px;
+      background: var(--beige);
+      box-shadow: var(--sombra);
+    }
+
+    .about-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--beige) 0%, var(--beige-oscuro) 100%);
+    }
+
+    .about-text h2 {
+      font-size: clamp(1.7rem, 3vw, 2.2rem);
+      margin-bottom: 1rem;
+    }
+
+    .about-text p {
+      color: var(--texto-suave);
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+      font-size: 0.97rem;
+    }
+
+    .about-features {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .about-feature {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--texto);
+      font-size: 0.9rem;
+    }
+
+    .about-feature svg { flex-shrink: 0; color: var(--oro); }
+
+    /* =========================================================
+       OCCASIONS / OCASIONES SECTION
+    ========================================================= */
+    #ocasiones {
+      padding: 5rem 1.5rem;
+      background: var(--verde);
+    }
+
+    #ocasiones .section-title { color: var(--blanco); }
+    #ocasiones .section-subtitle { color: rgba(255,255,255,0.7); }
+    #ocasiones .section-divider { background: var(--oro); }
+
+    .occasions-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .occasion-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: var(--radius);
+      padding: 2rem 1.2rem;
+      text-align: center;
+      transition: background var(--trans), border-color var(--trans), transform var(--trans);
+      cursor: default;
+    }
+
+    .occasion-card:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: var(--oro);
+      transform: translateY(-4px);
+    }
+
+    .occasion-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(212,175,55,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: var(--oro);
+    }
+
+    .occasion-card h3 {
+      color: var(--blanco);
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .occasion-card p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    /* =========================================================
+       CONTACT / CONTACTO SECTION
+    ========================================================= */
+    #contacto {
+      padding: 5rem 1.5rem;
+      background: var(--beige);
+    }
+
+    .contact-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .contact-info h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      color: var(--verde);
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-item-icon {
+      width: 42px;
+      height: 42px;
+      background: var(--verde);
+      color: var(--oro);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-item-text strong {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--oro);
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-item-text span, .contact-item-text a {
+      font-size: 0.95rem;
+      color: var(--texto);
+      line-height: 1.5;
+    }
+
+    .contact-item-text a:hover { color: var(--verde); }
+
+    .contact-form h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      color: var(--verde);
+    }
+
+    .form-group { margin-bottom: 1rem; }
+
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--verde);
+      margin-bottom: 0.35rem;
+      letter-spacing: 0.04em;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border: 1.5px solid var(--beige-oscuro);
+      border-radius: 8px;
+      background: var(--blanco);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9rem;
+      color: var(--texto);
+      outline: none;
+      transition: border-color var(--trans);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--verde); }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .btn-form {
+      width: 100%;
+      padding: 0.85rem;
+      background: var(--verde);
+      color: var(--blanco);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-radius: 8px;
+      transition: background var(--trans), transform var(--trans);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-form:hover { background: var(--verde-claro); transform: translateY(-1px); }
+
+    /* =========================================================
+       CART SIDEBAR
+    ========================================================= */
+    #cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    #cart-overlay.open { opacity: 1; pointer-events: all; }
+
+    #cart-sidebar {
+      position: fixed;
+      top: 0; right: 0;
+      width: 100%;
+      max-width: 420px;
+      height: 100%;
+      background: var(--blanco);
+      z-index: 2001;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -4px 0 24px rgba(0,0,0,0.2);
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #cart-sidebar.open { transform: translateX(0); }
+
+    .cart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--beige-oscuro);
+      background: var(--verde);
+      color: var(--blanco);
+    }
+
+    .cart-header h2 {
+      color: var(--blanco);
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .cart-close-btn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      color: rgba(255,255,255,0.8);
+      transition: background var(--trans), color var(--trans);
+    }
+
+    .cart-close-btn:hover { background: rgba(255,255,255,0.15); color: var(--blanco); }
+
+    .cart-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 1.5rem;
+    }
+
+    .cart-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 1rem;
+      color: var(--texto-suave);
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .cart-empty svg { opacity: 0.3; }
+    .cart-empty p { font-size: 0.95rem; }
+    .cart-empty strong { color: var(--verde); font-family: 'Playfair Display', serif; font-size: 1.1rem; }
+
+    #cart-items-list { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--beige-oscuro);
+    }
+
+    .cart-item-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--beige);
+    }
+
+    .cart-item-img-placeholder {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      background: var(--beige);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .cart-item-info { flex: 1; min-width: 0; }
+
+    .cart-item-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.93rem;
+      color: var(--verde);
+      margin-bottom: 0.2rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cart-item-unit-price {
+      font-size: 0.78rem;
+      color: var(--texto-suave);
+    }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border: 1.5px solid var(--beige-oscuro);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .qty-btn {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--verde);
+      font-weight: 700;
+      transition: background var(--trans);
+    }
+
+    .qty-btn:hover { background: var(--beige); }
+
+    .qty-display {
+      width: 28px;
+      text-align: center;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--texto);
+      pointer-events: none;
+    }
+
+    .cart-item-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.4rem;
+    }
+
+    .cart-item-total {
+      font-weight: 700;
+      font-size: 0.97rem;
+      color: var(--verde);
+    }
+
+    .cart-remove-btn {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #cc3333;
+      border-radius: 4px;
+      transition: background var(--trans);
+      font-size: 0.9rem;
+    }
+
+    .cart-remove-btn:hover { background: #ffeaea; }
+
+    .cart-footer {
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid var(--beige-oscuro);
+      background: var(--beige);
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .cart-total-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--texto-suave);
+    }
+
+    .cart-total-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--verde);
+      font-weight: 700;
+    }
+
+    .btn-checkout {
+      width: 100%;
+      padding: 0.95rem 1rem;
+      background: #25D366;
+      color: var(--blanco);
+      border-radius: 10px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: background var(--trans), transform var(--trans), box-shadow var(--trans);
+    }
+
+    .btn-checkout:hover {
+      background: #1db954;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+    #footer {
+      background: var(--verde);
+      color: rgba(255,255,255,0.8);
+      padding: 3.5rem 1.5rem 1.5rem;
+    }
+
+    .footer-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--oro);
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-brand-desc {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-col h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--oro);
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.04em;
+    }
+
+    .footer-links { display: flex; flex-direction: column; gap: 0.6rem; }
+
+    .footer-links a {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.7);
+      transition: color var(--trans), padding-left var(--trans);
+    }
+
+    .footer-links a:hover { color: var(--oro); padding-left: 4px; }
+
+    .footer-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-info-item svg { flex-shrink: 0; color: var(--oro); margin-top: 2px; }
+
+    .footer-info-item span,
+    .footer-info-item a {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.5;
+    }
+
+    .footer-info-item a:hover { color: var(--oro); }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.45);
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* =========================================================
+       WHATSAPP FLOATING BUTTON
+    ========================================================= */
+    #wa-float {
+      position: fixed;
+      bottom: 1.8rem;
+      right: 1.8rem;
+      width: 56px;
+      height: 56px;
+      background: #25D366;
+      color: var(--blanco);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 900;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+      transition: transform var(--trans), box-shadow var(--trans);
+    }
+
+    #wa-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.65);
+    }
+
+    #wa-float::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid rgba(37,211,102,0.4);
+      animation: waPulse 2s ease infinite;
+    }
+
+    @keyframes waPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0; }
+    }
+
+    /* =========================================================
+       ANIMATIONS (shared)
+    ========================================================= */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+    @media (max-width: 1024px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .about-container { gap: 2rem; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .search-wrapper.open { max-width: 180px; }
+      #nav-search-input { width: 160px; }
+      .about-container { grid-template-columns: 1fr; }
+      .about-img-wrap { height: 280px; }
+      .contact-container { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .hero-btns { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-outline { width: 100%; max-width: 280px; justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: 1fr; }
+      .occasions-grid { grid-template-columns: repeat(2, 1fr); }
+      #cart-sidebar { max-width: 100%; }
+      .category-tabs { gap: 0.4rem; }
+      .cat-tab { padding: 0.4rem 0.85rem; font-size: 0.75rem; }
+    }
+
+    /* Utility */
+    .hidden { display: none !important; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+  </style>
 </head>
 <body>
 
-<header>
-    <img src="logo.png" alt="La Huerta De Juan Fernández Logo">
-    <h1>Welcome to La Huerta De Juan Fernández</h1>
-</header>
+<!-- ============================================================
+     NAVIGATION
+============================================================ -->
+<nav id="navbar" role="navigation" aria-label="Navegación principal">
+  <div class="nav-inner">
+    <!-- Logo -->
+    <a href="#inicio" class="nav-logo" aria-label="La Huerta De Juan Fernández – Inicio">
+      <img
+        src="/images/logo/logo.png"
+        alt="La Huerta De Juan Fernández"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+      />
+      <span class="nav-logo-fallback font-playfair">La Huerta De Juan Fernández</span>
+    </a>
 
-<main>
-    <section id="catalog">
-        <h2>Product Catalog</h2>
-        <div class="product">Follaje</div>
-        <div class="product">Flores</div>
-        <div class="product">Bouquets</div>
-    </section>
-    <section id="search">
-        <input type="text" placeholder="Search products..." id="searchBox">
-        <button onclick="searchProducts()">Search</button>
-    </section>
-</main>
+    <!-- Desktop Nav Links -->
+    <ul class="nav-links" role="list">
+      <li>
+        <a href="#inicio" class="active">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Inicio
+        </a>
+      </li>
+      <li>
+        <a href="#catalogo">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Catálogo
+        </a>
+      </li>
+      <li>
+        <a href="#ocasiones">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+          Ocasiones
+        </a>
+      </li>
+      <li>
+        <a href="#nosotros">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg>
+          Nosotros
+        </a>
+      </li>
+      <li>
+        <a href="#contacto">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          Contacto
+        </a>
+      </li>
+    </ul>
 
-<a class="whatsapp" href="https://wa.me/34602687285">Chat with us on WhatsApp</a>
+    <!-- Nav Actions -->
+    <div class="nav-actions">
+      <!-- Search wrapper -->
+      <div class="search-wrapper" id="search-wrapper" role="search">
+        <label for="nav-search-input" class="sr-only">Buscar productos</label>
+        <input
+          type="search"
+          id="nav-search-input"
+          placeholder="Buscar flores…"
+          autocomplete="off"
+          aria-label="Buscar productos"
+        />
+      </div>
 
+      <!-- Search toggle button -->
+      <button
+        class="nav-icon-btn"
+        id="search-toggle-btn"
+        aria-label="Abrir búsqueda"
+        aria-expanded="false"
+        aria-controls="search-wrapper"
+      >
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+
+      <!-- Cart button -->
+      <button
+        class="nav-icon-btn"
+        id="cart-toggle-btn"
+        aria-label="Abrir bolsa de compras"
+        aria-expanded="false"
+        aria-controls="cart-sidebar"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <span class="cart-badge" id="cart-badge" aria-live="polite" aria-label="Artículos en bolsa">0</span>
+      </button>
+
+      <!-- Hamburger (mobile) -->
+      <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav Overlay -->
+<nav id="mobile-nav" role="navigation" aria-label="Menú móvil" aria-hidden="true">
+  <button id="mobile-nav-close" aria-label="Cerrar menú">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <a href="#inicio">Inicio</a>
+  <a href="#catalogo">Catálogo</a>
+  <a href="#ocasiones">Ocasiones</a>
+  <a href="#nosotros">Nosotros</a>
+  <a href="#contacto">Contacto</a>
+</nav>
+
+<!-- ============================================================
+     HERO BANNER
+============================================================ -->
+<section id="inicio" aria-label="Portada">
+  <div id="hero">
+    <!-- Background image with fallback -->
+    <img
+      class="hero-bg-img"
+      src="/images/banner/banner.webp"
+      alt=""
+      role="presentation"
+      aria-hidden="true"
+      onerror="this.style.display='none'; document.querySelector('.hero-bg-fallback').style.display='block';"
+    />
+    <div class="hero-bg-fallback" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <!-- Petals animation -->
+    <div class="petals-container" aria-hidden="true" id="petals-container"></div>
+
+    <!-- Content -->
+    <div class="hero-content">
+      <span class="hero-tag">Floristería en Madrid</span>
+      <h1 class="hero-title">
+        La Huerta De<br /><span>Juan Fernández</span>
+      </h1>
+      <p class="hero-subtitle">Flores frescas, Bouquets especiales y más</p>
+      <div class="hero-btns">
+        <a href="#catalogo" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Ver Catálogo
+        </a>
+        <a href="https://wa.me/34602687285" target="_blank" rel="noopener noreferrer" class="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Hacer Pedido
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="hero-scroll" aria-hidden="true">
+      <span>Explorar</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRODUCT CATALOG
+============================================================ -->
+<section id="catalogo" aria-labelledby="catalogo-title">
+  <div class="catalog-container">
+    <h2 class="section-title" id="catalogo-title">Nuestro Catálogo</h2>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p class="section-subtitle">Flores frescas seleccionadas para cada momento especial</p>
+
+    <!-- Category Tabs -->
+    <div class="category-tabs" role="tablist" aria-label="Filtrar por categoría">
+      <button class="cat-tab active" data-cat="todos" role="tab" aria-selected="true">Todos</button>
+      <button class="cat-tab" data-cat="bouquets" role="tab" aria-selected="false">Bouquets</button>
+      <button class="cat-tab" data-cat="flores" role="tab" aria-selected="false">Flores</button>
+      <button class="cat-tab" data-cat="arreglos" role="tab" aria-selected="false">Arreglos</button>
+      <button class="cat-tab" data-cat="follaje" role="tab" aria-selected="false">Follaje</button>
+      <button class="cat-tab" data-cat="plantas" role="tab" aria-selected="false">Plantas</button>
+      <button class="cat-tab" data-cat="especiales" role="tab" aria-selected="false">Especiales</button>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid" id="products-grid" role="list" aria-label="Productos">
+
+      <!-- Product cards injected by JS -->
+
+    </div>
+
+    <!-- No results -->
+    <p id="no-results" role="status" aria-live="polite">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      No se encontraron productos para tu búsqueda.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     OCASIONES
+============================================================ -->
+<section id="ocasiones" aria-labelledby="ocasiones-title">
+  <h2 class="section-title" id="ocasiones-title">Para Cada Ocasión</h2>
+  <div class="section-divider" aria-hidden="true"></div>
+  <p class="section-subtitle">Tenemos la flor perfecta para cada momento</p>
+
+  <div class="occasions-grid">
+    <article class="occasion-card">
+      <div class="occasion-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+      </div>
+      <h3>San Valentín</h3>
+      <p>Rosas y bouquets románticos para declarar tu amor</p>
+    </article>
+    <article class="occasion-card">
+      <div class="occasion-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      </div>
+      <h3>Cumpleaños</h3>
+      <p>Alegra el día especial con flores vibrantes y coloridas</p>
+    </article>
+    <article class="occasion-card">
+      <div class="occasion-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3>Bodas</h3>
+      <p>Arreglos florales elegantes para tu gran día</p>
+    </article>
+    <article class="occasion-card">
+      <div class="occasion-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <h3>Decoración</h3>
+      <p>Flores para embellecer hogares y espacios</p>
+    </article>
+    <article class="occasion-card">
+      <div class="occasion-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <h3>Día de la Madre</h3>
+      <p>Expresa tu gratitud con un bouquet especial</p>
+    </article>
+    <article class="occasion-card">
+      <div class="occasion-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+      </div>
+      <h3>Regalos</h3>
+      <p>El regalo perfecto para cualquier persona especial</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     NOSOTROS
+============================================================ -->
+<section id="nosotros" aria-labelledby="nosotros-title">
+  <div class="about-container">
+    <div class="about-img-wrap">
+      <img
+        src="/images/nosotros/tienda.webp"
+        alt="Interior de La Huerta De Juan Fernández"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+      />
+      <div class="about-img-placeholder" aria-hidden="true">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+    </div>
+    <div class="about-text">
+      <h2 id="nosotros-title">Nuestra Historia</h2>
+      <div class="section-divider" style="margin: 0.6rem 0 1.2rem; text-align: left;" aria-hidden="true"></div>
+      <p>En La Huerta De Juan Fernández llevamos años cultivando la pasión por las flores frescas. Ubicados en el corazón de Madrid, en la Plaza Tirso de Molina, ofrecemos una selección única de flores de temporada, bouquets artesanales y arreglos florales para cada ocasión.</p>
+      <p>Cada flor que ofrecemos es cuidadosamente seleccionada para garantizar su frescura y calidad. Nuestro compromiso es hacer que cada pedido sea especial y memorable.</p>
+      <div class="about-features">
+        <div class="about-feature">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Flores frescas todos los días</span>
+        </div>
+        <div class="about-feature">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Bouquets artesanales personalizados</span>
+        </div>
+        <div class="about-feature">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Atención personalizada y cercana</span>
+        </div>
+        <div class="about-feature">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Pedidos por WhatsApp con respuesta rápida</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACTO
+============================================================ -->
+<section id="contacto" aria-labelledby="contacto-title">
+  <h2 class="section-title" id="contacto-title">Contáctanos</h2>
+  <div class="section-divider" aria-hidden="true"></div>
+  <p class="section-subtitle">Estamos aquí para ayudarte con tu pedido</p>
+
+  <div class="contact-container">
+    <div class="contact-info">
+      <h3>Información de Contacto</h3>
+
+      <div class="contact-item">
+        <div class="contact-item-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="contact-item-text">
+          <strong>Ubicación</strong>
+          <span>Plaza Tirso de Molina Kiosco #5<br />CP 28012, Madrid</span>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-item-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.69A2 2 0 012.18 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.1a16 16 0 006 6l1.46-1.46a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+        </div>
+        <div class="contact-item-text">
+          <strong>WhatsApp</strong>
+          <a href="https://wa.me/34602687285" target="_blank" rel="noopener noreferrer">+34 602 687 285</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-item-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="contact-item-text">
+          <strong>Correo Electrónico</strong>
+          <a href="mailto:castro59freddy@gmail.com">castro59freddy@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-item-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="contact-item-text">
+          <strong>Horario</strong>
+          <span>Lunes a Domingo: 10:00 AM - 9:00 PM</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <h3>Envíanos un Mensaje</h3>
+      <form id="contact-form">
+        <div class="form-group">
+          <label for="cf-name">Nombre</label>
+          <input type="text" id="cf-name" name="name" placeholder="Tu nombre" required />
+        </div>
+        <div class="form-group">
+          <label for="cf-email">Correo Electrónico</label>
+          <input type="email" id="cf-email" name="email" placeholder="tu@email.com" required />
+        </div>
+        <div class="form-group">
+          <label for="cf-message">Mensaje</label>
+          <textarea id="cf-message" name="message" placeholder="¿En qué podemos ayudarte?" required></textarea>
+        </div>
+        <button type="submit" class="btn-form">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Enviar Mensaje
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CART SIDEBAR
+============================================================ -->
+<div id="cart-overlay" role="dialog" aria-modal="true" aria-label="Bolsa de compras" aria-hidden="true">
+  <aside id="cart-sidebar">
+    <div class="cart-header">
+      <h2>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        Bolsa de Compras
+      </h2>
+      <button class="cart-close-btn" id="cart-close-btn" aria-label="Cerrar bolsa de compras">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="cart-body" id="cart-body">
+      <!-- Cart items rendered by JS -->
+    </div>
+
+    <div class="cart-footer" id="cart-footer" style="display:none;">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-amount" id="cart-total">€0.00</span>
+      </div>
+      <button class="btn-checkout" id="btn-checkout">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Finalizar Pedido por WhatsApp
+      </button>
+    </div>
+  </aside>
+</div>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer id="footer" role="contentinfo">
+  <div class="footer-grid">
+    <!-- Brand -->
+    <div class="footer-col">
+      <p class="footer-brand-name">La Huerta De Juan Fernández</p>
+      <p class="footer-brand-desc">Floristería artesanal en el corazón de Madrid. Flores frescas, bouquets especiales y arreglos únicos para cada ocasión.</p>
+    </div>
+
+    <!-- Links -->
+    <div class="footer-col">
+      <h4>Navegación</h4>
+      <nav class="footer-links" aria-label="Navegación del pie de página">
+        <a href="#inicio">Inicio</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#ocasiones">Ocasiones</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+
+    <!-- Horario -->
+    <div class="footer-col">
+      <h4>Horario</h4>
+      <div class="footer-info-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Lunes a Domingo<br />10:00 AM - 9:00 PM</span>
+      </div>
+    </div>
+
+    <!-- Contacto -->
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <div class="footer-info-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Plaza Tirso de Molina Kiosco #5, CP 28012, Madrid</span>
+      </div>
+      <div class="footer-info-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.69A2 2 0 012.18 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.1a16 16 0 006 6l1.46-1.46a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+        <a href="https://wa.me/34602687285" target="_blank" rel="noopener noreferrer">+34 602 687 285</a>
+      </div>
+      <div class="footer-info-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:castro59freddy@gmail.com">castro59freddy@gmail.com</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>&copy; <span id="footer-year"></span> La Huerta De Juan Fernández. Todos los derechos reservados.</span>
+    <span>Floristería en Madrid</span>
+  </div>
+</footer>
+
+<!-- ============================================================
+     WHATSAPP FLOATING BUTTON
+============================================================ -->
+<a
+  id="wa-float"
+  href="https://wa.me/34602687285"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Contactar por WhatsApp"
+>
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+  </svg>
+</a>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
 <script>
-    function searchProducts() {
-        const query = document.getElementById('searchBox').value.toLowerCase();
-        alert(`Search functionality is not implemented yet. You searched for: ${query}`);
+(function () {
+  'use strict';
+
+  /* -------------------------------------------------------
+     PRODUCT DATA
+  ------------------------------------------------------- */
+  const PRODUCTS = [
+    { id: 1,  name: 'Rosa Roja',            cat: 'bouquets',   price: 12.00, img: '/images/productos/rosa-roja.webp' },
+    { id: 2,  name: 'Tulipán Holandés',     cat: 'flores',     price:  8.00, img: '/images/productos/tulipan-holandes.webp' },
+    { id: 3,  name: 'Orquídea Phalaenopsis',cat: 'plantas',    price: 25.00, img: '/images/productos/orquidea-phalaenopsis.webp' },
+    { id: 4,  name: 'Girasol Campestre',    cat: 'flores',     price:  6.00, img: '/images/productos/girasol-campestre.webp' },
+    { id: 5,  name: 'Lirio Blanco',         cat: 'bouquets',   price: 15.00, img: '/images/productos/lirio-blanco.webp' },
+    { id: 6,  name: 'Lavanda Provenzal',    cat: 'arreglos',   price: 18.00, img: '/images/productos/lavanda-provenzal.webp' },
+    { id: 7,  name: 'Peony Rosa',           cat: 'especiales', price: 22.00, img: '/images/productos/peony-rosa.webp' },
+    { id: 8,  name: 'Margarita Silvestre',  cat: 'flores',     price:  5.00, img: '/images/productos/margarita-silvestre.webp' },
+    { id: 9,  name: 'Follaje Verde',        cat: 'follaje',    price: 10.00, img: '/images/productos/follaje-verde.webp' },
+    { id: 10, name: 'Arreglo de Mesa',      cat: 'arreglos',   price: 35.00, img: '/images/productos/arreglo-de-mesa.webp' },
+    { id: 11, name: 'Cala Blanca',          cat: 'flores',     price: 14.00, img: '/images/productos/cala-blanca.webp' },
+    { id: 12, name: 'Hortensia Azul',       cat: 'especiales', price: 20.00, img: '/images/productos/hortensia-azul.webp' },
+  ];
+
+  const CAT_LABELS = {
+    bouquets:   'Bouquets',
+    flores:     'Flores Individuales',
+    arreglos:   'Arreglos',
+    follaje:    'Follaje',
+    plantas:    'Plantas',
+    especiales: 'Especiales',
+  };
+
+  /* -------------------------------------------------------
+     GOLD FLOWER SVG PLACEHOLDER
+  ------------------------------------------------------- */
+  const FLOWER_SVG = `
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+      <g opacity="0.55">
+        <ellipse cx="32" cy="16" rx="7" ry="12" fill="#D4AF37" transform="rotate(0 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="12" fill="#D4AF37" transform="rotate(60 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="12" fill="#D4AF37" transform="rotate(120 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="12" fill="#D4AF37" transform="rotate(180 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="12" fill="#D4AF37" transform="rotate(240 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="12" fill="#D4AF37" transform="rotate(300 32 32)"/>
+        <circle cx="32" cy="32" r="9" fill="#b8961e"/>
+      </g>
+    </svg>`;
+
+  /* -------------------------------------------------------
+     CART STATE
+  ------------------------------------------------------- */
+  let cart = [];
+
+  function saveCart() {
+    try { localStorage.setItem('lhfjCart', JSON.stringify(cart)); } catch (e) {
+      console.warn('Cart persistence unavailable:', e.message);
     }
+  }
+
+  function loadCart() {
+    try {
+      const raw = localStorage.getItem('lhfjCart');
+      if (raw) cart = JSON.parse(raw);
+    } catch (_) { cart = []; }
+  }
+
+  function addToCart(id, name, price, image) {
+    const existing = cart.find(function (i) { return i.id === id; });
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({ id: id, name: name, price: price, image: image, quantity: 1 });
+    }
+    saveCart();
+    renderCart();
+    updateBadge();
+    openCart();
+  }
+
+  function removeFromCart(id) {
+    cart = cart.filter(function (i) { return i.id !== id; });
+    saveCart();
+    renderCart();
+    updateBadge();
+  }
+
+  function increaseQty(id) {
+    const item = cart.find(function (i) { return i.id === id; });
+    if (item) { item.quantity += 1; saveCart(); renderCart(); updateBadge(); }
+  }
+
+  function decreaseQty(id) {
+    const item = cart.find(function (i) { return i.id === id; });
+    if (item) {
+      item.quantity -= 1;
+      if (item.quantity <= 0) {
+        removeFromCart(id);
+      } else {
+        saveCart(); renderCart(); updateBadge();
+      }
+    }
+  }
+
+  function updateBadge() {
+    const total = cart.reduce(function (sum, i) { return sum + i.quantity; }, 0);
+    const badge = document.getElementById('cart-badge');
+    if (!badge) return;
+    badge.textContent = total > 99 ? '99+' : String(total);
+    if (total > 0) {
+      badge.classList.add('visible');
+    } else {
+      badge.classList.remove('visible');
+    }
+  }
+
+  function renderCart() {
+    const body  = document.getElementById('cart-body');
+    const footer = document.getElementById('cart-footer');
+    const totalEl = document.getElementById('cart-total');
+    if (!body) return;
+
+    if (cart.length === 0) {
+      body.innerHTML = `
+        <div class="cart-empty" role="status">
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <strong>Tu bolsa está vacía</strong>
+          <p>Agrega flores de nuestro catálogo para comenzar</p>
+        </div>`;
+      if (footer) footer.style.display = 'none';
+      return;
+    }
+
+    let total = 0;
+    const listHTML = cart.map(function (item) {
+      const lineTotal = item.price * item.quantity;
+      total += lineTotal;
+      const imgHTML = item.image
+        ? `<img
+            class="cart-item-img"
+            src="${escapeAttr(item.image)}"
+            alt="${escapeAttr(item.name)}"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          /><div class="cart-item-img-placeholder" style="display:none;" aria-hidden="true">${FLOWER_SVG}</div>`
+        : `<div class="cart-item-img-placeholder" aria-hidden="true">${FLOWER_SVG}</div>`;
+
+      return `
+        <div class="cart-item" data-id="${item.id}" role="listitem">
+          ${imgHTML}
+          <div class="cart-item-info">
+            <div class="cart-item-name">${escapeHTML(item.name)}</div>
+            <div class="cart-item-unit-price">${formatPrice(item.price)} / ud.</div>
+            <div class="cart-item-controls" role="group" aria-label="Cantidad de ${escapeAttr(item.name)}">
+              <button class="qty-btn" data-action="decrease" data-id="${item.id}" aria-label="Disminuir cantidad de ${escapeAttr(item.name)}">&#8722;</button>
+              <span class="qty-display" aria-live="polite">${item.quantity}</span>
+              <button class="qty-btn" data-action="increase" data-id="${item.id}" aria-label="Aumentar cantidad de ${escapeAttr(item.name)}">&#43;</button>
+            </div>
+          </div>
+          <div class="cart-item-right">
+            <span class="cart-item-total">${formatPrice(lineTotal)}</span>
+            <button class="cart-remove-btn" data-action="remove" data-id="${item.id}" aria-label="Eliminar ${escapeAttr(item.name)} de la bolsa">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+        </div>`;
+    }).join('');
+
+    body.innerHTML = `<div id="cart-items-list" role="list">${listHTML}</div>`;
+    if (footer) footer.style.display = 'block';
+    if (totalEl) totalEl.textContent = formatPrice(total);
+  }
+
+  /* -------------------------------------------------------
+     CART OPEN / CLOSE
+  ------------------------------------------------------- */
+  function openCart() {
+    const overlay  = document.getElementById('cart-overlay');
+    const sidebar  = document.getElementById('cart-sidebar');
+    const toggleBtn = document.getElementById('cart-toggle-btn');
+    if (!overlay || !sidebar) return;
+    overlay.classList.add('open');
+    sidebar.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeCart() {
+    const overlay  = document.getElementById('cart-overlay');
+    const sidebar  = document.getElementById('cart-sidebar');
+    const toggleBtn = document.getElementById('cart-toggle-btn');
+    if (!overlay || !sidebar) return;
+    overlay.classList.remove('open');
+    sidebar.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  /* -------------------------------------------------------
+     SEARCH
+  ------------------------------------------------------- */
+  let searchQuery = '';
+  let activeCategory = 'todos';
+
+  function applyFilters() {
+    const cards = document.querySelectorAll('.product-card');
+    let visible = 0;
+    cards.forEach(function (card) {
+      const name = (card.dataset.name || '').toLowerCase();
+      const cat  = card.dataset.cat || '';
+      const matchSearch = searchQuery === '' || name.includes(searchQuery);
+      const matchCat    = activeCategory === 'todos' || cat === activeCategory;
+      if (matchSearch && matchCat) {
+        card.style.display = '';
+        visible++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    const noResults = document.getElementById('no-results');
+    if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  /* -------------------------------------------------------
+     RENDER PRODUCTS
+  ------------------------------------------------------- */
+  function buildProductCards() {
+    const grid = document.getElementById('products-grid');
+    if (!grid) return;
+    grid.innerHTML = PRODUCTS.map(function (p, idx) {
+      const catLabel = CAT_LABELS[p.cat] || p.cat;
+      return `
+        <article
+          class="product-card"
+          data-id="${p.id}"
+          data-name="${escapeAttr(p.name.toLowerCase())}"
+          data-cat="${p.cat}"
+          role="listitem"
+          style="transition-delay: ${idx * 60}ms"
+        >
+          <div class="product-img-wrap">
+            <img
+              class="product-img"
+              src="${escapeAttr(p.img)}"
+              alt="${escapeAttr(p.name)}"
+              loading="lazy"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            />
+            <div class="product-img-placeholder" style="display:none;" aria-hidden="true">${FLOWER_SVG}</div>
+          </div>
+          <div class="product-body">
+            <p class="product-cat-label">${escapeHTML(catLabel)}</p>
+            <h3 class="product-name">${escapeHTML(p.name)}</h3>
+            <div class="product-footer">
+              <span class="product-price">${formatPrice(p.price)}</span>
+              <button
+                class="btn-add"
+                data-action="add-to-cart"
+                data-id="${p.id}"
+                data-name="${escapeAttr(p.name)}"
+                data-price="${p.price}"
+                data-img="${escapeAttr(p.img)}"
+                aria-label="Añadir ${escapeAttr(p.name)} a la bolsa"
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Añadir
+              </button>
+            </div>
+          </div>
+        </article>`;
+    }).join('');
+  }
+
+  /* -------------------------------------------------------
+     INTERSECTION OBSERVER – card fade-in
+  ------------------------------------------------------- */
+  function initCardObserver() {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.product-card').forEach(function (c) {
+        c.classList.add('in-view');
+      });
+      return;
+    }
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.product-card').forEach(function (card) {
+      observer.observe(card);
+    });
+  }
+
+  /* -------------------------------------------------------
+     PETALS ANIMATION
+  ------------------------------------------------------- */
+  function initPetals() {
+    const container = document.getElementById('petals-container');
+    if (!container) return;
+    const count = 14;
+    const colors = ['#D4AF37', '#e8d5a3', '#f5e6c8', '#c49b2e', '#ffffff'];
+    for (let i = 0; i < count; i++) {
+      const el = document.createElement('div');
+      el.className = 'petal';
+      const size   = 6 + Math.random() * 8;
+      const left   = Math.random() * 100;
+      const dur    = 8 + Math.random() * 12;
+      const delay  = Math.random() * 10;
+      const color  = colors[Math.floor(Math.random() * colors.length)];
+      el.style.cssText = `
+        left:${left}%;
+        width:${size}px;
+        height:${size * 1.6}px;
+        background:${color};
+        border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+        animation-duration:${dur}s;
+        animation-delay:${delay}s;
+      `;
+      container.appendChild(el);
+    }
+  }
+
+  /* -------------------------------------------------------
+     WHATSAPP CHECKOUT
+  ------------------------------------------------------- */
+  function buildWhatsAppMessage() {
+    if (cart.length === 0) return '';
+    let msg = '*Pedido - La Huerta De Juan Fernández*\n\n';
+    let total = 0;
+    cart.forEach(function (item) {
+      const line = item.price * item.quantity;
+      total += line;
+      msg += `• ${item.name} x${item.quantity} – ${formatPrice(line)}\n`;
+    });
+    msg += `\n*Total: ${formatPrice(total)}*`;
+    msg += '\n\nHola, me gustaría realizar este pedido.';
+    return msg;
+  }
+
+  /* -------------------------------------------------------
+     NAVBAR ACTIVE LINK ON SCROLL
+  ------------------------------------------------------- */
+  function initScrollSpy() {
+    const sections = ['inicio', 'catalogo', 'ocasiones', 'nosotros', 'contacto'];
+    const links = document.querySelectorAll('.nav-links a');
+    const handler = function () {
+      let current = 'inicio';
+      sections.forEach(function (id) {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 100) current = id;
+      });
+      links.forEach(function (a) {
+        const href = a.getAttribute('href').replace('#', '');
+        a.classList.toggle('active', href === current);
+      });
+    };
+    window.addEventListener('scroll', handler, { passive: true });
+  }
+
+  /* -------------------------------------------------------
+     UTILITY HELPERS
+  ------------------------------------------------------- */
+  function formatPrice(num) {
+    return new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(num);
+  }
+
+  function escapeHTML(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function escapeAttr(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  /* -------------------------------------------------------
+     EVENT LISTENERS SETUP
+  ------------------------------------------------------- */
+  function setupEventListeners() {
+    /* --- Search toggle --- */
+    const searchToggle  = document.getElementById('search-toggle-btn');
+    const searchWrapper = document.getElementById('search-wrapper');
+    const searchInput   = document.getElementById('nav-search-input');
+
+    if (searchToggle && searchWrapper && searchInput) {
+      searchToggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const isOpen = searchWrapper.classList.toggle('open');
+        searchToggle.setAttribute('aria-expanded', String(isOpen));
+        if (isOpen) {
+          searchInput.focus();
+        } else {
+          searchInput.value = '';
+          searchQuery = '';
+          applyFilters();
+        }
+      });
+
+      searchInput.addEventListener('input', function () {
+        searchQuery = searchInput.value.trim().toLowerCase();
+        applyFilters();
+      });
+
+      searchInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          searchWrapper.classList.remove('open');
+          searchToggle.setAttribute('aria-expanded', 'false');
+          searchInput.value = '';
+          searchQuery = '';
+          applyFilters();
+          searchToggle.focus();
+        }
+      });
+
+      document.addEventListener('click', function (e) {
+        if (
+          searchWrapper.classList.contains('open') &&
+          !searchWrapper.contains(e.target) &&
+          e.target !== searchToggle
+        ) {
+          searchWrapper.classList.remove('open');
+          searchToggle.setAttribute('aria-expanded', 'false');
+          searchInput.value = '';
+          searchQuery = '';
+          applyFilters();
+        }
+      });
+    }
+
+    /* --- Cart toggle / close --- */
+    const cartToggle  = document.getElementById('cart-toggle-btn');
+    const cartOverlay = document.getElementById('cart-overlay');
+    const cartClose   = document.getElementById('cart-close-btn');
+
+    if (cartToggle) {
+      cartToggle.addEventListener('click', function () {
+        const sidebar = document.getElementById('cart-sidebar');
+        if (sidebar && sidebar.classList.contains('open')) {
+          closeCart();
+        } else {
+          openCart();
+        }
+      });
+    }
+
+    if (cartClose) cartClose.addEventListener('click', closeCart);
+
+    if (cartOverlay) {
+      cartOverlay.addEventListener('click', function (e) {
+        if (e.target === cartOverlay) closeCart();
+      });
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        const sidebar = document.getElementById('cart-sidebar');
+        if (sidebar && sidebar.classList.contains('open')) closeCart();
+      }
+    });
+
+    /* --- Cart item actions (event delegation) --- */
+    const cartBody = document.getElementById('cart-body');
+    if (cartBody) {
+      cartBody.addEventListener('click', function (e) {
+        const btn = e.target.closest('[data-action]');
+        if (!btn) return;
+        const action = btn.dataset.action;
+        const id = parseInt(btn.dataset.id, 10);
+        if (isNaN(id)) return;
+        if (action === 'increase') increaseQty(id);
+        else if (action === 'decrease') decreaseQty(id);
+        else if (action === 'remove') removeFromCart(id);
+      });
+    }
+
+    /* --- Add to cart (event delegation on grid) --- */
+    const productsGrid = document.getElementById('products-grid');
+    if (productsGrid) {
+      productsGrid.addEventListener('click', function (e) {
+        const btn = e.target.closest('[data-action="add-to-cart"]');
+        if (!btn) return;
+        const id    = parseInt(btn.dataset.id, 10);
+        const name  = btn.dataset.name;
+        const price = parseFloat(btn.dataset.price);
+        const img   = btn.dataset.img;
+        if (!isNaN(id) && name && !isNaN(price)) {
+          addToCart(id, name, price, img);
+        }
+      });
+    }
+
+    /* --- Category tabs --- */
+    const tabs = document.querySelectorAll('.cat-tab');
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        activeCategory = tab.dataset.cat;
+        applyFilters();
+      });
+    });
+
+    /* --- WhatsApp checkout --- */
+    const checkoutBtn = document.getElementById('btn-checkout');
+    if (checkoutBtn) {
+      checkoutBtn.addEventListener('click', function () {
+        const msg = buildWhatsAppMessage();
+        if (!msg) return;
+        const url = 'https://wa.me/34602687285?text=' + encodeURIComponent(msg);
+        window.open(url, '_blank', 'noopener,noreferrer');
+      });
+    }
+
+    /* --- Hamburger / mobile nav --- */
+    const hamburger   = document.getElementById('hamburger-btn');
+    const mobileNav   = document.getElementById('mobile-nav');
+    const mobileClose = document.getElementById('mobile-nav-close');
+
+    function openMobileNav() {
+      if (!mobileNav || !hamburger) return;
+      mobileNav.classList.add('open');
+      mobileNav.setAttribute('aria-hidden', 'false');
+      hamburger.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileNav() {
+      if (!mobileNav || !hamburger) return;
+      mobileNav.classList.remove('open');
+      mobileNav.setAttribute('aria-hidden', 'true');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    if (hamburger) hamburger.addEventListener('click', openMobileNav);
+    if (mobileClose) mobileClose.addEventListener('click', closeMobileNav);
+
+    if (mobileNav) {
+      mobileNav.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', closeMobileNav);
+      });
+    }
+
+    /* --- Contact form (redirect to WhatsApp) --- */
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const name    = document.getElementById('cf-name').value.trim();
+        const email   = document.getElementById('cf-email').value.trim();
+        const message = document.getElementById('cf-message').value.trim();
+        if (!name || !email || !message) return;
+        const text = `Hola, soy ${name} (${email}).\n\n${message}`;
+        const url  = 'https://wa.me/34602687285?text=' + encodeURIComponent(text);
+        window.open(url, '_blank', 'noopener,noreferrer');
+      });
+    }
+  }
+
+  /* -------------------------------------------------------
+     INIT
+  ------------------------------------------------------- */
+  function init() {
+    // Footer year
+    const yearEl = document.getElementById('footer-year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // Load cart from storage
+    loadCart();
+
+    // Build product grid
+    buildProductCards();
+
+    // Apply initial filters (show all)
+    applyFilters();
+
+    // Set up all event listeners
+    setupEventListeners();
+
+    // Start card intersection observer
+    initCardObserver();
+
+    // Hero petals
+    initPetals();
+
+    // Scroll spy for nav
+    initScrollSpy();
+
+    // Sync badge on load
+    updateBadge();
+
+    // Render any persisted cart items
+    renderCart();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+}());
 </script>
 
 </body>
