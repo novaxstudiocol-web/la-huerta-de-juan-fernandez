@@ -218,8 +218,7 @@
       =====================================================
     -->
     <div class="logo-wrap">
-      <img src="images/logo/logo.png" alt="La Huerta De Juan Fern&#225;ndez" id="logoImg" style="display:none"
-           onload="this.style.display='block';document.getElementById('logoTxt').style.display='none'">
+      <img src="images/logo/logo.png" alt="La Huerta De Juan Fern&#225;ndez" id="logoImg" style="display:none">
       <div class="logo-txt" id="logoTxt">
         La Huerta De Juan Fern&#225;ndez
         <span>Florist&#237;a &middot; Madrid</span>
@@ -435,9 +434,10 @@ var P=[
 /* ── STATE ── */
 var cart=[],curCat='todos',curOcc='all',curQ='',srchOpen=false;
 var CATS={follaje:'Follaje',flores:'Flores',bouquets:'Bouquets'};
+var BLANK_IMG='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 /* ── CART STORAGE ── */
-function loadCart(){try{var r=localStorage.getItem('huerta-cart-v2');if(r)cart=JSON.parse(r);}catch(e){cart=[];}}
-function saveCart(){try{localStorage.setItem('huerta-cart-v2',JSON.stringify(cart));}catch(e){}}
+function loadCart(){try{var r=localStorage.getItem('huerta-cart-v2');if(r)cart=JSON.parse(r);}catch(e){cart=[];console.warn('Cart load failed:',e);}}
+function saveCart(){try{localStorage.setItem('huerta-cart-v2',JSON.stringify(cart));}catch(e){console.warn('Cart save failed:',e);}}
 /* ── CART UI ── */
 function openCart(){document.getElementById('cartAside').classList.add('open');document.getElementById('cartOverlay').classList.add('open');document.body.style.overflow='hidden';}
 function closeCart(){document.getElementById('cartAside').classList.remove('open');document.getElementById('cartOverlay').classList.remove('open');document.body.style.overflow='';}
@@ -475,7 +475,7 @@ function renderCart(){
   cart.forEach(function(it){
     var sub=it.price*it.qty;tot+=sub;
     html+='<div class="cart-item">'+
-      '<img src="'+esc(it.img)+'" alt="'+esc(it.name)+'" class="ci-thumb" onerror="this.removeAttribute(\'onerror\');this.src=\'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\';">'+
+      '<img src="'+esc(it.img)+'" alt="'+esc(it.name)+'" class="ci-thumb" onerror="this.removeAttribute(\'onerror\');this.src=\''+BLANK_IMG+'\';">'+
       '<div class="ci-info">'+
         '<p class="ci-name">'+esc(it.name)+'</p>'+
         '<p class="ci-unit">'+fmt(it.price)+' &middot; Subtotal: '+fmt(sub)+'</p>'+
@@ -567,8 +567,16 @@ function closeMobNav(){document.getElementById('mobNav').classList.remove('open'
 document.addEventListener('keydown',function(e){
   if(e.key==='Escape'){closeCart();if(srchOpen)toggleSearch();closeMobNav();}
 });
-/* ── INIT ── */
-loadCart();renderProducts();renderCart();updateBadge();
+/* ── LOGO LOAD ── */
+document.addEventListener('DOMContentLoaded',function(){
+  loadCart();renderProducts();renderCart();updateBadge();
+  var logoImg=document.getElementById('logoImg');
+  if(logoImg){
+    function showLogo(){logoImg.style.display='block';document.getElementById('logoTxt').style.display='none';}
+    logoImg.addEventListener('load',showLogo);
+    if(logoImg.complete&&logoImg.naturalWidth>0){showLogo();}
+  }
+});
 </script>
 </body>
 </html>
