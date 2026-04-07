@@ -93,67 +93,102 @@
       text-transform: uppercase;
     }
 
-    /* — Right: search + cart — */
+    /* — Right: search icon + bag icon — */
     .header-right {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 8px;
+      gap: 4px;
     }
-    .search-wrapper {
-      display: flex;
-      align-items: center;
-      background: rgba(255,255,255,.12);
-      border-radius: 20px;
-      overflow: hidden;
-      transition: background .2s;
-    }
-    .search-wrapper:focus-within { background: rgba(255,255,255,.22); }
-    #searchInput {
-      background: none;
-      border: none;
-      outline: none;
-      color: #fff;
-      font-size: .85rem;
-      width: 130px;
-      padding: 6px 10px;
-    }
-    #searchInput::placeholder { color: rgba(255,255,255,.55); }
-    .search-wrapper button {
+    .search-btn {
       background: none;
       border: none;
       cursor: pointer;
-      padding: 6px 10px;
-      color: var(--oro);
-      font-size: 1rem;
-      line-height: 1;
+      padding: 8px;
+      color: var(--beige);
+      display: flex;
+      align-items: center;
+      transition: color .2s;
     }
+    .search-btn:hover { color: var(--oro); }
+    .search-btn svg { width: 22px; height: 22px; }
     .cart-btn {
       position: relative;
       background: none;
       border: none;
       cursor: pointer;
-      color: var(--oro);
-      font-size: 1.4rem;
-      line-height: 1;
-      padding: 6px;
+      color: var(--beige);
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      transition: color .2s;
     }
+    .cart-btn:hover { color: var(--oro); }
+    .cart-btn svg { width: 24px; height: 24px; }
     #cartCount {
       position: absolute;
-      top: 0;
-      right: 0;
+      top: 2px;
+      right: 2px;
       background: #e74c3c;
       color: #fff;
       border-radius: 50%;
       width: 16px;
       height: 16px;
-      font-size: .65rem;
-      display: flex;
+      font-size: .62rem;
+      display: none;
       align-items: center;
       justify-content: center;
       font-weight: 700;
+      line-height: 1;
+    }
+
+    /* ===================== SEARCH PANEL ===================== */
+    .search-panel {
+      position: sticky;
+      top: 64px;
+      z-index: 999;
+      background: var(--verde-dk);
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height .3s ease, padding .3s ease;
+      padding: 0 16px;
+    }
+    .search-panel.open {
+      max-height: 70px;
+      padding: 12px 16px;
+    }
+    .search-panel-inner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 10px;
+      padding: 0 14px;
+    }
+    .search-panel-inner svg { color: var(--oro); flex-shrink: 0; width: 18px; height: 18px; }
+    #searchInput {
+      background: none;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: .9rem;
+      width: 100%;
+      padding: 11px 0;
+    }
+    #searchInput::placeholder { color: rgba(255,255,255,.45); }
+    .search-clear {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,.45);
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 4px;
+      line-height: 1;
+      flex-shrink: 0;
       display: none;
     }
+    .search-clear.visible { display: block; }
 
     /* ===================== MOBILE NAV DRAWER ===================== */
     .nav-drawer {
@@ -556,11 +591,31 @@
       font-size: 1.4rem;
       flex-shrink: 0;
     }
-    .cart-item .ci-info { flex: 1; }
-    .cart-item .ci-name { font-size: .85rem; font-weight: 700; color: var(--verde); line-height: 1.2; }
-    .cart-item .ci-variant { font-size: .75rem; color: #888; }
-    .cart-item .ci-price { font-size: .85rem; font-weight: 700; color: var(--oro); margin-top: 2px; }
-    .cart-item .ci-qty {
+    .cart-item .ci-info { flex: 1; min-width: 0; }
+    .cart-item .ci-name { font-size: .85rem; font-weight: 700; color: var(--verde); line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cart-item .ci-variant { font-size: .73rem; color: #888; }
+    .cart-item .ci-price-unit { font-size: .73rem; color: #aaa; margin-top: 1px; }
+    .cart-item .ci-subtotal { font-size: .88rem; font-weight: 700; color: var(--oro); margin-top: 2px; }
+    .cart-item .ci-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .ci-remove {
+      background: none;
+      border: none;
+      color: #ccc;
+      cursor: pointer;
+      font-size: .85rem;
+      padding: 2px 4px;
+      line-height: 1;
+      transition: color .15s;
+      align-self: flex-end;
+    }
+    .ci-remove:hover { color: #e74c3c; }
+    .ci-qty {
       display: flex;
       align-items: center;
       gap: 6px;
@@ -568,8 +623,8 @@
     .ci-qty button {
       background: #f0f0f0;
       border: none;
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 6px;
       cursor: pointer;
       font-size: 1rem;
@@ -578,9 +633,10 @@
       align-items: center;
       justify-content: center;
       transition: background .15s;
+      flex-shrink: 0;
     }
     .ci-qty button:hover { background: #ddd; }
-    .ci-qty span { font-size: .9rem; font-weight: 700; min-width: 20px; text-align: center; }
+    .ci-qty span { font-size: .9rem; font-weight: 700; min-width: 22px; text-align: center; }
     .cart-footer {
       padding: 16px 20px;
       border-top: 2px solid #eee;
@@ -647,7 +703,6 @@
 
     /* ===================== RESPONSIVE ===================== */
     @media (max-width: 480px) {
-      #searchInput { width: 90px; }
       .cart-sidebar { width: 100vw; }
     }
   </style>
@@ -669,18 +724,37 @@
     <span class="logo-sub">Floristería · Madrid</span>
   </a>
 
-  <!-- Right: search + cart -->
+  <!-- Right: search icon + bag icon -->
   <div class="header-right">
-    <div class="search-wrapper">
-      <input type="text" id="searchInput" placeholder="Buscar…" aria-label="Buscar productos" />
-      <button aria-label="Buscar">🔍</button>
-    </div>
-    <button class="cart-btn" id="cartBtn" aria-label="Ver carrito">
-      🛒
+    <!-- Elegant beige magnifying glass -->
+    <button class="search-btn" id="searchBtn" aria-label="Buscar productos">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="10.5" cy="10.5" r="7"/>
+        <line x1="16.5" y1="16.5" x2="22" y2="22"/>
+      </svg>
+    </button>
+    <!-- Shopping bag -->
+    <button class="cart-btn" id="cartBtn" aria-label="Ver pedido">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 01-8 0"/>
+      </svg>
       <span id="cartCount">0</span>
     </button>
   </div>
 </header>
+
+<!-- ═══════════════════════════════════════ SEARCH PANEL ═════════════════════════════════ -->
+<div class="search-panel" id="searchPanel">
+  <div class="search-panel-inner">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="10.5" cy="10.5" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/>
+    </svg>
+    <input type="text" id="searchInput" placeholder="Buscar flores, follaje…" aria-label="Buscar productos" autocomplete="off" />
+    <button class="search-clear" id="searchClear" aria-label="Limpiar búsqueda">✕</button>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════════════ NAV DRAWER ═══════════════════════════════════ -->
 <div class="nav-overlay" id="navOverlay"></div>
@@ -750,7 +824,12 @@
 <div class="cart-overlay" id="cartOverlay"></div>
 <aside class="cart-sidebar" id="cartSidebar" aria-label="Carrito de compras">
   <div class="cart-header">
-    <h3>🛒 Tu Carrito</h3>
+    <h3>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;vertical-align:middle;margin-right:6px">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>Mi Pedido</h3>
     <button class="cart-close" id="cartClose" aria-label="Cerrar carrito">✕</button>
   </div>
   <div class="cart-items" id="cartItems"></div>
@@ -826,7 +905,7 @@ const PRODUCTS = [
   { id: 'bouquet-15', name: 'Bouquet 6 Rosas',      cat: 'bouquets', icon: '🌹', price: 15, unit: '(6 rosas)' },
 ];
 
-const CART_KEY = 'huerta-cart-v2';
+const CART_KEY = 'huerta-cart-v3';
 const WA_NUMBER = '34602687285';
 
 /* ─── Cart state ─── */
@@ -884,8 +963,14 @@ function renderCart() {
   if (cart.length === 0) {
     container.innerHTML = `
       <div class="cart-empty">
-        <div class="icon">🛒</div>
-        <p>Tu carrito está vacío.<br>¡Añade algunas flores!</p>
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:3rem;height:3rem">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+        </div>
+        <p>Tu pedido está vacío.<br>¡Añade algunas flores!</p>
       </div>`;
     footer.style.display = 'none';
     return;
@@ -893,24 +978,31 @@ function renderCart() {
 
   footer.style.display = 'block';
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  container.innerHTML = cart.map(item => `
+
+  container.innerHTML = cart.map(item => {
+    const safeKey = encodeURIComponent(item.key);
+    return `
     <div class="cart-item">
       <div class="ci-icon">${item.icon}</div>
       <div class="ci-info">
         <div class="ci-name">${item.name}</div>
         ${item.variant ? `<div class="ci-variant">${item.variant}</div>` : ''}
-        <div class="ci-price">€${(item.price * item.qty).toFixed(2)}</div>
+        <div class="ci-price-unit">€${item.price.toFixed(2)} / ud.</div>
+        <div class="ci-subtotal">€${(item.price * item.qty).toFixed(2)}</div>
       </div>
-      <div class="ci-qty">
-        <button onclick="updateQty('${item.key}', -1)" aria-label="Reducir cantidad">−</button>
-        <span>${item.qty}</span>
-        <button onclick="updateQty('${item.key}', 1)" aria-label="Aumentar cantidad">+</button>
+      <div class="ci-controls">
+        <button class="ci-remove" data-action="remove" data-key="${safeKey}" title="Eliminar">✕</button>
+        <div class="ci-qty">
+          <button data-action="decrease" data-key="${safeKey}" aria-label="Reducir">−</button>
+          <span>${item.qty}</span>
+          <button data-action="increase" data-key="${safeKey}" aria-label="Aumentar">+</button>
+        </div>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 
   document.getElementById('cartTotal').textContent = `€${total.toFixed(2)}`;
 
-  // Build WhatsApp message
   const lines = cart.map(i => `• ${i.qty}x ${i.name}${i.variant ? ' (' + i.variant + ')' : ''} – €${(i.price * i.qty).toFixed(2)}`);
   const msg = `Hola, quisiera hacer el siguiente pedido:\n${lines.join('\n')}\nTotal: €${total.toFixed(2)}`;
   document.getElementById('checkoutBtn').href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
@@ -1023,10 +1115,31 @@ function filterCategory(cat) {
   renderGrid();
 }
 
-/* ─── Search ─── */
-document.getElementById('searchInput').addEventListener('input', function() {
+/* ─── Search toggle ─── */
+const searchBtn   = document.getElementById('searchBtn');
+const searchPanel = document.getElementById('searchPanel');
+const searchInput = document.getElementById('searchInput');
+const searchClear = document.getElementById('searchClear');
+
+searchBtn.addEventListener('click', () => {
+  const isOpen = searchPanel.classList.toggle('open');
+  if (isOpen) { searchInput.focus(); }
+  else { searchInput.value = ''; currentSearch = ''; searchClear.classList.remove('visible'); renderGrid(); }
+});
+searchInput.addEventListener('input', function() {
   currentSearch = this.value;
+  searchClear.classList.toggle('visible', this.value.length > 0);
   renderGrid();
+});
+searchInput.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    searchPanel.classList.remove('open');
+    this.value = ''; currentSearch = ''; searchClear.classList.remove('visible'); renderGrid();
+  }
+});
+searchClear.addEventListener('click', function() {
+  searchInput.value = ''; currentSearch = ''; this.classList.remove('visible');
+  searchInput.focus(); renderGrid();
 });
 
 /* ─── Hamburger / nav drawer ─── */
@@ -1053,9 +1166,29 @@ const cartSidebar = document.getElementById('cartSidebar');
 const cartOverlay = document.getElementById('cartOverlay');
 const cartClose   = document.getElementById('cartClose');
 
-cartBtn.addEventListener('click', () => { cartSidebar.classList.add('open'); cartOverlay.classList.add('open'); });
-cartClose.addEventListener('click', () => { cartSidebar.classList.remove('open'); cartOverlay.classList.remove('open'); });
-cartOverlay.addEventListener('click', () => { cartSidebar.classList.remove('open'); cartOverlay.classList.remove('open'); });
+function openCart()  { cartSidebar.classList.add('open');    cartOverlay.classList.add('open'); }
+function closeCart() { cartSidebar.classList.remove('open'); cartOverlay.classList.remove('open'); }
+
+cartBtn.addEventListener('click', openCart);
+cartClose.addEventListener('click', closeCart);
+cartOverlay.addEventListener('click', closeCart);
+
+/* ─── Cart item controls – event delegation ─── */
+document.getElementById('cartItems').addEventListener('click', function(e) {
+  const btn = e.target.closest('[data-action]');
+  if (!btn) return;
+  const action = btn.dataset.action;
+  const key    = decodeURIComponent(btn.dataset.key);
+  if (action === 'increase') {
+    updateQty(key, 1);
+  } else if (action === 'decrease') {
+    updateQty(key, -1);
+  } else if (action === 'remove') {
+    cart = cart.filter(i => i.key !== key);
+    saveCart();
+    renderCart();
+  }
+});
 
 /* ─── SVG Petals animation ─── */
 function createPetals() {
